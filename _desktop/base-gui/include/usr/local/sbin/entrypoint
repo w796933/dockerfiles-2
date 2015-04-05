@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+	echo "Error: missing command"
+	exit 1
+fi
+
+# Match the host user/group ID
+[ ! -z "$XUID" ] && usermod  -ou "$XUID" user
+[ ! -z "$XGID" ] && groupmod -og "$XGID" user
+
+# Enforce ownership of data volumes
+for volume in $(egrep -o '/data[^ ]*' /proc/mounts); do
+	chown user:user "$(echo -e $volume)"
+done
+
+# Execute ...
+su user -c "$(echo $@)"

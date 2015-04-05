@@ -1,0 +1,16 @@
+[submodule "miniircd/source"]
+	path = miniircd/source
+	url = https://github.com/jrosdahl/miniircd.git
+[submodule "tircd/source"]
+	path = tircd/source
+	url = https://github.com/DexterTheDragon/tircd.git
+	branch = my_version
+[submodule "limnoria/source"]
+	path = limnoria/source
+	url = https://github.com/ProgVal/Limnoria.git
+[submodule "limnoria/plugins-progval"]
+	path = limnoria/plugins-progval
+	url = https://github.com/ProgVal/Supybot-plugins.git
+[submodule "limnoria/plugins-glolol"]
+	path = limnoria/plugins-glolol
+	url = https://github.com/GLolol/SupyPlugins.git

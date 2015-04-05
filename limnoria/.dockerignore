@@ -1,0 +1,6 @@
+plugins-*/*.*
+source/debian
+*/.git*
+*/*/.git*
+*/.travis.yml
+*/*/.travis.yml

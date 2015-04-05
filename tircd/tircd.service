@@ -1,0 +1,17 @@
+[Unit]
+Description=Twitter
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=0
+
+ExecStartPre=-/usr/bin/docker rm -fv tircd
+ExecStart=/usr/bin/docker run --name tircd -v /mnt/tircd:/data \
+--cap-drop ALL -c 128 -m 64m --memory-swap 128m nightling/tircd
+
+ExecStop=/usr/bin/docker stop tircd
+
+[Install]
+WantedBy=multi-user.target
