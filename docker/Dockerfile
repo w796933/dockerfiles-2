@@ -1,4 +1,5 @@
-FROM nightling/base
+FROM nightling/fedora:22
+MAINTAINER Nightling
 
 RUN dnf -y install docker lxc \
 	&& dnf clean all

@@ -1,4 +1,5 @@
-FROM nightling/base
+FROM nightling/fedora:22
+MAINTAINER Nightling
 
 # Basic desktop prerequisites
 COPY include /

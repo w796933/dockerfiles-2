@@ -1,4 +1,5 @@
-FROM nightling/buildpack
+FROM nightling/buildpack:22
+MAINTAINER Nightling
 
 RUN dnf -y install znc-{devel,modpython,modperl} \
 	&& dnf clean all \

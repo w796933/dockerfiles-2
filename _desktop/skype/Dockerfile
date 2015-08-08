@@ -1,4 +1,5 @@
-FROM nightling/base-gui
+FROM nightling/base-gui:22
+MAINTAINER Nightling
 
 RUN curl -o /tmp/.rpm http://download.skype.com/linux/skype-4.3.0.37-fedora.i586.rpm \
 	&& echo "2318acc6d275daa90c98f5edf642b7cad9369f87 /tmp/.rpm" | sha1sum -c - \

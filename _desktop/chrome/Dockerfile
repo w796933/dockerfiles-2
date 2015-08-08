@@ -1,4 +1,5 @@
-FROM nightling/base-gui
+FROM nightling/base-gui:22
+MAINTAINER Nightling
 
 ADD google-chrome.repo /etc/yum.repos.d/
 

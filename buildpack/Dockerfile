@@ -1,4 +1,5 @@
-FROM nightling/base
+FROM nightling/fedora:22
+MAINTAINER Nightling
 
 # SCM and build essentials
 RUN dnf -y install \
@@ -23,6 +24,7 @@ RUN dnf -y install \
 	libcurl-devel \
 	libevent-devel \
 	libffi-devel \
+	libicu-devel \
 	libstdc++-devel.* \
 	libtool-ltdl-devel \
 	libxml2-devel \

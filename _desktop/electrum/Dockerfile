@@ -1,4 +1,5 @@
-FROM nightling/base-gui
+FROM nightling/base-gui:22
+MAINTAINER Nightling
 
 RUN dnf -y install PyQt4 \
 	&& dnf clean all
