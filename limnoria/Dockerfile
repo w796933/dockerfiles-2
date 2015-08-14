@@ -29,7 +29,7 @@ RUN cd /opt/limnoria \
 	&& pip install -r requirements.txt \
 	&& python setup.py install \
 	&& rm -rf build ~/.cache \
-	&& useradd -md /data --key={UID,GID}_MIN=13296 limnoria
+	&& useradd -lmd /data --key={UID,GID}_MIN=13296 limnoria
 
 USER limnoria
 VOLUME /data

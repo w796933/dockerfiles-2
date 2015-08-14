@@ -1,7 +1,7 @@
 FROM nightling/fedora:22
 MAINTAINER Nightling
 
-RUN useradd -md /data --key={UID,GID}_MIN=26658 miniircd
+RUN useradd -lmd /data --key={UID,GID}_MIN=26658 miniircd
 ADD source /opt/miniircd
 
 EXPOSE 6667
