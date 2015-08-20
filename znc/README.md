@@ -29,12 +29,6 @@ To install shipped modules symlink the .so files into `/data/modules`.
 List available (precompiled) shipped modules:
 
 ```
-docker run --rm --entrypoint sh nightling/znc -c 'find /usr/share/znc/modules -name *.so'
-```
-
-If you want to compile your own modules:
-
-```
-docker run --rm -v /path/to/znc:/data -w /data/modules \
---entrypoint znc-buildmod nightling/znc module1.cpp ...
+docker run --rm --entrypoint sh nightling/znc -c \
+'find /usr/share/znc/modules-external -name *.so'
 ```
