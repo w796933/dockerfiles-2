@@ -14,3 +14,15 @@
 [submodule "limnoria/plugins-glolol"]
 	path = limnoria/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
+[submodule "znc/modules/push"]
+	path = znc/modules/push
+	url = https://github.com/jreese/znc-push.git
+[submodule "znc/modules/clientbuffer"]
+	path = znc/modules/clientbuffer
+	url = https://github.com/jpnurmi/znc-clientbuffer.git
+[submodule "znc/modules/chanfilter"]
+	path = znc/modules/chanfilter
+	url = https://github.com/jpnurmi/znc-chanfilter.git
+[submodule "znc/modules/playback"]
+	path = znc/modules/playback
+	url = https://github.com/jpnurmi/znc-playback.git
