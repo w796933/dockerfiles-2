@@ -26,11 +26,9 @@ RUN dnf -y install \
 	libffi-devel \
 	libicu-devel \
 	libstdc++-devel.* \
-	libtool-ltdl-devel \
 	libxml2-devel \
 	libxslt-devel \
 	libyaml-devel \
-	lzma-devel \
 	openssl-devel \
 	perl-devel \
 	python{3,}-devel \

@@ -13,4 +13,5 @@ docker run -d -h tresorit --name="$CONTAINER_ID" \
 -v /etc/machine-id:/etc/machine-id:ro \
 -v "${DATA}:/data/tresorit" \
 -v "${HOME}/Downloads:/data/Downloads" \
+-e XUID=${UID} -e XGID=${GID} \
 nightling/tresorit $@
