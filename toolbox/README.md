@@ -1,0 +1,23 @@
+## docker-toolbox
+
+Swiss army knife for debugging and managing container hosts.
+
+## Usage
+
+Start Toolbox with NET_ADMIN and SYS_ADMIN capabilities:
+
+```
+docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} nightling/toolbox
+```
+
+Share a running container's volumes, network and IPC namespaces:
+
+```
+--volumes-from="$1" --{net,ipc}="container:$1"
+```
+
+Share everything from the host system:
+
+```
+-v /:/mnt/host --{net,ipc,pid,uts}=host
+```
