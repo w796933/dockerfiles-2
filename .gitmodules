@@ -26,3 +26,6 @@
 [submodule "znc/modules/playback"]
 	path = znc/modules/playback
 	url = https://github.com/jpnurmi/znc-playback.git
+[submodule "weevely/source"]
+	path = weevely/source
+	url = https://github.com/epinna/weevely3.git
