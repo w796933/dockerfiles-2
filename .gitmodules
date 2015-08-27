@@ -1,10 +1,12 @@
 [submodule "miniircd/source"]
 	path = miniircd/source
 	url = https://github.com/jrosdahl/miniircd.git
+
 [submodule "tircd/source"]
 	path = tircd/source
 	url = https://github.com/DexterTheDragon/tircd.git
 	branch = my_version
+
 [submodule "limnoria/source"]
 	path = limnoria/source
 	url = https://github.com/ProgVal/Limnoria.git
@@ -14,6 +16,7 @@
 [submodule "limnoria/plugins-glolol"]
 	path = limnoria/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
+
 [submodule "znc/modules/push"]
 	path = znc/modules/push
 	url = https://github.com/jreese/znc-push.git
@@ -26,6 +29,20 @@
 [submodule "znc/modules/playback"]
 	path = znc/modules/playback
 	url = https://github.com/jpnurmi/znc-playback.git
+
 [submodule "weevely/source"]
 	path = weevely/source
 	url = https://github.com/epinna/weevely3.git
+
+[submodule "pwnie/ROPgadget"]
+	path = pwnie/ROPgadget
+	url = https://github.com/JonathanSalwan/ROPgadget.git
+[submodule "pwnie/pwntools"]
+	path = pwnie/pwntools
+	url = https://github.com/Gallopsled/pwntools.git
+[submodule "pwnie/peda"]
+	path = pwnie/peda
+	url = https://github.com/zachriggle/peda.git
+[submodule "pwnie/preeny"]
+	path = pwnie/preeny
+	url = https://github.com/zardus/preeny.git
