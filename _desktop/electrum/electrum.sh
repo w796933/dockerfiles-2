@@ -1,15 +1,25 @@
 #!/bin/bash
-CONTAINER_ID="electrum-${UID}"
+NAME="electrum-${USER}"
+DATA="${HOME}/.electrum"
 
-docker rm -v "$CONTAINER_ID" 2> /dev/null
+if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
+	docker run --rm nightling/electrum -h
+	exit 0
+fi
 
-docker run -d -h electrum --name="$CONTAINER_ID" \
---cap-drop=ALL --cap-add={AUDIT_WRITE,CHOWN,SETGID,SETUID} \
--v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
--v /etc/localtime:/etc/localtime:ro \
--v /etc/machine-id:/etc/machine-id:ro \
--v /run/user/${UID}/pulse:/run/user/pulse:ro \
--v "${HOME}/.electrum:/data/.electrum" \
--v "${HOME}/Downloads:/data/Downloads" \
--e XUID=${UID} -e XGID=${GID} \
-nightling/electrum $@
+if [ "$(docker inspect -f '{{ .State.Running }}' "$NAME" 2> /dev/null)" == "true" ]; then
+	docker exec "$NAME" electrum "$@" &
+else
+	mkdir -p "$DATA"
+	docker rm -fv "$NAME" 2> /dev/null
+	docker run -du $UID:$GID --name="$NAME" --cap-drop=ALL \
+	-v /etc/group:/etc/group:ro \
+	-v /etc/localtime:/etc/localtime:ro \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-v /etc/passwd:/etc/passwd:ro \
+	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
+	-v "$DATA":/data/.electrum \
+	-v "$HOME"/Downloads:/data/Downloads \
+	nightling/electrum:"$TAG" "$@"
+fi

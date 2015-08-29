@@ -12,4 +12,4 @@ RUN URL="https://download.electrum.org/Electrum-2.4.1.tar.gz" \
 	&& pip install /tmp/.tar.gz \
 	&& rm -rf /tmp/.tar.gz* ~/.cache
 
-ENTRYPOINT ["entrypoint", "electrum"]
+ENTRYPOINT ["electrum"]

@@ -6,4 +6,4 @@ if [[ "${!#}" != *"://"* ]]; then
 fi
 
 "$(dirname "$(realpath "$0")")"/mpv.sh \
---ytdl-format="'bestvideo[height<=?1440]+bestaudio/best'" "${OPTS[@]}"
+--ytdl-format="bestvideo[height<=?1440]+bestaudio/best" ${OPTS[@]}

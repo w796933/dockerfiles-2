@@ -6,4 +6,4 @@ RUN curl -o /tmp/.rpm http://download.skype.com/linux/skype-4.3.0.37-fedora.i586
 	&& dnf -y install /tmp/.rpm && rm -f /tmp/.rpm \
 	&& dnf clean all
 
-ENTRYPOINT ["entrypoint", "skype"]
+ENTRYPOINT ["skype"]

@@ -6,5 +6,5 @@ ADD etc /etc
 RUN dnf -y install google-chrome-stable \
 	&& dnf clean all
 
-ENTRYPOINT ["entrypoint", "google-chrome"]
+ENTRYPOINT ["google-chrome"]
 CMD ["--incognito"]

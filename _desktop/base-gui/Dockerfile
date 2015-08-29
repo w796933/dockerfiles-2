@@ -16,10 +16,8 @@ RUN dnf -y install \
 
 COPY include /
 
-RUN useradd -lmd /data -UG audio,video user
+RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/
 
-ENV PULSE_SERVER /run/user/pulse/native
-
+ENV HOME /data
+WORKDIR /data
 VOLUME /data
-
-ENTRYPOINT ["entrypoint"]

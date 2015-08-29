@@ -4,4 +4,4 @@ MAINTAINER Nightling
 RUN dnf -y install firefox \
 	&& dnf clean all
 
-ENTRYPOINT ["entrypoint", "firefox"]
+ENTRYPOINT ["firefox"]

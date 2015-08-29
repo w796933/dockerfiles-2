@@ -6,4 +6,4 @@ docker exec -it "$CONTAINER_ID" bash 2> /dev/null || \
 
 docker run -it --rm --name="$CONTAINER_ID" --cap-add=SYS_ADMIN \
 -v "${HOME}/Downloads:/root/Downloads" \
-"$@" nightling/pwnie
+"$@" nightling/pwnie:"$TAG"

@@ -2,37 +2,53 @@
 
 A common base image for **desktop** images based on **Fedora**.
 
-The included `entrypoint` script:
+Any user's home directory will be overridden to `/data` inside a container
+which then must be writable by an arbitrary user on the host.
+This is not a multi-user environment so let it be world writable,
+allowing us to drop all linux capabilities, including SETUID and CHOWN.
+All of this is necessary so every container can have it's own skeleton
+home directory in an easily disposable volume without an entrypoint script
+and dangerous linux capabilities.
 
- 1. Modifies user/group IDs if XUID/XGID environment variables are set.
-
- 2. Enforces ownership of volumes and bind mounts in /data.
-
- 3. Executes the given parameters as "user".
-
-Recent RPM Fusion installers are available in `/usr/src/rpmfusion`.
+Recent RPM Fusion installers are available in `/usr/share/rpmfusion`.
 
 ## Usage
 
-Recommended docker run options:
+Docker run options:
 
- * `-e XUID=${UID} -e XGID=${GID}` to match user IDs
+To match the host user/group IDs:
 
- * `-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}"` for graphics via X11
+ * `-u $UID:$GID`
 
- * `-v /run/user/${UID}/pulse:/run/user/pulse:ro` for sound via PulseAudio
+To share important configuration files (read-only):
 
- * `-v /etc/localtime:/etc/localtime:ro` to inherit the timezone
+ * `-v /etc/passwd:/etc/passwd:ro`
 
- * `-v /etc/machine-id:/etc/machine-id:ro` to inherit the machine ID
+ * `-v /etc/group:/etc/group:ro`
 
- * `--device=/dev/dri:/dev/dri:rw` to allow direct access to the graphics card(s)
+ * `-v /etc/machine-id:/etc/machine-id:ro`
 
- * `--device=/dev/snd:/dev/snd:rw` to allow direct access to audio devices
+ * `-v /etc/localtime:/etc/localtime:ro`
 
- * `--cap-drop=ALL --cap-add={AUDIT_WRITE,CHOWN,SETGID,SETUID}` to limit capabilities
+For local audio and graphics:
 
- 	 * These are still necessary until native UID mapping.
+ * `-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro`
+
+ * `-v /tmp/.X11-unix:/tmp/.X11-unix:ro`
+
+	 * `-e DISPLAY="unix${DISPLAY}"`
+
+To allow direct access to graphics and audio devices:
+
+ * `--device=/dev/dri:/dev/dri:rw`
+
+ * `--device=/dev/snd:/dev/snd:rw`
+
+To drop all linux capabilities:
+
+ * `--cap-drop=ALL`
+
+Finally, mount the necessary directories in `/data` for the application.
 
 ## Host requirements
 

@@ -12,7 +12,7 @@ Host requirements: X11.
 
 ```
 docker run --rm -v /usr/share:/mnt/share -u root --entrypoint bash nightling/libreoffice -c \
-"(cd /usr/share && find . -name '*libreoffice*' > /tmp/files) \
+"(cd /usr/share && find . -name 'libreoffice*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```
 ```

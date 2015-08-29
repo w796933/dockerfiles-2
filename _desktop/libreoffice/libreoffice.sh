@@ -1,7 +1,7 @@
 #!/bin/bash
-CONTAINER_ID="libreoffice-${UID}-$(echo $@ | md5sum - | head -c 16)"
-CONFIG="${HOME}/.config/libreoffice"
-RUN_OPTS=(-w /mnt)
+NAME="libreoffice-${USER}"
+DATA="${HOME}/.config/libreoffice"
+RUN_OPTS=()
 CMD_OPTS=()
 
 if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
@@ -16,33 +16,39 @@ while [ $# -gt 0 ]; do
 		x=$(printf '%b' "${x//%/\\x}")
 	fi
 	if [ -d "$x" ]; then
-		source=$(realpath "$x")
-		target=/mnt/$#-$(basename "$source")
-		RUN_OPTS+=(-v "${source}:${target}")
+		wdir=$(realpath "$x")
+		RUN_OPTS+=(-v "${wdir}:/data/${wdir//\//_}")
 	elif [ -f "$x" ]; then
-		source=$(dirname "$(realpath "$x")")
-		target=/mnt/$#-$(basename "$source")
-		RUN_OPTS+=(-v "${source}:${target}")
-		CMD_OPTS+=(\"${target}/$(basename "$x")\")
+		if [[ "$x" =~ "$HOME"/(Documents|Downloads|Public|Templates)/.* ]]; then
+			CMD_OPTS+=("$(realpath -s --relative-base="$HOME" "$x")")
+		else
+			wdir=$(dirname "$(realpath "$x")")
+			dest=${wdir//\//_}
+			RUN_OPTS+=(-v "${wdir}:/data/${dest}")
+			CMD_OPTS+=("${dest}/$(basename "$x")")
+		fi
 	else
-		CMD_OPTS+=("$x")
+		CMD_OPTS+=("$1")
 	fi
     shift
 done
 
-mkdir -p "$CONFIG"
-
-docker run -d --name="$CONTAINER_ID" \
---cap-drop=ALL --cap-add={AUDIT_WRITE,CHOWN,SETGID,SETUID} \
--v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
--v /etc/localtime:/etc/localtime:ro \
--v /etc/machine-id:/etc/machine-id:ro \
--v /run/user/${UID}/pulse:/run/user/pulse:ro \
--v "${CONFIG}:/data/.config/libreoffice" \
--v "${HOME}/Downloads:/data/Downloads" \
--v "${HOME}/Public:/data/Public" \
--v "${HOME}/Templates:/data/Templates" \
--e XUID=${UID} -e XGID=${GID} \
-"${RUN_OPTS[@]}" nightling/libreoffice "${CMD_OPTS[@]}"
-
-sh -c "docker wait ${CONTAINER_ID} && docker rm -v ${CONTAINER_ID}" &
+if [ "$(docker inspect -f '{{ .State.Running }}' "$NAME" 2> /dev/null)" == "true" ]; then
+	docker exec "$NAME" libreoffice "${CMD_OPTS[@]}" &
+else
+	mkdir -p "$DATA"
+	docker rm -fv "$NAME" 2> /dev/null
+	docker run -du $UID:$GID --name="$NAME" --cap-drop=ALL \
+	-v /etc/group:/etc/group:ro \
+	-v /etc/localtime:/etc/localtime:ro \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-v /etc/passwd:/etc/passwd:ro \
+	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
+	-v "$DATA":/data/.config/libreoffice \
+	-v "$HOME"/Documents:/data/Documents \
+	-v "$HOME"/Downloads:/data/Downloads \
+	-v "$HOME"/Public:/data/Public \
+	-v "$HOME"/Templates:/data/Templates \
+	"${RUN_OPTS[@]}" nightling/libreoffice:"$TAG" "${CMD_OPTS[@]}"
+fi
