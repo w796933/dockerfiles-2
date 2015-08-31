@@ -46,3 +46,9 @@
 [submodule "pwnie/preeny"]
 	path = pwnie/preeny
 	url = https://github.com/zardus/preeny.git
+[submodule "pwnie/HashPump"]
+	path = pwnie/HashPump
+	url = https://github.com/bwall/HashPump.git
+[submodule "pwnie/xortool"]
+	path = pwnie/xortool
+	url = https://github.com/hellman/xortool.git

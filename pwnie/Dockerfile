@@ -8,6 +8,7 @@ RUN dnf -y install \
 	hexedit \
 	ltrace \
 	strace \
+	tmux \
 	valgrind \
 	vim-enhanced \
 	\
@@ -19,22 +20,35 @@ RUN dnf -y install \
 	libini_config-devel.* \
 	pyserial \
 	python-argh \
+	python-docopt \
 	python-mako \
 	python-paramiko \
 	python-pyelftools \
 	python-requests \
-	\
 	&& dnf clean all
 
 COPY ROPgadget /opt/ROPgadget
 RUN cd /opt/ROPgadget \
 	&& python setup.py install \
-	&& rm -rf build ~/.cache
+	&& python setup.py clean --all
 
 COPY pwntools /opt/pwntools
 RUN cd /opt/pwntools \
 	&& python setup.py install \
-	&& rm -rf build ~/.cache
+	&& python setup.py clean --all
+
+COPY HashPump /opt/HashPump
+RUN cd /opt/HashPump \
+	&& make \
+	&& make install \
+	&& python setup.py install \
+	&& python setup.py clean --all \
+	&& make clean
+
+COPY xortool /opt/xortool
+RUN cd /opt/xortool \
+	&& python setup.py install \
+	&& python setup.py clean --all
 
 COPY preeny /opt/preeny
 RUN cd /opt/preeny \
