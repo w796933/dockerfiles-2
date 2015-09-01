@@ -5,19 +5,24 @@ MAINTAINER Nightling
 
 RUN dnf -y install \
 	arptools \
+	atop \
 	binwalk \
 	checksec \
 	dnsenum \
 	etcd \
+	ethtool \
 	foremost \
 	gdb \
 	goaccess \
 	hexedit \
+	htop \
 	httpd-tools \
+	iftop \
 	iperf \
 	irssi \
 	kubernetes-client \
 	ltrace \
+	mc \
 	net-tools \
 	nmap \
 	openssh-server \
@@ -34,6 +39,7 @@ RUN dnf -y install \
 	tmux \
 	tor \
 	traceroute \
+	tree \
 	vim-enhanced \
 	w3m \
 	whois \
