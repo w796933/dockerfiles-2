@@ -1,9 +1,12 @@
 #!/bin/bash
-CONTAINER_ID="pwnie-${UID}-$(echo $@ | md5sum - | head -c 16)"
+NAME="pwnie-${UID}-$(echo "$TAG" "$@" | md5sum - | head -c 16)"
 
-# Try to enter a running container...
-docker exec -it "$CONTAINER_ID" bash 2> /dev/null || \
+docker create --name="$NAME" -e TERM -v "$HOME"/Downloads:/root/Downloads "$@" \
+nightling/pwnie:"$TAG" sleep inf 2> /dev/null
 
-docker run -it --rm --name="$CONTAINER_ID" --cap-add=SYS_ADMIN \
--v "${HOME}/Downloads:/root/Downloads" \
-"$@" nightling/pwnie:"$TAG"
+docker start "$NAME" 2> /dev/null
+
+docker exec -it "$NAME" bash
+
+[ "$(docker top "$NAME" 2> /dev/null | wc -l)" -le 2 ] &&
+	docker kill "$NAME" &> /dev/null

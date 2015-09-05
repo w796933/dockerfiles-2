@@ -1,61 +1,49 @@
-FROM nightling/buildpack:22
+# Release tagging is not supported yet
+FROM nightling/toolbox:latest
 MAINTAINER Nightling
 
 RUN dnf -y install \
-	binwalk \
-	checksec \
-	gdb \
-	hexedit \
-	ltrace \
-	strace \
-	tmux \
 	valgrind \
-	vim-enhanced \
-	\
 	american-fuzzy-lop \
 	python{3,}-afl \
 	python-afl-bin \
+	python-z3 \
 	z3 \
 	\
 	libini_config-devel.* \
 	pyserial \
 	python-argh \
+	python-dateutil \
 	python-docopt \
 	python-mako \
 	python-paramiko \
+	python-prettytable \
 	python-pyelftools \
 	python-requests \
+	PyYAML \
+	scapy \
 	&& dnf clean all
 
-COPY ROPgadget /opt/ROPgadget
-RUN cd /opt/ROPgadget \
-	&& python setup.py install \
-	&& python setup.py clean --all
+COPY opt /opt
 
-COPY pwntools /opt/pwntools
-RUN cd /opt/pwntools \
-	&& python setup.py install \
-	&& python setup.py clean --all
-
-COPY HashPump /opt/HashPump
-RUN cd /opt/HashPump \
-	&& make \
-	&& make install \
-	&& python setup.py install \
-	&& python setup.py clean --all \
-	&& make clean
-
-COPY xortool /opt/xortool
-RUN cd /opt/xortool \
-	&& python setup.py install \
-	&& python setup.py clean --all
-
-COPY preeny /opt/preeny
-RUN cd /opt/preeny \
-	&& make -C src && mv *-*-* bin64 \
-	&& PLATFORM=-m32 setarch i686 make -C src && mv *-*-* bin32
-
-COPY peda /opt/peda
+RUN set -e; \
+	for dir in ROPgadget pwntools HashPump xortool; do \
+		cd /opt/$dir; \
+		python setup.py install; \
+		python setup.py clean --all; \
+	done; \
+	cd /opt/HashPump; \
+	make && make install && make clean; \
+	cd /opt/preeny; \
+	make -C src && mv *-*-* bin64; \
+	PLATFORM=-m32 setarch i686 make -C src && mv *-*-* bin32; \
+	pip install -r /opt/weevely3/requirements.txt; \
+	cd /usr/local/bin; \
+	ln -s /opt/commix/commix.py commix; \
+	ln -s /opt/sqlmap/sqlmap.py sqlmap; \
+	ln -s /opt/sqlmap/sqlmapapi.py sqlmapapi; \
+	ln -s /opt/weevely3/weevely.py weevely; \
+	chmod +x *
 
 COPY root /root
 VOLUME /root
