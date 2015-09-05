@@ -11,12 +11,12 @@ Host requirements: X11.
 ### Installation
 
 ```
-docker run --rm -v /usr/share:/mnt/share -u root --entrypoint bash nightling/libreoffice -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/libreoffice -c \
 "(cd /usr/share && find . -name 'libreoffice*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```
 ```
-cp --preserve=mode libreoffice.sh /usr/bin/libreoffice
+cp --preserve=mode libreoffice.sh /usr/local/bin/libreoffice
 ```
 
 ### Usage

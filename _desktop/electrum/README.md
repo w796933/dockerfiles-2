@@ -11,10 +11,10 @@ Host requirements: X11.
 ### Installation
 
 ```
-docker run --rm -v /usr/share:/mnt/share -u root --entrypoint bash nightling/electrum -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/electrum -c \
 "(cd /usr/share && find . -name 'electrum*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```
 ```
-cp --preserve=mode electrum.sh /usr/bin/electrum
+cp --preserve=mode electrum.sh /usr/local/bin/electrum
 ```

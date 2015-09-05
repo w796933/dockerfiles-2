@@ -11,10 +11,10 @@ Host requirements: X11, Pulseaudio.
 ### Installation
 
 ```
-docker run --rm -v /usr/share:/mnt/share -u root --entrypoint bash nightling/firefox -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/firefox -c \
 "(cd /usr/share && find . -name 'firefox*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```
 ```
-cp --preserve=mode firefox.sh /usr/bin/firefox
+cp --preserve=mode firefox.sh /usr/local/bin/firefox
 ```

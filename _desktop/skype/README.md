@@ -11,10 +11,10 @@ Host requirements: X11, Pulseaudio.
 ### Installation
 
 ```
-docker run --rm -v /usr/share:/mnt/share -u root --entrypoint bash nightling/skype -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/skype -c \
 "(cd /usr/share && find . -not -wholename '*/lang/*' -name 'skype*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```
 ```
-cp --preserve=mode skype.sh /usr/bin/skype
+cp --preserve=mode skype.sh /usr/local/bin/skype
 ```

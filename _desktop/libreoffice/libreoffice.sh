@@ -4,8 +4,8 @@ DATA="${HOME}/.config/libreoffice"
 RUN_OPTS=()
 CMD_OPTS=()
 
-if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
-	docker run --rm nightling/libreoffice -h
+if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
+	docker run --rm nightling/libreoffice "$1"
 	exit 0
 fi
 

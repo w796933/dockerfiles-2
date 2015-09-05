@@ -2,8 +2,8 @@
 NAME="electrum-${USER}"
 DATA="${HOME}/.electrum"
 
-if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
-	docker run --rm nightling/electrum -h
+if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
+	docker run --rm nightling/electrum "$1"
 	exit 0
 fi
 

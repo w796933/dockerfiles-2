@@ -2,8 +2,8 @@
 NAME="firefox-${USER}"
 DATA="${HOME}/.mozilla/.docker"
 
-if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
-	docker run --rm nightling/firefox -h
+if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
+	docker run --rm nightling/firefox "$1"
 	exit 0
 fi
 

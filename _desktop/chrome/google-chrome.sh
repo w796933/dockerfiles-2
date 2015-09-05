@@ -2,8 +2,8 @@
 NAME="chrome-${USER}"
 DATA="${HOME}/.config/google-chrome-docker"
 
-if [[ "$1" == "-h" ]] || [[ "$1" == *"help" ]]; then
-	docker run --rm nightling/chrome -h
+if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
+	docker run --rm nightling/chrome "$1"
 	exit 0
 fi
 
