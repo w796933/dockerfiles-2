@@ -1,17 +1,18 @@
 ## docker-firefox
 
-See [firefox.sh](https://github.com/Nightling/dockerfiles/blob/master/_desktop/firefox/firefox.sh)
-for a complete example of running Firefox in a container.
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/firefox/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/firefox)
 
-This image is based on Fedora from
-[nightling/base-gui](https://github.com/Nightling/dockerfiles/blob/master/_desktop/base-gui).
+See [firefox.sh](firefox.sh) for a complete example of running Firefox in a container.
+
+This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
 
 Host requirements: X11, Pulseaudio.
 
 ### Installation
 
 ```
-docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/firefox -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --privileged \
+--entrypoint bash quay.io/nightling/firefox -c \
 "(cd /usr/share && find . -name 'firefox*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```

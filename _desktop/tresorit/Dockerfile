@@ -1,4 +1,4 @@
-FROM nightling/base-gui:22
+FROM quay.io/nightling/base-desktop:fc22
 MAINTAINER Nightling
 
 RUN curl -o /tmp/.run https://installerstorage.blob.core.windows.net/public/install/tresorit_installer.run \

@@ -3,7 +3,7 @@ NAME="firefox-${USER}"
 DATA="${HOME}/.mozilla/.docker"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm nightling/firefox "$1"
+	docker run --rm quay.io/nightling/firefox "$1"
 	exit 0
 fi
 
@@ -23,5 +23,5 @@ else
 	-v "$DATA":/data/.mozilla \
 	-v "$HOME"/.config/gtk-3.0/settings.ini:/data/.config/gtk-3.0/settings.ini:ro \
 	-v "$HOME"/Downloads:/data/Downloads \
-	nightling/firefox:"$TAG" "$@"
+	quay.io/nightling/firefox:"$TAG" "$@"
 fi

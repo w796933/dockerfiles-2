@@ -1,4 +1,4 @@
-FROM nightling/base-gui:22
+FROM quay.io/nightling/base-desktop:fc22
 MAINTAINER Nightling
 
 RUN dnf -y install firefox \

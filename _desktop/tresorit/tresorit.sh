@@ -16,5 +16,5 @@ else
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/tresorit \
 	-v "$HOME"/Downloads:/data/Downloads \
-	nightling/tresorit:"$TAG" "$@"
+	quay.io/nightling/tresorit:"$TAG" "$@"
 fi

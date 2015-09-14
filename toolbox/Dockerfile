@@ -1,4 +1,4 @@
-FROM nightling/buildpack:22
+FROM quay.io/nightling/buildpack:fc22
 MAINTAINER Nightling
 
 # Expect all packages from the base images...

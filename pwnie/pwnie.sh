@@ -2,7 +2,7 @@
 NAME="pwnie-${UID}-$(echo "$TAG" "$@" | md5sum - | head -c 16)"
 
 docker create --name="$NAME" -e TERM -v "$HOME"/Downloads:/root/Downloads "$@" \
-nightling/pwnie:"$TAG" sleep inf 2> /dev/null
+quay.io/nightling/pwnie:"$TAG" sleep inf 2> /dev/null
 
 docker start "$NAME" 2> /dev/null
 

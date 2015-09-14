@@ -1,17 +1,18 @@
 ## docker-libreoffice
 
-See [libreoffice.sh](https://github.com/Nightling/dockerfiles/blob/master/_desktop/libreoffice/libreoffice.sh)
-for a complete example of running LibreOffice in a container.
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/libreoffice/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/libreoffice)
 
-This image is based on Fedora from
-[nightling/base-gui](https://github.com/Nightling/dockerfiles/blob/master/_desktop/base-gui).
+See [libreoffice.sh](libreoffice.sh) for a complete example of running LibreOffice in a container.
+
+This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
 
 Host requirements: X11.
 
 ### Installation
 
 ```
-docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/libreoffice -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --privileged \
+--entrypoint bash quay.io/nightling/libreoffice -c \
 "(cd /usr/share && find . -name 'libreoffice*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```

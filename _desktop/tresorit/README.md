@@ -1,9 +1,9 @@
 ## docker-tresorit
 
-See [tresorit.sh](https://github.com/Nightling/dockerfiles/blob/master/_desktop/tresorit/tresorit.sh) 
-for a complete example of running Tresorit GUI in a container.
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/tresorit/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/tresorit)
 
-This image is based on Fedora from
-[nightling/base-gui](https://github.com/Nightling/dockerfiles/blob/master/_desktop/base-gui).
+See [tresorit.sh](tresorit.sh) for a complete example of running Tresorit GUI in a container.
+
+This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
 
 Host requirements: X11.

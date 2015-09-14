@@ -1,4 +1,4 @@
-FROM nightling/fedora:22
+FROM quay.io/nightling/fedora:22
 MAINTAINER Nightling
 
 RUN useradd -lmd /data --key={UID,GID}_MIN=26658 miniircd

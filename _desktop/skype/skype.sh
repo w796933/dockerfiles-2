@@ -3,7 +3,7 @@ NAME="skype-${USER}"
 DATA="${HOME}/.Skype"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm nightling/skype "$1"
+	docker run --rm quay.io/nightling/skype "$1"
 	exit 0
 fi
 
@@ -26,5 +26,5 @@ else
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/.Skype \
 	-v "$HOME"/Downloads:/data/Downloads \
-	${PORTS} nightling/skype:"$TAG" "$@"
+	${PORTS} quay.io/nightling/skype:"$TAG" "$@"
 fi

@@ -5,7 +5,7 @@ RUN_OPTS=()
 CMD_OPTS=()
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm nightling/libreoffice "$1"
+	docker run --rm quay.io/nightling/libreoffice "$1"
 	exit 0
 fi
 
@@ -50,5 +50,5 @@ else
 	-v "$HOME"/Downloads:/data/Downloads \
 	-v "$HOME"/Public:/data/Public \
 	-v "$HOME"/Templates:/data/Templates \
-	"${RUN_OPTS[@]}" nightling/libreoffice:"$TAG" "${CMD_OPTS[@]}"
+	"${RUN_OPTS[@]}" quay.io/nightling/libreoffice:"$TAG" "${CMD_OPTS[@]}"
 fi

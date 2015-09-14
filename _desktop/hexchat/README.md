@@ -1,17 +1,18 @@
 ## docker-hexchat
 
-See [hexchat.sh](https://github.com/Nightling/dockerfiles/blob/master/_desktop/hexchat/hexchat.sh)
-for a complete example of running HexChat in a container.
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/hexchat/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/hexchat)
 
-This image is based on Fedora from
-[nightling/base-gui](https://github.com/Nightling/dockerfiles/blob/master/_desktop/base-gui).
+See [hexchat.sh](hexchat.sh) for a complete example of running HexChat in a container.
+
+This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
 
 Host requirements: X11.
 
 ### Installation
 
 ```
-docker run --rm -v /usr/local/share:/mnt/share -u root --entrypoint bash nightling/hexchat -c \
+docker run --rm -v /usr/local/share:/mnt/share -u root --privileged \
+--entrypoint bash quay.io/nightling/hexchat -c \
 "(cd /usr/share && find . -name 'hexchat*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```

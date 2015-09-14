@@ -1,4 +1,6 @@
-## base-gui
+## base-desktop
+
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/base-desktop/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/base-desktop)
 
 A common base image for **desktop** images based on **Fedora**.
 

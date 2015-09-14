@@ -1,9 +1,9 @@
 ## docker-mpv
 
-See [mpv.sh](https://github.com/Nightling/dockerfiles/blob/master/_desktop/mpv/mpv.sh) 
-for a complete example of running [mpv](http://mpv.io) in a container.
+[![Docker Repository on Quay.io](https://quay.io/repository/nightling/mpv/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/mpv)
 
-This image is based on Fedora from
-[nightling/base-gui](https://github.com/Nightling/dockerfiles/blob/master/_desktop/base-gui).
+See [mpv.sh](mpv.sh) for a complete example of running [mpv](http://mpv.io) in a container.
+
+This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
 
 Host requirements: X11, PulseAudio.

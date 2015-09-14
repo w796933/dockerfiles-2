@@ -3,7 +3,7 @@ NAME="hexchat-${USER}"
 DATA="${HOME}/.config/hexchat"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm nightling/hexchat "$1"
+	docker run --rm quay.io/nightling/hexchat "$1"
 	exit 0
 fi
 
@@ -21,5 +21,5 @@ else
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/.config/hexchat \
 	-v "$HOME"/Downloads:/data/Downloads \
-	nightling/hexchat:"$TAG" "$@"
+	quay.io/nightling/hexchat:"$TAG" "$@"
 fi
