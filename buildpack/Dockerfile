@@ -31,6 +31,7 @@ RUN dnf -y install \
 	libyaml-devel \
 	openssl-devel \
 	perl-devel \
+	postgresql-devel \
 	python{3,}-devel \
 	readline-devel \
 	ruby-devel \
