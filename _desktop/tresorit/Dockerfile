@@ -6,9 +6,9 @@ RUN curl -o /tmp/.run https://installerstorage.blob.core.windows.net/public/inst
 	&& sudo -iu user sh /tmp/.run \
 	&& rm -f /tmp/.run \
 	&& mv /data/.local/share/tresorit/ /opt/tresorit/ \
-	&& ln -s /opt/tresorit/tresorit /usr/bin/ \
-	&& for dir in Logs Profiles Updates; do \
-		ln -s /data/tresorit/$dir /opt/tresorit/$dir; \
+	&& ln -s /opt/tresorit/tresorit /usr/local/bin/ \
+	&& for DIR in Logs Profiles Updates; do \
+		ln -s /data/.tresorit/${DIR} /opt/tresorit/${DIR}; \
 	done
 
 ENTRYPOINT ["tresorit"]

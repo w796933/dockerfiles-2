@@ -14,7 +14,8 @@ else
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
-	-v "$DATA":/data/tresorit \
+	-v "$DATA":/data/.tresorit \
 	-v "$HOME"/Downloads:/data/Downloads \
+	-v "$HOME"/Public:/data/Public \
 	quay.io/nightling/tresorit:"$TAG" "$@"
 fi
