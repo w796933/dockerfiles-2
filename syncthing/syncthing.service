@@ -1,0 +1,27 @@
+[Unit]
+Description=Syncthing User Service
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=0
+
+ExecStartPre=-/usr/bin/docker rm -fv sync-${USER}
+ExecStart=/usr/bin/docker run --name sync-${USER} -u ${USER} --net host \
+-v /etc/group:/etc/group:ro \
+-v /etc/localtime:/etc/localtime:ro \
+-v /etc/machine-id:/etc/machine-id:ro \
+-v /etc/passwd:/etc/passwd:ro \
+-v ${HOME}/.config/syncthing:/data/.config/syncthing \
+-v ${HOME}/Backups:/data/Backups \
+-v ${HOME}/Documents:/data/Documents \
+-v ${HOME}/Library:/data/Library \
+-v ${HOME}/Music:/data/Music \
+-v ${HOME}/Pictures:/data/Pictures \
+-v ${HOME}/Sync:/data/Sync \
+-v ${HOME}/Works:/data/Works \
+--cap-drop ALL quay.io/nightling/syncthing
+
+ExecStop=/usr/bin/docker stop sync-${USER}
+
+[Install]
+WantedBy=default.target
