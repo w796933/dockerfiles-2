@@ -33,9 +33,6 @@ RUN set -e; \
 	done; \
 	cd /opt/HashPump; \
 	make && make install && make clean; \
-	cd /opt/preeny; \
-	make -C src && mv *-*-* bin64; \
-	PLATFORM=-m32 setarch i686 make -C src && mv *-*-* bin32; \
 	pip install -r /opt/weevely3/requirements.txt; \
 	cd /usr/local/bin; \
 	ln -s /opt/commix/commix.py commix; \
