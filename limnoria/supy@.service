@@ -8,8 +8,8 @@ Restart=on-failure
 TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker rm -fv supy-%i
-ExecStart=/usr/bin/docker run --name supy-%i -v /mnt/supy-%i:/data \
---cap-drop ALL -c 128 -m 96m --memory-swap 256m nightling/limnoria supybot %i.conf
+ExecStart=/usr/bin/docker run --name supy-%i -c 128 -m 96m --cap-drop ALL \
+-v /mnt/supy-%i:/data:Z quay.io/nightling/limnoria supybot %i.conf
 
 ExecStop=/usr/bin/docker stop supy-%i
 

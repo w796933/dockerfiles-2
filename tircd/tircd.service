@@ -8,8 +8,8 @@ Restart=on-failure
 TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker rm -fv tircd
-ExecStart=/usr/bin/docker run --name tircd -v /mnt/tircd:/data \
---cap-drop ALL -c 128 -m 64m --memory-swap 128m nightling/tircd
+ExecStart=/usr/bin/docker run --name tircd -c 128 -m 64m --cap-drop ALL \
+-v /mnt/tircd:/data:Z quay.io/nightling/tircd
 
 ExecStop=/usr/bin/docker stop tircd
 

@@ -7,11 +7,11 @@ Requires=docker.service
 Restart=on-failure
 TimeoutStartSec=0
 
-ExecStartPre=-/usr/bin/docker rm -fv ircd
-ExecStart=/usr/bin/docker run --name ircd -v /mnt/miniircd:/data \
---cap-drop ALL -m 16m --memory-swap 96m nightling/miniircd
+ExecStartPre=-/usr/bin/docker rm -fv miniircd
+ExecStart=/usr/bin/docker run --name miniircd -m 16m --cap-drop ALL \
+-v /mnt/miniircd:/data:Z quay.io/nightling/miniircd
 
-ExecStop=/usr/bin/docker stop ircd
+ExecStop=/usr/bin/docker stop miniircd
 
 [Install]
 WantedBy=multi-user.target

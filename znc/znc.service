@@ -8,8 +8,8 @@ Restart=on-failure
 TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker rm -fv znc
-ExecStart=/usr/bin/docker run --name znc -v /mnt/znc:/data -p 6697:6697 -p 8443:8443 \
---cap-drop ALL -m 64m --memory-swap 128m nightling/znc
+ExecStart=/usr/bin/docker run --name znc -m 96m --cap-drop ALL \
+-v /mnt/znc:/data:Z -p 7000:7000 quay.io/nightling/znc
 
 ExecStop=/usr/bin/docker stop znc
 
