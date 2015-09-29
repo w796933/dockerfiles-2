@@ -21,6 +21,7 @@ while [ $# -gt 0 ]; do
 done
 
 docker run -itu $UID:$GID --rm --cap-drop=ALL \
+--security-opt=label:disable \
 --device=/dev/dri:/dev/dri:rw \
 -v /etc/group:/etc/group:ro \
 -v /etc/localtime:/etc/localtime:ro \

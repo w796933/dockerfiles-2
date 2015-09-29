@@ -15,13 +15,13 @@ docker run --rm --entrypoint sh quay.io/nightling/znc -c id
 Interactive first time configuration:
 
 ```
-docker run -it --rm -v /path/to/znc:/data quay.io/nightling/znc --makeconf
+docker run -it --rm -v /path/to/znc:/data:Z quay.io/nightling/znc --makeconf
 ```
 
 Start ZNC and publish the configured port(s):
 
 ```
-docker run --rm --name znc -p 6667:6667 -v /path/to/znc:/data quay.io/nightling/znc
+docker run --rm --name znc -p 6667:6667 -v /path/to/znc:/data:Z quay.io/nightling/znc
 ```
 
 ## Modules

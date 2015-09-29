@@ -8,6 +8,7 @@ else
 	mkdir -p "$DATA"/{Logs,Profiles,Updates}
 	docker rm -fv "$NAME" 2> /dev/null
 	docker run -du $UID:$GID --name="$NAME" --cap-drop=ALL \
+	--security-opt=label:disable \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/localtime:/etc/localtime:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \

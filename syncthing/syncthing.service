@@ -19,6 +19,7 @@ ExecStart=/usr/bin/docker run --name sync-${USER} -u ${USER} --net host \
 -v ${HOME}/Pictures:/data/Pictures \
 -v ${HOME}/Sync:/data/Sync \
 -v ${HOME}/Works:/data/Works \
+--security-opt label:disable \
 --cap-drop ALL quay.io/nightling/syncthing
 
 ExecStop=/usr/bin/docker stop sync-${USER}

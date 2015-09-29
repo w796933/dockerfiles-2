@@ -18,7 +18,7 @@ docker run --rm --entrypoint sh quay.io/nightling/limnoria -c id
 Interactive first time configuration:
 
 ```
-docker run -it --rm -v /path/to/supy:/data quay.io/nightling/limnoria supybot-wizard --allow-home
+docker run -it --rm -v /path/to/supy:/data:Z quay.io/nightling/limnoria supybot-wizard --allow-home
 ```
 
 List all available plugins:
@@ -31,5 +31,5 @@ docker run -it --rm quay.io/nightling/limnoria ls /opt/limnoria/plugins/
 Start Limnoria with your existing configuration:
 
 ```
-docker run --rm --name supy -v /path/to/supy:/data quay.io/nightling/limnoria supybot <name>.conf
+docker run --rm --name supy -v /path/to/supy:/data:Z quay.io/nightling/limnoria supybot <name>.conf
 ```

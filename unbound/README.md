@@ -24,7 +24,7 @@ You can override the local configuration directory with:
 But first, you have to run unbound-control-setup:
 
 ```
-docker run --rm -v /path/to/unbound:/etc/unbound/conf.d quay.io/nightling/unbound \
+docker run --rm -v /path/to/unbound:/etc/unbound/conf.d:z quay.io/nightling/unbound \
 unbound-control-setup -d /etc/unbound/conf.d
 ```
 

@@ -13,6 +13,7 @@ else
 	mkdir -p "$DATA"
 	docker rm -fv "$NAME" 2> /dev/null
 	docker run -du $UID:$GID --name="$NAME" --cap-drop=ALL \
+	--security-opt=label:disable \
 	--device=/dev/dri:/dev/dri:rw \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/localtime:/etc/localtime:ro \

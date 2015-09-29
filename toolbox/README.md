@@ -21,5 +21,5 @@ Share a running container's volumes, network and IPC namespaces:
 Share everything from the host system:
 
 ```
--v /:/mnt/host --{net,ipc,pid,uts}=host
+-v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
 ```
