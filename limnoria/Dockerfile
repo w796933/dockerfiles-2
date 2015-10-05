@@ -2,6 +2,7 @@ FROM quay.io/nightling/fedora:22
 MAINTAINER Nightling
 
 RUN dnf -y install \
+	python-babel \
 	python-beautifulsoup4 \
 	python-chardet \
 	python-dateutil \

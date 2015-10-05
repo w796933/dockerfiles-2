@@ -20,6 +20,9 @@
 [submodule "limnoria/plugins-glolol"]
 	path = limnoria/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
+[submodule "limnoria/plugins-extra/TVMaze"]
+	path = limnoria/plugins-extra/TVMaze
+	url = https://github.com/Znuff/limnoria-tvmaze.git
 
 [submodule "znc/modules/push"]
 	path = znc/modules/push
