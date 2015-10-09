@@ -1,5 +1,4 @@
-FROM quay.io/nightling/base-desktop:fc22
-MAINTAINER Nightling
+FROM quay.io/oszi/base-desktop:fc22
 
 RUN dnf -y install firefox \
 	&& dnf clean all

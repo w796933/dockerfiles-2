@@ -1,6 +1,6 @@
 ## docker-backup
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/backup/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/backup)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/backup/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/backup)
 
 Docker image for backup tools:
 

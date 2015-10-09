@@ -1,6 +1,6 @@
 ## docker-toolbox
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/toolbox/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/toolbox)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/toolbox/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/toolbox)
 
 Swiss army knife for debugging and managing container hosts.
 
@@ -9,7 +9,7 @@ Swiss army knife for debugging and managing container hosts.
 Start Toolbox with NET_ADMIN and SYS_ADMIN capabilities:
 
 ```
-docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} quay.io/nightling/toolbox
+docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} quay.io/oszi/toolbox
 ```
 
 Share a running container's volumes, network and IPC namespaces:

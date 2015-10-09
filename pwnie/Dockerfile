@@ -1,5 +1,4 @@
-FROM quay.io/nightling/toolbox:fc22
-MAINTAINER Nightling
+FROM quay.io/oszi/toolbox:fc22
 
 RUN dnf -y install \
 	valgrind \

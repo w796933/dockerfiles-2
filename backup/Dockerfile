@@ -1,5 +1,4 @@
-FROM quay.io/nightling/buildpack:fc22
-MAINTAINER Nightling
+FROM quay.io/oszi/buildpack:fc22
 
 RUN dnf -y install \
 	duplicity \

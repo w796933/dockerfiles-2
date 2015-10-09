@@ -1,6 +1,6 @@
 ## docker-tircd
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/tircd/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/tircd)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/tircd/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/tircd)
 
 An ircd proxy to the Twitter API.
 

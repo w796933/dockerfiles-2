@@ -3,7 +3,7 @@ NAME="chrome-${USER}"
 DATA="${HOME}/.config/google-chrome-docker"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm quay.io/nightling/chrome "$1"
+	docker run --rm quay.io/oszi/chrome "$1"
 	exit 0
 fi
 
@@ -23,5 +23,5 @@ else
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/.config/google-chrome \
 	-v "$HOME"/Downloads:/data/Downloads \
-	quay.io/nightling/chrome:"$TAG" "$@"
+	quay.io/oszi/chrome:"$TAG" "$@"
 fi

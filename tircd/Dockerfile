@@ -1,5 +1,4 @@
-FROM quay.io/nightling/fedora:22
-MAINTAINER Nightling
+FROM quay.io/oszi/fedora:22
 
 RUN dnf -y install perl-JSON-Any perl-LWP-Protocol-https perl-Net-OAuth \
 	perl-Net-Twitter-Lite perl-POE-Filter-IRCD perl-URI-Find \

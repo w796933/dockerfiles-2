@@ -3,7 +3,7 @@ NAME="electrum-${USER}"
 DATA="${HOME}/.electrum"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm quay.io/nightling/electrum "$1"
+	docker run --rm quay.io/oszi/electrum "$1"
 	exit 0
 fi
 
@@ -22,5 +22,5 @@ else
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/.electrum \
 	-v "$HOME"/Downloads:/data/Downloads \
-	quay.io/nightling/electrum:"$TAG" "$@"
+	quay.io/oszi/electrum:"$TAG" "$@"
 fi

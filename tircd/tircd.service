@@ -9,7 +9,7 @@ TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker rm -fv tircd
 ExecStart=/usr/bin/docker run --name tircd -c 128 -m 64m --cap-drop ALL \
--v /mnt/tircd:/data:Z quay.io/nightling/tircd
+-v /mnt/tircd:/data:Z quay.io/oszi/tircd
 
 ExecStop=/usr/bin/docker stop tircd
 

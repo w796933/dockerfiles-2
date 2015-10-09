@@ -18,5 +18,5 @@ else
 	-v "$DATA":/data/.tresorit \
 	-v "$HOME"/Downloads:/data/Downloads \
 	-v "$HOME"/Public:/data/Public \
-	quay.io/nightling/tresorit:"$TAG" "$@"
+	quay.io/oszi/tresorit:"$TAG" "$@"
 fi

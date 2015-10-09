@@ -1,6 +1,6 @@
 ## docker-libreoffice
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/libreoffice/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/libreoffice)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/libreoffice/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/libreoffice)
 
 See [libreoffice.sh](libreoffice.sh) for a complete example of running LibreOffice in a container.
 
@@ -12,7 +12,7 @@ Host requirements: X11.
 
 ```
 docker run --rm -v /usr/local/share:/mnt/share -u root --privileged \
---entrypoint bash quay.io/nightling/libreoffice -c \
+--entrypoint bash quay.io/oszi/libreoffice -c \
 "(cd /usr/share && find . -name 'libreoffice*' > /tmp/files) \
 && rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
 ```

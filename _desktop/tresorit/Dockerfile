@@ -1,5 +1,4 @@
-FROM quay.io/nightling/base-desktop:fc22
-MAINTAINER Nightling
+FROM quay.io/oszi/base-desktop:fc22
 
 RUN curl -o /tmp/.run https://installerstorage.blob.core.windows.net/public/install/tresorit_installer.run \
 	&& useradd -ld /data user \

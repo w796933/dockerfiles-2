@@ -1,6 +1,6 @@
 ## docker-limnoria
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/limnoria/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/limnoria)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/limnoria/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/limnoria)
 
 [Limnoria](https://github.com/ProgVal/Limnoria) IRC bot, a fork of Supybot.
 
@@ -12,24 +12,24 @@ and [GLolol](https://github.com/GLolol/SupyPlugins).
 If you mount /data yourself, it must be writable by the container user:
 
 ```
-docker run --rm --entrypoint sh quay.io/nightling/limnoria -c id
+docker run --rm --entrypoint sh quay.io/oszi/limnoria -c id
 ```
 
 Interactive first time configuration:
 
 ```
-docker run -it --rm -v /path/to/supy:/data:Z quay.io/nightling/limnoria supybot-wizard --allow-home
+docker run -it --rm -v /path/to/supy:/data:Z quay.io/oszi/limnoria supybot-wizard --allow-home
 ```
 
 List all available plugins:
 
 
 ```
-docker run -it --rm quay.io/nightling/limnoria ls /opt/limnoria/plugins/
+docker run -it --rm quay.io/oszi/limnoria ls /opt/limnoria/plugins/
 ```
 
 Start Limnoria with your existing configuration:
 
 ```
-docker run --rm --name supy -v /path/to/supy:/data:Z quay.io/nightling/limnoria supybot <name>.conf
+docker run --rm --name supy -v /path/to/supy:/data:Z quay.io/oszi/limnoria supybot <name>.conf
 ```

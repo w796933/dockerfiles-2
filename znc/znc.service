@@ -9,7 +9,7 @@ TimeoutStartSec=0
 
 ExecStartPre=-/usr/bin/docker rm -fv znc
 ExecStart=/usr/bin/docker run --name znc -m 96m --cap-drop ALL \
--v /mnt/znc:/data:Z -p 7000:7000 quay.io/nightling/znc
+-v /mnt/znc:/data:Z -p 7000:7000 quay.io/oszi/znc
 
 ExecStop=/usr/bin/docker stop znc
 

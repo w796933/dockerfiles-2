@@ -1,6 +1,6 @@
 ## docker-pwnie
 
-[![Docker Repository on Quay.io](https://quay.io/repository/nightling/pwnie/status "Docker Repository on Quay.io")](https://quay.io/repository/nightling/pwnie)
+[![Docker Repository on Quay.io](https://quay.io/repository/oszi/pwnie/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/pwnie)
 
 Docker image for penetration testing and CTFs.
 

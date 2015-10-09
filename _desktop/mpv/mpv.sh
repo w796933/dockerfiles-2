@@ -30,4 +30,4 @@ docker run -itu $UID:$GID --rm --cap-drop=ALL \
 -v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 -v "$DATA":/data/.config/mpv \
-"${RUN_OPTS[@]}" quay.io/nightling/mpv:"$TAG" "${CMD_OPTS[@]}"
+"${RUN_OPTS[@]}" quay.io/oszi/mpv:"$TAG" "${CMD_OPTS[@]}"

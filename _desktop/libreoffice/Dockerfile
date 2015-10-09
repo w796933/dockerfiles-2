@@ -1,5 +1,4 @@
-FROM quay.io/nightling/base-desktop:fc22
-MAINTAINER Nightling
+FROM quay.io/oszi/base-desktop:fc22
 
 RUN dnf -y groups install LibreOffice \
 	&& dnf -y install libreoffice-{postgresql,langpack-hu} \

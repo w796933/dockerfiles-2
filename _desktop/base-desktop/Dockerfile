@@ -1,5 +1,4 @@
-FROM quay.io/nightling/fedora:22
-MAINTAINER Nightling
+FROM quay.io/oszi/fedora:22
 
 # Common shared libraries
 RUN dnf -y install \
