@@ -11,6 +11,7 @@ RUN dnf -y install \
 	git \
 	mercurial \
 	rpm-build \
+	rpm-ostree \
 	subversion \
 	&& dnf clean all
 
