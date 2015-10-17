@@ -57,8 +57,10 @@ RUN dnf -y install \
 	&& dnf -y erase etcd \
 	&& dnf clean all
 
-COPY root /root
+COPY include /
+
 VOLUME /root
+
 WORKDIR /root
 
 EXPOSE 22 80 443 1337 1337/udp

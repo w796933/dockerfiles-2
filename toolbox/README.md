@@ -23,3 +23,7 @@ Share everything from the host system:
 ```
 -v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
 ```
+
+Docker and rkt are automatically chrooted into /host.
+
+There are useful aliases in [profile.d](include/etc/profile.d) ...
