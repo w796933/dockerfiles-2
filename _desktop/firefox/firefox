@@ -3,7 +3,7 @@ NAME="firefox-${USER}"
 DATA="${HOME}/.mozilla/.docker"
 
 if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm quay.io/oszi/firefox "$1"
+	docker run --rm "__IMAGE__" "$1"
 	exit 0
 fi
 
@@ -20,9 +20,9 @@ else
 	-v /etc/machine-id:/etc/machine-id:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
-	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="$DISPLAY" \
 	-v "$DATA":/data/.mozilla \
 	-v "$HOME"/.config/gtk-3.0/settings.ini:/data/.config/gtk-3.0/settings.ini:ro \
 	-v "$HOME"/Downloads:/data/Downloads \
-	quay.io/oszi/firefox:"$TAG" "$@"
+	"__IMAGE__" "$@"
 fi

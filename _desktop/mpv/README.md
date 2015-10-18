@@ -2,8 +2,9 @@
 
 [![Docker Repository on Quay.io](https://quay.io/repository/oszi/mpv/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/mpv)
 
-See [mpv.sh](mpv.sh) for a complete example of running [mpv](http://mpv.io) in a container.
+See [mpv.sh](mpv) for an example of running [mpv](http://mpv.io) in a container.
 
-This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
+This image is based on Fedora / [base-desktop].
 
-Host requirements: X11, PulseAudio.
+For documentation on how to use this and how it works see [base-desktop].
+[base-desktop]:/_desktop/base-desktop

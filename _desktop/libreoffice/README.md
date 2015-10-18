@@ -2,23 +2,12 @@
 
 [![Docker Repository on Quay.io](https://quay.io/repository/oszi/libreoffice/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/libreoffice)
 
-See [libreoffice.sh](libreoffice.sh) for a complete example of running LibreOffice in a container.
+See [libreoffice.sh](libreoffice) for an example of running LibreOffice in a container.
 
-This image is based on Fedora from [base-desktop](/_desktop/base-desktop).
+This image is based on Fedora / [base-desktop].
 
-Host requirements: X11.
-
-### Installation
-
-```
-docker run --rm -v /usr/local/share:/mnt/share -u root --privileged \
---entrypoint bash quay.io/oszi/libreoffice -c \
-"(cd /usr/share && find . -name 'libreoffice*' > /tmp/files) \
-&& rsync -av --files-from=/tmp/files /{usr,mnt}/share/"
-```
-```
-cp --preserve=mode libreoffice.sh /usr/local/bin/libreoffice
-```
+For documentation on how to use this and how it works see [base-desktop].
+[base-desktop]:/_desktop/base-desktop
 
 ### Usage
 

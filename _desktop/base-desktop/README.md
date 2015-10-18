@@ -61,3 +61,38 @@ Finally, mount the necessary directories in `/data` for the application.
  * Pulseaudio
 
 Best compatible with Fedora based systems.
+
+## Test run
+
+Start a container without touching the host system:
+
+```
+atomic run quay.io/oszi/__IMAGE__
+```
+
+Manually on any distribution:
+
+```
+export IMAGE="quay.io/oszi/__IMAGE__"
+export NAME="__IMAGE__"
+docker pull ${IMAGE}
+eval $(docker inspect -f "{{.Config.Labels.RUN}}" ${IMAGE})
+```
+
+Your data persists only until the container exists.
+
+## Install
+
+Install files under /usr/local/ for desktop integration:
+
+```
+atomic install quay.io/oszi/__IMAGE__
+```
+
+Manually on any distribution:
+
+```
+export IMAGE="quay.io/oszi/__IMAGE__"
+docker pull ${IMAGE}
+eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+```

@@ -1,16 +1,11 @@
 #!/bin/bash
-NAME="hexchat-${USER}"
-DATA="${HOME}/.config/hexchat"
-
-if [[ "$1" =~ ^-*(h|v)|(help|version)$ ]]; then
-	docker run --rm quay.io/oszi/hexchat "$1"
-	exit 0
-fi
+NAME="tresorit-${USER}"
+DATA="${HOME}/.local/share/tresorit"
 
 if [ "$(docker inspect -f '{{ .State.Running }}' "$NAME" 2> /dev/null)" == "true" ]; then
-	docker exec "$NAME" hexchat --existing "$@" &
+	docker exec "$NAME" tresorit "$@" &
 else
-	mkdir -p "$DATA"
+	mkdir -p "$DATA"/{Logs,Profiles,Updates}
 	docker rm -fv "$NAME" 2> /dev/null
 	docker run -du $UID:$GID --name="$NAME" --cap-drop=ALL \
 	--security-opt=label:disable \
@@ -19,8 +14,9 @@ else
 	-v /etc/machine-id:/etc/machine-id:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
-	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
-	-v "$DATA":/data/.config/hexchat \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="$DISPLAY" \
+	-v "$DATA":/data/.tresorit \
 	-v "$HOME"/Downloads:/data/Downloads \
-	quay.io/oszi/hexchat:"$TAG" "$@"
+	-v "$HOME"/Public:/data/Public \
+	"__IMAGE__" "$@"
 fi

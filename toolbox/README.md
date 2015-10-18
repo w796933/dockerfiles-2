@@ -26,4 +26,19 @@ Share everything from the host system:
 
 Docker and rkt are automatically chrooted into /host.
 
-There are useful aliases in [profile.d](include/etc/profile.d) ...
+There are useful aliases in [aliases.sh](include/usr/share/install/aliases.sh)
+and [profile.d](include/etc/profile.d) ...
+
+## Install
+
+```
+atomic install quay.io/oszi/toolbox
+```
+
+Manually on any distribution:
+
+```
+export IMAGE="quay.io/oszi/toolbox"
+docker pull ${IMAGE}
+eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+```

@@ -10,4 +10,6 @@ RUN curl -o /tmp/.run https://installerstorage.blob.core.windows.net/public/inst
 		ln -s /data/.tresorit/${DIR} /opt/tresorit/${DIR}; \
 	done
 
+COPY tresorit* /usr/share/install/
+
 ENTRYPOINT ["tresorit"]

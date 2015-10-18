@@ -20,7 +20,8 @@ RUN dnf -y install \
 	python-requests \
 	PyYAML \
 	scapy \
-	&& dnf clean all
+	&& dnf clean all \
+	&& rm -rf /usr/share/install/
 
 COPY opt /opt
 
@@ -40,10 +41,13 @@ RUN set -e; \
 	ln -s /opt/weevely3/weevely.py weevely; \
 	chmod +x *
 
-COPY root /root
-VOLUME /root
-WORKDIR /root
+LABEL RUN /usr/bin/docker run -it --name=\${NAME} -e NAME=\${NAME} \
+	-e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}
 
-EXPOSE 1337 1337/udp
+COPY include /
+
+VOLUME /root
+
+WORKDIR /root
 
 CMD ["bash"]

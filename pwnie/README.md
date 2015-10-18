@@ -33,3 +33,17 @@ Web:
  * [weevely3](https://github.com/epinna/weevely3)
 
 Here be dragons!
+
+## Install
+
+```
+atomic install quay.io/oszi/pwnie
+```
+
+Manually on any distribution:
+
+```
+export IMAGE="quay.io/oszi/pwnie"
+docker pull ${IMAGE}
+eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+```

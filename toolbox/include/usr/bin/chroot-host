@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -h "$0" ]; then
+  chroot "$HOST" "$(basename "$0")" "$@"
+elif [ $# -gt 0 ]; then
+  chroot "$HOST" "$@"
+else # shell ...
+  chroot "$HOST" bash
+fi
