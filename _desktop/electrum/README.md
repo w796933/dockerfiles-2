@@ -2,7 +2,7 @@
 
 [![Docker Repository on Quay.io](https://quay.io/repository/oszi/electrum/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/electrum)
 
-See [electrum.sh](electrum) for an example of running Electrum in a container.
+See [electrum.sh](electrum) for an example of running [Electrum](https://electrum.org) in a container.
 
 This image is based on Fedora / [base-desktop].
 
