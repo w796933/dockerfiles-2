@@ -7,24 +7,25 @@ Docker image for an out of the box, secure DNS resolver.
 [Unbound](https://unbound.net) is a validating, recursive, and caching DNS resolver.
 
 ## Usage
+
 Warning: Recursive queries are allowed by default!
 
 Start unbound with the default configuration:
 
 ```
-docker run --rm --name dns -p 53:53 -p 53:53/udp quay.io/oszi/unbound
+docker run --rm --name dns -p 53:53/udp -p 53:53/tcp quay.io/oszi/unbound
 ```
 
 You can override the local configuration directory with:
 
 ```
--v /path/to/unbound:/etc/unbound/conf.d:ro
+-v /path/to/unbound:/etc/unbound/conf.d:ro,Z
 ```
 
 But first, you have to run unbound-control-setup:
 
 ```
-docker run --rm -v /path/to/unbound:/etc/unbound/conf.d:z quay.io/oszi/unbound \
+docker run --rm -v /path/to/unbound:/etc/unbound/conf.d:Z quay.io/oszi/unbound \
 unbound-control-setup -d /etc/unbound/conf.d
 ```
 

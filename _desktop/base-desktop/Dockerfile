@@ -29,7 +29,7 @@ LABEL RUN /usr/bin/docker create --name=\${NAME} -u \${UID}:\${GID} \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /run/user/\${UID}/pulse:/run/user/\${UID}/pulse:ro \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-	-e DISPLAY=\${DISPLAY:-:0} \
+	-e DISPLAY=\${DISPLAY:-unix:0} \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}; \
 	/usr/bin/docker start \${NAME}
 

@@ -7,6 +7,9 @@ RUN dnf -y install docker \
 	lxc \
 	&& dnf clean all
 
+LABEL RUN /usr/bin/docker run -it --privileged --name=\${NAME} -e NAME=\${NAME} \
+	-e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}
+
 COPY wrapdocker /usr/local/bin/
 
 VOLUME /var/lib/docker
