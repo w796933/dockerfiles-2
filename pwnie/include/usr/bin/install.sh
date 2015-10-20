@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # If no image tag is specified, expose it.
 [[ $(echo ${IMAGE} | awk -F/ '{print $(NF)}') =~ ':' ]] || IMAGE="${IMAGE}:\${TAG}"
 
