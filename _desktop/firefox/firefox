@@ -20,7 +20,7 @@ else
 	-v /etc/machine-id:/etc/machine-id:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro \
-	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="$DISPLAY" \
+	-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e DISPLAY="unix${DISPLAY}" \
 	-v "$DATA":/data/.mozilla \
 	-v "$HOME"/.config/gtk-3.0/settings.ini:/data/.config/gtk-3.0/settings.ini:ro \
 	-v "$HOME"/Downloads:/data/Downloads \
