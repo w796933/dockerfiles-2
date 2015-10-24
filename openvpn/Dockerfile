@@ -6,10 +6,11 @@ RUN dnf -y install openvpn bridge-utils \
 COPY easy-rsa /usr/share/easy-rsa
 COPY bin /usr/local/bin
 
-ENV EASYRSA=/etc/openvpn/easyrsa3 \
+ENV EASYRSA=/usr/share/easy-rsa/easyrsa3 \
 	EASYRSA_PKI=/etc/openvpn/pki
 
 VOLUME /etc/openvpn
 WORKDIR /etc/openvpn
 
-CMD ["openvpn.sh", "--config", "server.conf"]
+ENTRYPOINT ["entrypoint"]
+CMD ["--config", "server.conf"]

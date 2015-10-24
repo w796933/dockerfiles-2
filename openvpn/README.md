@@ -9,16 +9,19 @@ Docker image for OpenVPN - includes Easy-RSA3.
 Drop into a shell:
 
 ```
-docker run -it --rm -v /path/to/openvpn:/etc/openvpn:Z quay.io/oszi/openvpn bash
+docker run -it --rm -v /etc/openvpn:/etc/openvpn:Z --entrypoint bash quay.io/oszi/openvpn
 ```
 
 Set up Easy-RSA and server.conf:
 
 ```
-rsync -av --exclude easyrsa /usr/share/easy-rsa/easyrsa3 ./
-mv easyrsa3/vars{.example,}
+easyrsa init-pki
+cp -v ${EASYRSA}/vars.example ${EASYRSA_PKI}/vars
+touch server.conf
 easyrsa -h
 ```
+
+You can create a `pre-up.sh` file to be executed before startup.
 
 ## Usage
 
@@ -26,7 +29,7 @@ Start OpenVPN with server.conf:
 
 ```
 docker run --rm --name openvpn --cap-add NET_ADMIN -p 1194:1194/udp \
--v /path/to/openvpn:/etc/openvpn:Z quay.io/oszi/openvpn
+-v /etc/openvpn:/etc/openvpn:Z quay.io/oszi/openvpn
 ```
 
-You need to take care of firewall rules outside the container.
+You need to take care of firewall rules outside of the container or in pre-up.sh.
