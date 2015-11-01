@@ -3,13 +3,16 @@ FROM quay.io/oszi/base-desktop:fc22
 RUN dnf -y install PyQt4 \
 	&& dnf clean all
 
-RUN URL="https://download.electrum.org/Electrum-2.5.1.tar.gz" \
-	&& curl -o /tmp/.tar.gz "${URL}" \
-	&& curl -o /tmp/.tar.gz.asc "${URL}.asc" \
+ENV VERSION 2.5.2
+
+RUN URL=https://download.electrum.org/${VERSION}/Electrum-${VERSION}.tar.gz \
+	&& cd /tmp/ \
+	&& curl -OL ${URL} \
+	&& curl -OL ${URL}.asc \
 	&& gpg2 --keyserver ha.pool.sks-keyservers.net --recv-keys 2BD5824B7F9470E6 \
-	&& gpg2 --verify /tmp/.tar.gz.asc /tmp/.tar.gz \
-	&& pip install /tmp/.tar.gz \
-	&& rm -rf /tmp/.tar.gz* ~/.cache
+	&& gpg2 --verify Electrum-*.asc Electrum-*.tar.gz \
+	&& pip install Electrum-*.tar.gz \
+	&& rm -rf ./* ~/.cache
 
 COPY electrum* /usr/share/install/
 
