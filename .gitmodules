@@ -64,3 +64,8 @@
 [submodule "pwnie/opt/weevely3"]
 	path = pwnie/opt/weevely3
 	url = https://github.com/epinna/weevely3.git
+
+[submodule "_desktop/mpv/usr/src/mpv"]
+	path = _desktop/mpv/usr/src/mpv
+	url = https://github.com/mpv-player/mpv.git
+	branch = release/current

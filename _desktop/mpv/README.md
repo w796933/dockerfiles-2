@@ -8,3 +8,15 @@ This image is based on Fedora / [base-desktop].
 
 For documentation on how to use this and how it works see [base-desktop].
 [base-desktop]:/_desktop/base-desktop
+
+## Notes
+
+Due to the nature of mpv (e.g., hardware acceleration) this image needs to run
+in privileged mode. This means it cannot provide any more security than a simple chroot.
+You may experience system crashes if you run it on an incompatible host.
+
+Mounted directories (read-only) in which files can be opened:
+
+ * `/run/user/${UID}` for the file manager (gvfs cannot be accessed by root)
+
+ * `${HOME}/{Downloads,Music,Public,Videos}`
