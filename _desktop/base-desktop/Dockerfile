@@ -21,22 +21,32 @@ LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
 	-v /:/host --entrypoint uninstall.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker create --name=\${NAME} -u \${UID}:\${GID} \
+LABEL RUN /usr/bin/docker run --rm --name=\${NAME} -u \${UID}:\${GID} \
 	--cap-drop=ALL --security-opt=label:disable \
-	-v /etc/group:/etc/group:ro \
-	-v /etc/localtime:/etc/localtime:ro \
-	-v /etc/machine-id:/etc/machine-id:ro \
+	--net=\${NET:-host} \
+	-e PULSE_SERVER=\${PULSE_SERVER:-localhost} \
 	-v /etc/passwd:/etc/passwd:ro \
-	-v /run/user/\${UID}/pulse:/run/user/\${UID}/pulse:ro \
+	-v /etc/group:/etc/group:ro \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-v /etc/localtime:/etc/localtime:ro \
+	\$(: \${XDG_RUNTIME_DIR:=/run/user/\$UID}; \
+	echo \"-e XDG_RUNTIME_DIR=\${XDG_RUNTIME_DIR}\"; \
+	: \${WAYLAND_DISPLAY:=wayland-0}; \
+	WAYLAND_SOCK=\${XDG_RUNTIME_DIR}/\${WAYLAND_DISPLAY}; \
+	if [ -f \${WAYLAND_SOCK} ]; then \
+		echo \"-v \${WAYLAND_SOCK}:\${WAYLAND_SOCK}:ro \
+		-e WAYLAND_DISPLAY=\${WAYLAND_DISPLAY}\"; \
+	fi) \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-	-e DISPLAY=\${DISPLAY:-unix:0} \
-	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}; \
-	/usr/bin/docker start \${NAME}
+	-e DISPLAY=unix\${DISPLAY:-:0} \
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
 
 COPY include /
 
 RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/
 
 ENV HOME /data
+
 WORKDIR /data
+
 VOLUME /data

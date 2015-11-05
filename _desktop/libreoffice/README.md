@@ -9,8 +9,13 @@ This image is based on Fedora / [base-desktop].
 For documentation on how to use this and how it works see [base-desktop].
 [base-desktop]:/_desktop/base-desktop
 
-### Usage
+## Notes
 
-Any existing directory given as a parameter will be mounted in /mnt/ -
-including files' parent directories. Because of the isolation some things
-will not work, for instance, opening links in a browser.
+Always mounted directories: `${HOME}/{Documents,Downloads,Public,Templates}`
+
+Any other existing directory given as a parameter will be mounted in /mnt/ -
+including files' parent directories.
+
+Runtime mounts are not yet possible with Docker.
+
+Because of the isolation some things will not work, for instance, opening links in a browser.

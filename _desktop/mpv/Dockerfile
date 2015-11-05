@@ -22,6 +22,7 @@ RUN dnf -y install \
 	libXv-devel \
 	lua-devel \
 	luajit-devel \
+	perl-Math-BigRat \
 	pulseaudio-libs-devel \
 	rubberband-devel \
 	youtube-dl \

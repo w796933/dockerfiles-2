@@ -32,13 +32,23 @@ To share important configuration files (read-only):
 
  * `-v /etc/localtime:/etc/localtime:ro`
 
-For local audio and graphics:
+For audio via PulseAudio:
 
- * `-v /run/user/$UID/pulse:/run/user/$UID/pulse:ro`
+ * Configure PulseAudio to enable local network access... (paprefs)
+
+ * `-e PULSE_SERVER=localhost --net=host`
+
+-- Mounting the socket does not work as of F23. You can work around net=host.
+
+For graphics with X11 or Wayland:
 
  * `-v /tmp/.X11-unix:/tmp/.X11-unix:ro`
 
-	 * `-e DISPLAY="unix${DISPLAY}"`
+	 * `-e DISPLAY=unix${DISPLAY}`
+
+ * `-v ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:ro`
+
+	 * `-e XDG_RUNTIME_DIR -e WAYLAND_DISPLAY`
 
 To allow direct access to graphics and audio devices:
 
@@ -74,7 +84,7 @@ Manually on any distribution:
 
 ```
 export IMAGE="quay.io/oszi/__IMAGE__"
-export NAME="__IMAGE__"
+export NAME=${IMAGE}
 docker pull ${IMAGE}
 eval $(docker inspect -f "{{.Config.Labels.RUN}}" ${IMAGE})
 ```

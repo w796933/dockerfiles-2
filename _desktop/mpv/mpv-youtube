@@ -1,8 +1,2 @@
-#!/bin/bash
-OPTS="$@"
-
-if [[ "${!#}" != *"://"* ]]; then
-	OPTS[-1]="https://www.youtube.com/watch?v=${!#}"
-fi
-
-mpv --ytdl-format="bestvideo[height<=?1440]+bestaudio/best" ${OPTS[@]}
+#!/bin/sh
+exec mpv --ytdl-format="bestvideo[height<=?1440]+bestaudio/best" "$@"

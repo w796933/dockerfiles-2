@@ -17,6 +17,8 @@ You may experience system crashes if you run it on an incompatible host.
 
 Mounted directories (read-only) in which files can be opened:
 
+ * `/media` (but /mnt will not be mounted)
+
  * `/run/user/${UID}` for the file manager (gvfs cannot be accessed by root)
 
- * `${HOME}/{Downloads,Music,Public,Videos}`
+ * `${HOME}/{Downloads,Library,Music,Public,Videos}`
