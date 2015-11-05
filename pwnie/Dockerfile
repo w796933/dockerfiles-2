@@ -1,4 +1,4 @@
-FROM quay.io/oszi/toolbox:fc22
+FROM quay.io/oszi/toolbox:fc23
 
 RUN dnf -y install \
 	valgrind \

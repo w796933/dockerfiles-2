@@ -1,4 +1,4 @@
-FROM quay.io/oszi/fedora:22
+FROM quay.io/oszi/fedora:23
 
 ENV VERSION v0.11.26
 

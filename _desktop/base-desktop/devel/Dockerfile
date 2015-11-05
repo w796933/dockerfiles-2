@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc22
+FROM quay.io/oszi/base-desktop:fc23
 
 # SCM, build essentials and common development packages
 RUN dnf -y install \

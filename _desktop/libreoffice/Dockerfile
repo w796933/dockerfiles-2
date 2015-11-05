@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc22
+FROM quay.io/oszi/base-desktop:fc23
 
 RUN dnf -y groups install LibreOffice \
 	&& dnf -y install libreoffice-{postgresql,langpack-hu} \

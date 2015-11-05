@@ -1,4 +1,4 @@
-FROM quay.io/oszi/fedora:22
+FROM quay.io/oszi/fedora:23
 
 RUN dnf -y install perl-JSON-Any perl-LWP-Protocol-https perl-Net-OAuth \
 	perl-Net-Twitter-Lite perl-POE-Filter-IRCD perl-URI-Find \

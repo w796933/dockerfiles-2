@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc22-devel
+FROM quay.io/oszi/base-desktop:fc23-devel
 
 # Dependencies from Fedora
 RUN dnf -y install \
@@ -27,7 +27,7 @@ RUN dnf -y install \
 	youtube-dl \
 	&& dnf clean all
 
-RUN dnf -y install /usr/share/rpmfusion/*release-22.noarch.rpm \
+RUN dnf -y install /usr/share/rpmfusion/*release-23.noarch.rpm \
 	&& dnf -y install ffmpeg-devel \
 	&& dnf clean all
 

@@ -1,4 +1,4 @@
-FROM quay.io/oszi/fedora:22
+FROM quay.io/oszi/fedora:23
 
 RUN useradd -lmd /data --key={UID,GID}_MIN=26658 miniircd
 ADD source /opt/miniircd
