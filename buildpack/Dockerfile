@@ -1,10 +1,9 @@
 FROM quay.io/oszi/fedora:23
 
-# SCM and build essentials
+# SCM, build essentials and common development packages
 RUN dnf -y install \
 	autoconf \
 	automake \
-	binutils \
 	bison \
 	flex \
 	gcc-c++ \
@@ -13,10 +12,7 @@ RUN dnf -y install \
 	rpm-build \
 	rpm-ostree \
 	subversion \
-	&& dnf clean all
-
-# Common development packages
-RUN dnf -y install \
+	\
 	bzip2-devel \
 	expat-devel \
 	glib2-devel \
@@ -30,11 +26,19 @@ RUN dnf -y install \
 	libxslt-devel \
 	libyaml-devel \
 	openssl-devel \
-	perl-devel \
 	postgresql-devel \
-	python{3,}-devel \
 	readline-devel \
-	ruby-devel \
 	sqlite-devel \
 	zlib-devel \
+	\
+	nodejs-devel \
+	npm \
+	perl-devel \
+	perl-CPAN \
+	python-devel \
+	python-pip \
+	python3-devel \
+	python3-pip \
+	ruby-devel \
+	rubygems \
 	&& dnf clean all
