@@ -13,6 +13,16 @@ RUN dnf -y install \
 	xorg-x11-server-utils \
 	&& dnf clean all
 
+# Basic apps for convenience
+RUN dnf -y install leafpad midori pcmanfm \
+	&& dnf clean all \
+	&& sed -i -E 's:(text/plain)=(.*):\1=leafpad.desktop:g' \
+	/usr/share/applications/mimeapps.list \
+	&& sed -i -E 's:(.*(http|html|image).*)=(.*):\1=midori-private.desktop:g' \
+	/usr/share/applications/mimeapps.list \
+	&& sed -i -E 's:(.*/directory)=(.*):\1=pcmanfm.desktop:g' \
+	/usr/share/applications/mimeapps.list
+
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
 	-v /:/host --entrypoint install.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}

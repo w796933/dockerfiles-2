@@ -1,0 +1,9 @@
+[settings]
+enable-javascript=true
+enable-webgl=true
+preferred-encoding=MIDORI_ENCODING_UNICODE
+default-charset=UTF-8
+default-encoding=UTF-8
+load-on-startup=MIDORI_STARTUP_BLANK_PAGE
+identify-as=MIDORI_IDENT_CUSTOM
+user-agent=Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0
