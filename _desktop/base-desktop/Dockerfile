@@ -18,10 +18,16 @@ RUN dnf -y install leafpad midori pcmanfm \
 	&& dnf clean all \
 	&& sed -i -E 's:(text/plain)=(.*):\1=leafpad.desktop:g' \
 	/usr/share/applications/mimeapps.list \
-	&& sed -i -E 's:(.*(http|html|image).*)=(.*):\1=midori-private.desktop:g' \
+	&& sed -i -E 's:(.*(http|html|image).*)=(.*):\1=midori.desktop:g' \
 	/usr/share/applications/mimeapps.list \
 	&& sed -i -E 's:(.*/directory)=(.*):\1=pcmanfm.desktop:g' \
-	/usr/share/applications/mimeapps.list
+	/usr/share/applications/mimeapps.list \
+	&& rm -rf /etc/xdg/midori/extensions/adblock/
+
+COPY include /
+
+RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/ \
+	&& install-adblock-filters.sh
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
 	-v /:/host --entrypoint install.sh \
@@ -50,10 +56,6 @@ LABEL RUN /usr/bin/docker run --rm --name=\${NAME} -u \${UID}:\${GID} \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=unix\${DISPLAY:-:0} \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
-
-COPY include /
-
-RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/
 
 ENV HOME /data
 
