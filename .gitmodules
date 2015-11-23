@@ -69,3 +69,8 @@
 	path = _desktop/mpv/usr/src/mpv
 	url = https://github.com/mpv-player/mpv.git
 	branch = release/current
+
+[submodule "_desktop/keepassx/usr/src/keepassx"]
+	path = _desktop/keepassx/usr/src/keepassx
+	url = https://github.com/keepassx/keepassx.git
+	branch = 2.0
