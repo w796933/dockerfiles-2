@@ -5,6 +5,7 @@ RUN dnf -y install \
 	autoconf \
 	automake \
 	bison \
+	cmake \
 	flex \
 	gcc-c++ \
 	git \
@@ -12,6 +13,8 @@ RUN dnf -y install \
 	rpm-build \
 	rpm-ostree \
 	subversion \
+	waf \
+	yasm \
 	\
 	bzip2-devel \
 	expat-devel \
@@ -35,10 +38,8 @@ RUN dnf -y install \
 	npm \
 	perl-devel \
 	perl-CPAN \
-	python-devel \
-	python-pip \
-	python3-devel \
-	python3-pip \
+	python{3,}-devel \
+	python{3,}-pip \
 	ruby-devel \
 	rubygems \
 	&& dnf clean all

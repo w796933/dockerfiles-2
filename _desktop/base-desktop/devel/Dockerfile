@@ -5,11 +5,13 @@ RUN dnf -y install \
 	autoconf \
 	automake \
 	bison \
+	cmake \
 	flex \
 	gcc-c++ \
 	git \
 	mercurial \
 	rpm-build \
+	rpm-ostree \
 	subversion \
 	waf \
 	yasm \
@@ -17,21 +19,24 @@ RUN dnf -y install \
 	bzip2-devel \
 	expat-devel \
 	glib2-devel \
-	glibc-devel \
+	glibc-devel.* \
 	libcurl-devel \
 	libevent-devel \
 	libffi-devel \
 	libicu-devel \
-	libstdc++-devel \
+	libstdc++-devel.* \
 	libxml2-devel \
 	libxslt-devel \
 	libyaml-devel \
 	openssl-devel \
-	perl-devel \
-	python{3,}-devel \
 	readline-devel \
 	sqlite-devel \
 	zlib-devel \
+	\
+	perl-devel \
+	perl-CPAN \
+	python{3,}-devel \
+	python{3,}-pip \
 	\
 	alsa-lib-devel \
 	fontconfig-devel \
