@@ -1,6 +1,6 @@
 FROM quay.io/oszi/fedora:23
 
-ENV VERSION v0.11.26
+ENV VERSION v0.12.4
 
 RUN URL=https://github.com/syncthing/syncthing/releases/download/${VERSION} \
 	&& cd /tmp/ \

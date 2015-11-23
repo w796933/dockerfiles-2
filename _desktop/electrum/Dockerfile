@@ -3,7 +3,7 @@ FROM quay.io/oszi/base-desktop:fc23
 RUN dnf -y install PyQt4 \
 	&& dnf clean all
 
-ENV VERSION 2.5.2
+ENV VERSION 2.5.4
 
 RUN URL=https://download.electrum.org/${VERSION}/Electrum-${VERSION}.tar.gz \
 	&& cd /tmp/ \
