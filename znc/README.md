@@ -21,7 +21,7 @@ docker run -it --rm -v /path/to/znc:/data:Z quay.io/oszi/znc --makeconf
 Start ZNC and publish the configured port(s):
 
 ```
-docker run --rm --name znc -p 6667:6667 -v /path/to/znc:/data:Z quay.io/oszi/znc
+docker run --rm --name znc -p 7000:7000 -v /path/to/znc:/data:Z quay.io/oszi/znc
 ```
 
 ## Modules

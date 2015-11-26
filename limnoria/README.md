@@ -23,9 +23,8 @@ docker run -it --rm -v /path/to/supy:/data:Z quay.io/oszi/limnoria supybot-wizar
 
 List all available plugins:
 
-
 ```
-docker run -it --rm quay.io/oszi/limnoria ls /opt/limnoria/plugins/
+docker run -it --rm quay.io/oszi/limnoria ls /usr/src/limnoria/plugins/
 ```
 
 Start Limnoria with your existing configuration:

@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenVPN (iface:%i)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+
+ExecStartPre=-/usr/bin/docker rm -fv openvpn-%i
+ExecStart=/usr/bin/docker run --name=openvpn-%i -m 64m --memory-swap=256m \
+-v /etc/openvpn-%i:/etc/openvpn:Z --net=host --cap-add=NET_ADMIN \
+--security-opt=label:disable __IMAGE__
+
+ExecStop=/usr/bin/docker stop openvpn-%i
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=MiniIRCd
+After=dns.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+
+ExecStartPre=-/usr/bin/docker network create irc
+ExecStartPre=-/usr/bin/docker rm -fv miniircd
+ExecStart=/usr/bin/docker run --name=miniircd -m 64m --memory-swap=96m \
+-v /var/lib/miniircd:/data:Z --net=irc --cap-drop=ALL --read-only __IMAGE__
+
+ExecStop=/usr/bin/docker stop miniircd
+
+[Install]
+WantedBy=multi-user.target

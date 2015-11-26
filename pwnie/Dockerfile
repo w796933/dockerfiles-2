@@ -23,7 +23,7 @@ RUN dnf -y install \
 	&& dnf clean all \
 	&& rm -rf /usr/share/install/
 
-COPY opt /opt
+COPY rootfs /
 
 RUN set -e; \
 	for dir in ROPgadget pwntools HashPump xortool; do \
@@ -32,9 +32,17 @@ RUN set -e; \
 		python setup.py clean --all; \
 	done; \
 	cd /opt/HashPump; \
-	make && make install && make clean; \
+	make; \
+	make install; \
+	make clean; \
+	cd /opt/preeny; \
+	make; \
+	mv *-*-* bin64; \
+	CFLAGS=-m32 setarch i686 make; \
+	mv *-*-* bin32; \
+	make clean; \
 	pip install -r /opt/weevely3/requirements.txt; \
-	cd /usr/local/bin; \
+	cd /usr/bin; \
 	ln -s /opt/commix/commix.py commix; \
 	ln -s /opt/sqlmap/sqlmap.py sqlmap; \
 	ln -s /opt/sqlmap/sqlmapapi.py sqlmapapi; \
@@ -42,12 +50,4 @@ RUN set -e; \
 	chmod +x *
 
 LABEL RUN /usr/bin/docker run -it --name=\${NAME} -e NAME=\${NAME} \
-	-e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}
-
-COPY include /
-
-VOLUME /root
-
-WORKDIR /root
-
-CMD ["bash"]
+	-e IMAGE=\${IMAGE} \${IMAGE}

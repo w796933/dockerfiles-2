@@ -1,68 +1,68 @@
-[submodule "openvpn/easy-rsa"]
-	path = openvpn/easy-rsa
+[submodule "openvpn/usr/src/easy-rsa"]
+	path = openvpn/usr/src/easy-rsa
 	url = https://github.com/OpenVPN/easy-rsa.git
 
-[submodule "miniircd/source"]
-	path = miniircd/source
+[submodule "miniircd/usr/src/miniircd"]
+	path = miniircd/usr/src/miniircd
 	url = https://github.com/jrosdahl/miniircd.git
 
-[submodule "tircd/source"]
-	path = tircd/source
+[submodule "tircd/usr/src/tircd"]
+	path = tircd/usr/src/tircd
 	url = https://github.com/DexterTheDragon/tircd.git
 	branch = my_version
 
-[submodule "limnoria/source"]
-	path = limnoria/source
+[submodule "limnoria/usr/src/limnoria"]
+	path = limnoria/usr/src/limnoria
 	url = https://github.com/ProgVal/Limnoria.git
-[submodule "limnoria/plugins-progval"]
-	path = limnoria/plugins-progval
+[submodule "limnoria/usr/src/plugins-progval"]
+	path = limnoria/usr/src/plugins-progval
 	url = https://github.com/ProgVal/Supybot-plugins.git
-[submodule "limnoria/plugins-glolol"]
-	path = limnoria/plugins-glolol
+[submodule "limnoria/usr/src/plugins-glolol"]
+	path = limnoria/usr/src/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
-[submodule "limnoria/plugins-extra/TVMaze"]
-	path = limnoria/plugins-extra/TVMaze
+[submodule "limnoria/usr/src/plugins-extra/TVMaze"]
+	path = limnoria/usr/src/plugins-extra/TVMaze
 	url = https://github.com/Znuff/limnoria-tvmaze.git
 
-[submodule "znc/modules/push"]
-	path = znc/modules/push
+[submodule "znc/usr/share/znc/modules-external/push"]
+	path = znc/usr/share/znc/modules-external/push
 	url = https://github.com/jreese/znc-push.git
-[submodule "znc/modules/clientbuffer"]
-	path = znc/modules/clientbuffer
+[submodule "znc/usr/share/znc/modules-external/clientbuffer"]
+	path = znc/usr/share/znc/modules-external/clientbuffer
 	url = https://github.com/jpnurmi/znc-clientbuffer.git
-[submodule "znc/modules/chanfilter"]
-	path = znc/modules/chanfilter
+[submodule "znc/usr/share/znc/modules-external/chanfilter"]
+	path = znc/usr/share/znc/modules-external/chanfilter
 	url = https://github.com/jpnurmi/znc-chanfilter.git
-[submodule "znc/modules/playback"]
-	path = znc/modules/playback
+[submodule "znc/usr/share/znc/modules-external/playback"]
+	path = znc/usr/share/znc/modules-external/playback
 	url = https://github.com/jpnurmi/znc-playback.git
 
-[submodule "pwnie/opt/ROPgadget"]
-	path = pwnie/opt/ROPgadget
+[submodule "pwnie/rootfs/opt/ROPgadget"]
+	path = pwnie/rootfs/opt/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
-[submodule "pwnie/opt/pwntools"]
-	path = pwnie/opt/pwntools
+[submodule "pwnie/rootfs/opt/pwntools"]
+	path = pwnie/rootfs/opt/pwntools
 	url = https://github.com/Gallopsled/pwntools.git
-[submodule "pwnie/opt/peda"]
-	path = pwnie/opt/peda
+[submodule "pwnie/rootfs/opt/peda"]
+	path = pwnie/rootfs/opt/peda
 	url = https://github.com/zachriggle/peda.git
-[submodule "pwnie/opt/preeny"]
-	path = pwnie/opt/preeny
+[submodule "pwnie/rootfs/opt/preeny"]
+	path = pwnie/rootfs/opt/preeny
 	url = https://github.com/zardus/preeny.git
-[submodule "pwnie/opt/HashPump"]
-	path = pwnie/opt/HashPump
+[submodule "pwnie/rootfs/opt/HashPump"]
+	path = pwnie/rootfs/opt/HashPump
 	url = https://github.com/bwall/HashPump.git
-[submodule "pwnie/opt/xortool"]
-	path = pwnie/opt/xortool
+[submodule "pwnie/rootfs/opt/xortool"]
+	path = pwnie/rootfs/opt/xortool
 	url = https://github.com/hellman/xortool.git
-[submodule "pwnie/opt/sqlmap"]
-	path = pwnie/opt/sqlmap
+[submodule "pwnie/rootfs/opt/sqlmap"]
+	path = pwnie/rootfs/opt/sqlmap
 	url = https://github.com/sqlmapproject/sqlmap.git
-[submodule "pwnie/opt/commix"]
-	path = pwnie/opt/commix
+[submodule "pwnie/rootfs/opt/commix"]
+	path = pwnie/rootfs/opt/commix
 	url = https://github.com/stasinopoulos/commix.git
-[submodule "pwnie/opt/weevely3"]
-	path = pwnie/opt/weevely3
+[submodule "pwnie/rootfs/opt/weevely3"]
+	path = pwnie/rootfs/opt/weevely3
 	url = https://github.com/epinna/weevely3.git
 
 [submodule "_desktop/mpv/usr/src/mpv"]

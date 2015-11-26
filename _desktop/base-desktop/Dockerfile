@@ -22,19 +22,20 @@ RUN dnf -y install leafpad midori pcmanfm \
 	/usr/share/applications/mimeapps.list \
 	&& sed -i -E 's:(.*/directory)=(.*):\1=pcmanfm.desktop:g' \
 	/usr/share/applications/mimeapps.list \
+	&& ln -sf /usr/bin/midori /etc/alternatives/x-www-browser \
 	&& rm -rf /etc/xdg/midori/extensions/adblock/
 
-COPY include /
+COPY rootfs /
 
 RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/ \
 	&& install-adblock-filters.sh
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint install.sh \
+	-v /:/host --entrypoint=install.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint uninstall.sh \
+	-v /:/host --entrypoint=uninstall.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/docker run --rm --name=\${NAME} -u \${UID}:\${GID} \

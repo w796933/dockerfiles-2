@@ -1,0 +1,17 @@
+[Unit]
+Description=Unbound DNS Resolver
+After=docker.service docker-update.service
+Requires=docker.service
+
+[Service]
+Restart=always
+
+ExecStartPre=-/usr/bin/docker rm -fv unbound
+ExecStart=/usr/bin/docker run --name=unbound -m 64m --memory-swap=128m \
+-v /etc/unbound/conf.d:/etc/unbound/conf.d:ro,Z -p 53:53/udp -p 53:53/tcp --read-only __IMAGE__
+
+ExecStop=/usr/bin/docker stop unbound
+
+[Install]
+Alias=dns.service
+WantedBy=multi-user.target

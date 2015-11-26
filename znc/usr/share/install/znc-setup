@@ -1,0 +1,13 @@
+#!/bin/bash -e
+if [ -z "$1" ]; then
+  echo "Usage: $0 <port>"
+  exit 1
+fi
+
+DATA=/var/lib/znc-${1}
+ID=$(docker run --rm --entrypoint=id __IMAGE__ -uz)
+
+mkdir -pv ${DATA}
+chown ${ID}:${ID} ${DATA}
+docker run -it --rm -v ${DATA}:/data:Z __IMAGE__ --makeconf
+systemctl enable znc@${1}

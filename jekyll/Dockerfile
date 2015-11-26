@@ -33,11 +33,11 @@ RUN gem install \
 	pygments.rb
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint install.sh \
+	-v /:/host --entrypoint=install.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint uninstall.sh \
+	-v /:/host --entrypoint=uninstall.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 COPY usr /usr

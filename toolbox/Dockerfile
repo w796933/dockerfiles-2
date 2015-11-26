@@ -59,15 +59,14 @@ RUN dnf -y install \
 	&& dnf clean all
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint install.sh \
+	-v /:/host --entrypoint=install.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint uninstall.sh \
+	-v /:/host --entrypoint=uninstall.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run --rm -it --security-opt=label:disable \
-	--cap-add=NET_ADMIN --cap-add=SYS_ADMIN \
+LABEL RUN /usr/bin/docker run -it --rm --privileged \
 	--net=host --ipc=host --pid=host \
 	-v /:/host:rw -w /host \
 	-v /boot:/boot:ro \
@@ -82,10 +81,11 @@ LABEL RUN /usr/bin/docker run --rm -it --security-opt=label:disable \
 	-v /mnt:/mnt:rw \
 	-v /run:/run:rw \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+	-v /tmp:/tmp:rw \
 	-v /var/log:/var/log:rw \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}
+	-e HOST=/host -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
 
-COPY include /
+COPY rootfs /
 
 VOLUME /root
 

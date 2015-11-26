@@ -1,0 +1,20 @@
+[Unit]
+Description=Twitter IRCd
+After=dns.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+
+ExecStartPre=-/usr/bin/docker rm -fv tircd
+ExecStart=/usr/bin/docker run --name=tircd -m 64m --memory-swap=128m \
+-v /var/lib/tircd:/data:Z --cap-drop=ALL --read-only __IMAGE__
+
+ExecStartPost=-/usr/bin/docker network create irc
+ExecStartPost=/bin/sh -c "while ! /usr/bin/docker network \
+connect irc tircd; do sleep 1; done"
+
+ExecStop=/usr/bin/docker stop tircd
+
+[Install]
+WantedBy=multi-user.target

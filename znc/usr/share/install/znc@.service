@@ -1,0 +1,20 @@
+[Unit]
+Description=ZNC (port:%i)
+After=dns.service miniircd.service tircd.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+
+ExecStartPre=-/usr/bin/docker rm -fv znc-%i
+ExecStart=/usr/bin/docker run --name=znc-%i -m 64m --memory-swap=256m \
+-v /var/lib/znc-%i:/data:Z -p %i:%i --cap-drop=ALL --read-only __IMAGE__
+
+ExecStartPost=-/usr/bin/docker network create irc
+ExecStartPost=/bin/sh -c "while ! /usr/bin/docker network \
+connect irc znc-%i; do sleep 1; done"
+
+ExecStop=/usr/bin/docker stop znc-%i
+
+[Install]
+WantedBy=multi-user.target
