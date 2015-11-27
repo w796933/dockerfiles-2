@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 exec mpv --ytdl-format="bestvideo[height<=?1440]+bestaudio/best" "$@"

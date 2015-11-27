@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 IMAGE="__IMAGE__"
 NAME="libreoffice-${USER}"
 DATA="${HOME}/.config/libreoffice"

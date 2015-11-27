@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 IMAGE="__IMAGE__"
 NAME="chrome-${USER}"
 DATA="${HOME}/.config/google-chrome-docker"

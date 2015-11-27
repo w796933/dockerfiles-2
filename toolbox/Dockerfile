@@ -83,7 +83,8 @@ LABEL RUN /usr/bin/docker run -it --rm --privileged \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /tmp:/tmp:rw \
 	-v /var/log:/var/log:rw \
-	-e HOST=/host -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
+	-e TERM=\$(tset -q) \
+	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 COPY rootfs /
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 IMAGE="__IMAGE__"
 NAME="tresorit-${USER}"
 DATA="${HOME}/.local/share/tresorit"

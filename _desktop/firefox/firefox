@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 IMAGE="__IMAGE__"
 NAME="firefox-${USER}"
 DATA="${HOME}/.config/mozilla-docker"
