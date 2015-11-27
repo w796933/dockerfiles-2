@@ -1,4 +1,4 @@
-FROM quay.io/oszi/buildpack:fc23
+FROM oszi/buildpack:fc23
 
 RUN dnf -y install \
 	duplicity \

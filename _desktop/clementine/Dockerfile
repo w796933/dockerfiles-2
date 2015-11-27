@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc23
+FROM oszi/base-desktop:fc23
 
 RUN dnf -y install clementine flac-libs \
 	&& dnf -y install /usr/share/rpmfusion/*release-23.noarch.rpm \

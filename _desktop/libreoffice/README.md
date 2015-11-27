@@ -1,7 +1,5 @@
 ## docker-libreoffice
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/libreoffice/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/libreoffice)
-
 See [libreoffice.sh](libreoffice) for an example of running LibreOffice in a container.
 
 This image is based on Fedora / [base-desktop].

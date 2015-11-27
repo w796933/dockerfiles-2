@@ -1,7 +1,5 @@
 ## docker-electrum
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/keepassx/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/keepassx)
-
 See [keepassx.sh](keepassx) for an example of running [KeePassX](https://www.keepassx.org) in a container.
 
 This image is based on Fedora / [base-desktop].

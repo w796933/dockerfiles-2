@@ -1,4 +1,4 @@
-FROM quay.io/oszi/fedora:23
+FROM oszi/fedora:23
 
 # Common shared libraries
 RUN dnf -y install \

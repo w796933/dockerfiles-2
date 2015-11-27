@@ -1,4 +1,4 @@
-FROM quay.io/oszi/buildpack:fc23
+FROM oszi/buildpack:fc23
 
 # Expect all packages from the base images...
 

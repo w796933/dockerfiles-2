@@ -1,19 +1,17 @@
 ## docker-in-docker
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/docker/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/docker)
-
 Docker-in-Docker on Fedora, based on [jpetazzo / dind](https://github.com/jpetazzo/dind).
 
 Run Docker-in-Docker and spawn a shell:
 
 ```
-docker run -it --privileged quay.io/oszi/docker
+docker run -it --privileged oszi/docker
 ```
 
 Run Docker-in-Docker and expose the containerized daemon:
 
 ```
-docker run -d -p 2375 -e PORT=2375 --privileged quay.io/oszi/docker
+docker run -d -p 2375 -e PORT=2375 --privileged oszi/docker
 ```
 
 Useful environment variables to configure the [docker daemon] with additional options:

@@ -1,4 +1,4 @@
-FROM quay.io/oszi/fedora:23
+FROM oszi/fedora:23
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
 	-v /:/host --entrypoint=install.sh \

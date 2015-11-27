@@ -1,7 +1,5 @@
 ## docker-toolbox
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/toolbox/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/toolbox)
-
 Swiss army knife for debugging and managing container hosts.
 
 ## Usage
@@ -9,7 +7,7 @@ Swiss army knife for debugging and managing container hosts.
 Start Toolbox with NET_ADMIN and SYS_ADMIN capabilities:
 
 ```
-docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} quay.io/oszi/toolbox
+docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} oszi/toolbox
 ```
 
 Share a running container's volumes, network and IPC namespaces:
@@ -32,13 +30,13 @@ and [profile.d](include/etc/profile.d) ...
 ## Install
 
 ```
-atomic install quay.io/oszi/toolbox
+atomic install oszi/toolbox
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE="quay.io/oszi/toolbox"
+export IMAGE="oszi/toolbox"
 docker pull ${IMAGE}
 eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
 ```

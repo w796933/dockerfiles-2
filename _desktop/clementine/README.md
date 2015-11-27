@@ -1,7 +1,5 @@
 ## docker-clementine
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/clementine/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/clementine)
-
 See [clementine.sh](clementine) for an example of running [Clementine](https://www.clementine-player.org) in a container.
 
 This image is based on Fedora / [base-desktop].

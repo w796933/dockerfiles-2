@@ -1,7 +1,5 @@
 ## docker-pwnie
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/pwnie/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/pwnie)
-
 Docker image for penetration testing and CTFs.
 
 Binary:
@@ -37,13 +35,13 @@ Here be dragons!
 ## Install
 
 ```
-atomic install quay.io/oszi/pwnie
+atomic install oszi/pwnie
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE="quay.io/oszi/pwnie"
+export IMAGE="oszi/pwnie"
 docker pull ${IMAGE}
 eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
 ```

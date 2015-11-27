@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc23
+FROM oszi/base-desktop:fc23
 
 ADD etc /etc
 

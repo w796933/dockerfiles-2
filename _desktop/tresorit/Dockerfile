@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc23
+FROM oszi/base-desktop:fc23
 
 RUN curl -o /tmp/.run https://installerstorage.blob.core.windows.net/public/install/tresorit_installer.run \
 	&& useradd -ld /data user \

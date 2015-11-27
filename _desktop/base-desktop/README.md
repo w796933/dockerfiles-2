@@ -1,7 +1,5 @@
 ## base-desktop
 
-[![Docker Repository on Quay.io](https://quay.io/repository/oszi/base-desktop/status "Docker Repository on Quay.io")](https://quay.io/repository/oszi/base-desktop)
-
 A common base image for **desktop** images based on **Fedora**.
 
 Any user's home directory will be overridden to `/data` inside a container
@@ -77,13 +75,13 @@ Best compatible with Fedora based systems.
 Start a container without touching the host system:
 
 ```
-atomic run quay.io/oszi/__IMAGE__
+atomic run oszi/__IMAGE__
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE="quay.io/oszi/__IMAGE__"
+export IMAGE="oszi/__IMAGE__"
 export NAME=${IMAGE}
 docker pull ${IMAGE}
 eval $(docker inspect -f "{{.Config.Labels.RUN}}" ${IMAGE})
@@ -96,13 +94,13 @@ Your data persists only until the container exists.
 Install files under /usr/local/ for desktop integration:
 
 ```
-atomic install quay.io/oszi/__IMAGE__
+atomic install oszi/__IMAGE__
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE="quay.io/oszi/__IMAGE__"
+export IMAGE="oszi/__IMAGE__"
 docker pull ${IMAGE}
 eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
 ```

@@ -1,4 +1,4 @@
-FROM quay.io/oszi/base-desktop:fc23-devel
+FROM oszi/base-desktop:fc23-devel
 
 # Dependencies from Fedora
 RUN dnf -y install \
