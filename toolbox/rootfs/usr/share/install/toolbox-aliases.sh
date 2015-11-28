@@ -1,5 +1,5 @@
 toolbox() {
-  docker run -it -e TERM --rm "__IMAGE__" "$@"
+  docker run -it -e TERM --rm --privileged "__IMAGE__" "$@"
 }
 
 ctoolbox() {

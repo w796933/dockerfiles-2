@@ -3,14 +3,17 @@ FROM oszi/buildpack:fc23
 # Expect all packages from the base images...
 
 RUN dnf -y install \
-	atomic \
 	arptools \
+	atomic \
 	atop \
 	binwalk \
 	blktrace \
 	btrfs-progs \
 	checksec \
+	device-mapper \
 	dnsenum \
+	docker \
+	docker-compose \
 	e2fsprogs \
 	etcd \
 	ethtool \
@@ -27,6 +30,7 @@ RUN dnf -y install \
 	irssi \
 	kubernetes-client \
 	ltrace \
+	lxc \
 	mailx \
 	mc \
 	net-tools \
@@ -68,21 +72,20 @@ LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
 
 LABEL RUN /usr/bin/docker run -it --rm --privileged \
 	--net=host --ipc=host --pid=host \
-	-v /:/host:rw -w /host \
+	-v /:/host:rw \
 	-v /boot:/boot:ro \
 	-v /etc/environment:/etc/environment:ro \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /etc/shadow:/etc/shadow:ro \
-	-v /etc/systemd:/etc/systemd:rw \
 	-v /home:/home:rw \
 	-v /media:/media:rw \
 	-v /mnt:/mnt:rw \
 	-v /run:/run:rw \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /tmp:/tmp:rw \
-	-v /var/log:/var/log:rw \
+	-w \"/host\$(pwd)\" \
 	-e TERM=\$(tset -q) \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 

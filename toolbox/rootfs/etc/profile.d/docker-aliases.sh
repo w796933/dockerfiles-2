@@ -1,16 +1,30 @@
 alias d='docker'
-alias drun='docker run -it --rm'
 alias dexec='docker exec -it'
+alias dgc='docker ps -aqf status=dead -f status=exited -f status=created | xargs -r docker rm'
+alias dgcimg='docker images -qf dangling=true | xargs -r docker rmi'
+alias dgcvol='docker volume ls -qf dangling=true | xargs -r docker volume rm'
+alias dhist='docker history'
 alias dimg='docker images'
-alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
+alias dinspect-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=container'
 alias dinspect='docker inspect'
-alias dinspect-ip='docker inspect -f {{.NetworkSettings.IPAddress}}'
-alias dxargs='xargs -L1 -P1 -r docker'
+alias dnet='docker network'
+alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
+alias drun='docker run -it --rm'
+alias dvol='docker volume'
+alias dxargs='xargs -n1 -r docker'
+alias dxargsi='xargs -n1 -r -I{} docker'
+alias fig='docker-compose'
 
-dclean() {
-  docker ps -aqf 'status=dead' -f 'status=exited' -f 'status=created' | xargs -r docker rm -f
-  docker images -qf 'dangling=true' | xargs -r docker rmi
-  docker volume ls -qf 'dangling=true' | xargs -r docker volume rm
+dvertest() {
+  A=$(docker version -f {{.Client.Version}} | awk -F. '{printf("%03d%03d%03d",$1,$2,$3)}')
+  B=$(echo "$1" | awk -F. '{printf("%03d%03d%03d",$1,$2,$3)}')
+  test $A -ge $B
+}
+
+dcleanup() {
+  dgc -f -v
+  dgcimg
+  dvertest 1.9 && dgcvol
 }
 
 dimggrep() {
@@ -30,11 +44,11 @@ dupdate() {
 }
 
 dlogs() {
-  case `docker inspect -f {{.HostConfig.LogConfig.Type}} "${!#}" 2> /dev/null \
+  case `docker inspect -f '{{.HostConfig.LogConfig.Type}}' --type=container "${!#}" 2> /dev/null \
     || docker info | grep -m1 'Logging Driver' | awk '{print $(NF)}'` in
   journald)
     journalctl "${@:1:$#-1}" CONTAINER_NAME="${!#}";;
   *)
-    docker logs "$@";;
+    docker logs "$@" | less;;
   esac
 }

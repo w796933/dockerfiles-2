@@ -22,10 +22,8 @@ Share everything from the host system:
 -v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
 ```
 
-Docker and rkt are automatically chrooted into /host.
-
-There are useful aliases in [aliases.sh](include/usr/share/install/aliases.sh)
-and [profile.d](include/etc/profile.d) ...
+There are useful aliases in [toolbox-aliases.sh](rootfs/usr/share/install/toolbox-aliases.sh)
+and [profile.d](rootfs/etc/profile.d) ...
 
 ## Install
 
