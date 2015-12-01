@@ -11,5 +11,6 @@ if [ "$(docker inspect -f {{.State.Running}} ${NAME} 2> /dev/null)" == "true" ];
   exec docker exec ${NAME} skype "$@"
 else
   mkdir -p "${DATA}"
+  docker rm -fv ${NAME} &> /dev/null
   eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'
 fi

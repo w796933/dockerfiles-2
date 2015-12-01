@@ -4,7 +4,6 @@ NAME="clementine-${USER}"
 DATA="${HOME}/.config/Clementine"
 OPTS=(
   -v /media:/media:ro \
-  -v "${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}:ro" \
   -v "${DATA}:/data/.config/Clementine:rw" \
   -v "${HOME}/Downloads:/data/Downloads:rw" \
   -v "${HOME}/Library:/data/Library:ro" \
@@ -17,5 +16,6 @@ if [ "$(docker inspect -f {{.State.Running}} ${NAME} 2> /dev/null)" == "true" ];
   exec docker exec ${NAME} clementine "$@"
 else
   mkdir -p "${DATA}"
+  docker rm -fv ${NAME} &> /dev/null
   eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'
 fi

@@ -38,10 +38,11 @@ LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
 	-v /:/host --entrypoint=uninstall.sh \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run --rm --name=\${NAME} -u \${UID}:\${GID} \
-	--cap-drop=ALL --security-opt=label:disable \
+LABEL RUN /usr/bin/docker run --rm --name=\${NAME} \
+	--user=\${UID}:\${GID} \
+	--cap-drop=ALL \
+	--security-opt=label:disable \
 	--net=\${NET:-host} \
-	-e PULSE_SERVER=\${PULSE_SERVER:-localhost} \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \
@@ -54,8 +55,13 @@ LABEL RUN /usr/bin/docker run --rm --name=\${NAME} -u \${UID}:\${GID} \
 		echo \"-v \${WAYLAND_SOCK}:\${WAYLAND_SOCK}:ro \
 		-e WAYLAND_DISPLAY=\${WAYLAND_DISPLAY}\"; \
 	fi) \
+	\$(if [ -n "$XAUTHORITY" ]; then \
+		echo \"-v \${XAUTHORITY}:\${XAUTHORITY}:ro \
+		-e XAUTHORITY=\${XAUTHORITY}\"; \
+	fi) \
 	-v /tmp/.X11-unix:/tmp/.X11-unix:ro \
 	-e DISPLAY=unix\${DISPLAY:-:0} \
+	-e PULSE_SERVER=\${PULSE_SERVER:-localhost} \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
 
 ENV HOME /data

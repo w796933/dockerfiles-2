@@ -1,3 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}' | cut -d: -f1)
-find ${HOST}/usr/local/ -name "*${INAME}*" -exec rm -rf "{}" \;
+find ${HOST}/usr/local/ ${HOST}/etc/systemd/user/ \
+-name "*${INAME}*" -exec rm -rfv "{}" \;
