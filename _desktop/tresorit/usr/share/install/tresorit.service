@@ -1,0 +1,11 @@
+[Unit]
+Description=Tresorit Desktop
+
+[Service]
+Restart=on-failure
+RestartSec=10
+ExecStart=/usr/local/bin/tresorit --hidden
+ExecStop=/usr/bin/docker stop tresorit-%u
+
+[Install]
+WantedBy=default.target

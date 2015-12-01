@@ -6,6 +6,9 @@ OPTS=(
   -v "${DATA}:/data/.tresorit" \
   -v "${HOME}/Documents:/data/Documents" \
   -v "${HOME}/Downloads:/data/Downloads" \
+  -v "${HOME}/Library:/data/Library" \
+  -v "${HOME}/Music:/data/Music" \
+  -v "${HOME}/Pictures:/data/Pictures" \
   -v "${HOME}/Public:/data/Public" \
   -v "${HOME}/Templates:/data/Templates" \
 )
@@ -14,5 +17,6 @@ if [ "$(docker inspect -f {{.State.Running}} ${NAME} 2> /dev/null)" == "true" ];
   exec docker exec ${NAME} tresorit "$@"
 else
   mkdir -p "${DATA}"/{Logs,Profiles,Updates}
+  docker rm -fv ${NAME} &> /dev/null
   eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'
 fi
