@@ -1,4 +1,4 @@
-modules/*/*.md
-modules/*/*.png
-modules/*/.git*
-modules/*/doc
+usr/share/znc/modules*/*/.git*
+usr/share/znc/modules*/push/*.png
+usr/share/znc/modules*/push/doc/*.png
+usr/share/znc/modules*/push/contrib

@@ -1,5 +1,5 @@
-[submodule "openvpn/usr/src/easy-rsa"]
-	path = openvpn/usr/src/easy-rsa
+[submodule "openvpn/usr/share/easy-rsa"]
+	path = openvpn/usr/share/easy-rsa
 	url = https://github.com/OpenVPN/easy-rsa.git
 
 [submodule "miniircd/usr/src/miniircd"]

@@ -1,4 +1,4 @@
-## docker-electrum
+## docker-keepassx
 
 See [keepassx.sh](keepassx) for an example of running [KeePassX](https://www.keepassx.org) in a container.
 

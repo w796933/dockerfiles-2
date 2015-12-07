@@ -1,4 +1,4 @@
-*/.git*
-*/.dockerignore
-*/Dockerfile
-source/tircd.cfg
+usr/src/*/.git*
+usr/src/*/.dockerignore
+usr/src/*/Dockerfile
+usr/src/tircd/tircd.cfg

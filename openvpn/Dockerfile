@@ -11,7 +11,7 @@ LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
 RUN dnf -y install openvpn bridge-utils \
 	&& dnf clean all
 
-ENV EASYRSA=/usr/src/easy-rsa/easyrsa3 \
+ENV EASYRSA=/usr/share/easy-rsa/easyrsa3 \
 	EASYRSA_PKI=/etc/openvpn/pki
 
 COPY usr /usr

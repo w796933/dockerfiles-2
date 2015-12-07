@@ -1,6 +1,3 @@
-plugins-*/*.*
-source/debian
-*/.git*
-*/*/.git*
-*/.travis.yml
-*/*/.travis.yml
+usr/src/*/.git*
+usr/src/*/.travis.yml
+usr/src/limnoria/debian

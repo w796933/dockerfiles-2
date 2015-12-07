@@ -1,1 +1,3 @@
-*/.git*
+usr/share/*/.git*
+usr/share/easy-rsa/build
+usr/share/easy-rsa/distro
