@@ -24,18 +24,15 @@
 	path = limnoria/usr/src/plugins-extra/TVMaze
 	url = https://github.com/Znuff/limnoria-tvmaze.git
 
-[submodule "znc/usr/share/znc/modules-external/push"]
-	path = znc/usr/share/znc/modules-external/push
+[submodule "znc/usr/src/znc/modules/push"]
+	path = znc/usr/src/znc/modules/push
 	url = https://github.com/jreese/znc-push.git
-[submodule "znc/usr/share/znc/modules-external/clientbuffer"]
-	path = znc/usr/share/znc/modules-external/clientbuffer
+[submodule "znc/usr/src/znc/modules/clientbuffer"]
+	path = znc/usr/src/znc/modules/clientbuffer
 	url = https://github.com/jpnurmi/znc-clientbuffer.git
-[submodule "znc/usr/share/znc/modules-external/chanfilter"]
-	path = znc/usr/share/znc/modules-external/chanfilter
+[submodule "znc/usr/src/znc/modules/chanfilter"]
+	path = znc/usr/src/znc/modules/chanfilter
 	url = https://github.com/jpnurmi/znc-chanfilter.git
-[submodule "znc/usr/share/znc/modules-external/playback"]
-	path = znc/usr/share/znc/modules-external/playback
-	url = https://github.com/jpnurmi/znc-playback.git
 
 [submodule "pwnie/rootfs/opt/ROPgadget"]
 	path = pwnie/rootfs/opt/ROPgadget

@@ -1,4 +1,3 @@
-usr/share/znc/modules*/*/.git*
-usr/share/znc/modules*/push/*.png
-usr/share/znc/modules*/push/doc/*.png
-usr/share/znc/modules*/push/contrib
+usr/src/znc/modules/*/.git*
+usr/src/znc/modules/push/*.png
+usr/src/znc/modules/push/doc/*.png

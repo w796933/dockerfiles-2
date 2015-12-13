@@ -20,11 +20,12 @@ COPY usr /usr
 
 RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
 	&& dnf -y install $BUILD_DEPS \
-	&& cd /usr/share/znc/modules-external \
-	&& (cd push; CXXFLAGS='-DUSE_CURL' LIBS='-lcurl' znc-buildmod push.cpp) \
-	&& for DIR in $(ls .); do \
-		if [ -f ${DIR}/${DIR}.cpp ] && [ ! -f ${DIR}/${DIR}.so ]; then \
-			(cd ${DIR}; znc-buildmod ${DIR}.cpp); \
+	&& cd /usr/lib*/znc \
+	&& CXXFLAGS='-DUSE_CURL' LIBS='-lcurl' znc-buildmod /usr/src/znc/modules/push/push.cpp \
+	&& for NAME in $(ls /usr/src/znc/modules); do \
+		DIR=/usr/src/znc/modules/${NAME}; \
+		if [ -f ${DIR}/${NAME}.cpp ] && [ ! -f ${NAME}.so ]; then \
+			znc-buildmod ${DIR}/${NAME}.cpp || exit 1; \
 		fi; \
 	done \
 	&& dnf -y erase $BUILD_DEPS \

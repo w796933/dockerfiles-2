@@ -24,11 +24,6 @@ docker run --rm --name znc -p 7000:7000 -v /path/to/znc:/data:Z oszi/znc
 
 ## Modules
 
-To install shipped modules symlink the .so files into `/data/modules`.
+This image contains some external [modules](usr/src/znc/modules)...
 
-List available (precompiled) shipped modules:
-
-```
-docker run --rm --entrypoint sh oszi/znc -c \
-'find /usr/share/znc/modules-external -name *.so'
-```
+Additional modules can be installed under `/data/modules`.

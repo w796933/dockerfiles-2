@@ -263,8 +263,7 @@ public:
 
 		for (vector<CIgnore>::const_iterator it = m_vIgnores.begin(); it != m_vIgnores.end(); ++it) {
 			CIgnore Ignore = *it;
-
-			pFile->Write(Ignore.ToString());
+			pFile->Write(Ignore.ToString() + "\n");
 		}
 
 		pFile->Sync();
