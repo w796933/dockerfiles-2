@@ -7,7 +7,7 @@ fi
 DATA=/var/lib/znc-${1}
 ID=$(docker run --rm --entrypoint=id __IMAGE__ -uz)
 
-mkdir -pv ${DATA}
+mkdir -pvm 0700 ${DATA}
 chown ${ID}:${ID} ${DATA}
 
 docker run -it --rm -v ${DATA}:/data:Z __IMAGE__ --makeconf

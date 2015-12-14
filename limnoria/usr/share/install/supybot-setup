@@ -1,5 +1,5 @@
 #!/bin/bash -e
-if [ -z "$1" ]; then
+if ! [[ "$1" =~ ^[a-zA-Z0-9_-]+$ ]]; then
   echo "Usage: $0 <name>"
   exit 1
 fi
@@ -7,7 +7,8 @@ fi
 DATA=/var/lib/supybot-${1}
 ID=$(docker run --rm --entrypoint=id __IMAGE__ -uz)
 
-mkdir -pv ${DATA}
+mkdir -pvm 0700 ${DATA}
 chown ${ID}:${ID} ${DATA}
+
 docker run -it --rm -v ${DATA}:/data:Z __IMAGE__ supybot-wizard --allow-home
 systemctl enable supybot@${1}

@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -pv ${HOST}/var/lib/tircd
+mkdir -pvm 0700 ${HOST}/var/lib/tircd
 chown tircd: ${HOST}/var/lib/tircd
 
 cp -av /usr/share/install/tircd.service ${HOST}/etc/systemd/system/

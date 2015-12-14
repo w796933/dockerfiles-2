@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -pv ${HOST}/var/lib/miniircd
+mkdir -pvm 0700 ${HOST}/var/lib/miniircd
 chown miniircd: ${HOST}/var/lib/miniircd
 
 cp -av /usr/share/install/miniircd.service ${HOST}/etc/systemd/system/
