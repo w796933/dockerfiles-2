@@ -28,7 +28,7 @@ RUN dnf -y install \
 	iftop \
 	iperf \
 	irssi \
-	kubernetes-client \
+	kubernetes \
 	ltrace \
 	lxc \
 	mailx \
@@ -58,8 +58,6 @@ RUN dnf -y install \
 	whois \
 	xfsprogs \
 	zmap \
-	&& mv $(which etcdctl) /usr/local/bin/ \
-	&& dnf -y erase etcd \
 	&& dnf clean all
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \
@@ -89,12 +87,14 @@ LABEL RUN /usr/bin/docker run -it --rm --privileged \
 	-e TERM=\$(tset -q) \
 	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
+VOLUME ["/var/lib/docker"]
+
+ENV DOCKER_DRIVER overlay
+
+EXPOSE 2375 5001 8080 1337 1337/udp
+
 COPY rootfs /
 
-VOLUME /root
-
 WORKDIR /root
-
-EXPOSE 22 80 443 1337 1337/udp
 
 CMD ["bash"]

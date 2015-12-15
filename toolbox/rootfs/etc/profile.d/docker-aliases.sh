@@ -32,7 +32,7 @@ dimggrep() {
 }
 
 dpsgrep() {
-  docker ps --format='{{.Names}}\t{{.Image}}\t{{.Status}}' | grep "$@" | awk '{print $1}'
+  docker ps -a --format='{{.Names}}\t{{.Image}}\t{{.Status}}' | grep "$@" | awk '{print $1}'
 }
 
 dstats() {
