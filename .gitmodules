@@ -11,6 +11,10 @@
 	url = https://github.com/DexterTheDragon/tircd.git
 	branch = my_version
 
+[submodule "rtorrent/var/www/rutorrent"]
+	path = rtorrent/var/www/rutorrent
+	url = https://github.com/Novik/ruTorrent.git
+
 [submodule "limnoria/usr/src/limnoria"]
 	path = limnoria/usr/src/limnoria
 	url = https://github.com/ProgVal/Limnoria.git

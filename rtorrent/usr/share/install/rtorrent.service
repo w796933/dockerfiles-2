@@ -1,0 +1,19 @@
+[Unit]
+Description=rTorrent & ruTorrent
+After=dns.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+Environment=HTTP_PORT=8080
+Environment=P2P_PORT=55665
+
+ExecStartPre=-/usr/bin/docker rm -fv rtorrent
+ExecStart=/usr/bin/docker run --name=rtorrent -m 1024m --memory-swap=2048m \
+-p ${HTTP_PORT}:8080/tcp -p ${P2P_PORT}:${P2P_PORT}/udp -p ${P2P_PORT}:${P2P_PORT}/tcp \
+-v /mnt/torrent:/data:z --cap-drop=ALL --read-only ${OPTIONS} __IMAGE__
+
+ExecStop=/usr/bin/docker stop rtorrent
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+*
+!data
+!etc
+!usr
+!var
+var/www/rutorrent/.git*
+var/www/rutorrent/plugins/unpack
+var/www/rutorrent/plugins/screenshots
