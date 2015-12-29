@@ -1,0 +1,18 @@
+[Unit]
+Description=Samba SMBD
+After=dns.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+
+ExecStartPre=-/usr/bin/docker rm -fv samba
+ExecStart=/usr/bin/docker run --name=samba -m 1024m --memory-swap=2048m \
+-v /etc/samba:/etc/samba:ro,Z -v /var/lib/samba:/var/lib/samba:Z \
+-p 137-138:137-138/udp -p 139:139/tcp -p 445:445/tcp \
+--env-file=/etc/samba/environment --read-only ${OPTIONS} __IMAGE__
+
+ExecStop=/usr/bin/docker stop samba
+
+[Install]
+WantedBy=multi-user.target

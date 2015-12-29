@@ -1,0 +1,11 @@
+[Unit]
+Description=Samba NMBD
+After=smb.service
+Requires=smb.service
+
+[Service]
+Restart=on-failure
+ExecStart=/usr/bin/docker exec samba nmbd
+
+[Install]
+WantedBy=multi-user.target

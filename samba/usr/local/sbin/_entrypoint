@@ -1,0 +1,6 @@
+#!/bin/sh
+[ ! -h $0 ] && exit 1
+APP=$(basename $0)
+
+exec /usr/sbin/${APP} -FS "$@" \
+$(env | egrep -i "^(${APP}|SAMBA)_[A-Z0-9_]+=" | sed -E 's/^[^_]+_/--option=/i')
