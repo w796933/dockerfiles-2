@@ -14,9 +14,11 @@ RUN dnf -y install \
 	dnsenum \
 	docker \
 	docker-compose \
+	duplicity \
 	e2fsprogs \
 	etcd \
 	ethtool \
+	fatrace \
 	foremost \
 	fpaste \
 	gdb \
@@ -29,6 +31,7 @@ RUN dnf -y install \
 	iperf \
 	irssi \
 	kubernetes \
+	lsof \
 	ltrace \
 	lxc \
 	mailx \
@@ -40,6 +43,7 @@ RUN dnf -y install \
 	p7zip \
 	pcapdiff \
 	pciutils \
+	rsnapshot \
 	speedtest-cli \
 	sslscan \
 	sslsplit \
