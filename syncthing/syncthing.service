@@ -1,5 +1,7 @@
 [Unit]
 Description=Syncthing User Service
+After=docker.service dns.service
+Requires=docker.service
 
 [Service]
 Restart=on-failure

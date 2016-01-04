@@ -1,5 +1,7 @@
 [Unit]
 Description=Tresorit Desktop
+After=docker.service dns.service
+Requires=docker.service
 
 [Service]
 Restart=on-failure

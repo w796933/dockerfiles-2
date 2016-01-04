@@ -1,6 +1,6 @@
 [Unit]
 Description=OpenVPN (iface:%i)
-After=dns.service
+After=docker.service dns.service
 Requires=docker.service
 
 [Service]
