@@ -1,0 +1,52 @@
+#!/bin/bash
+# Configuration file
+
+name=fedora
+version=23
+repos=(fedora fedora-updates)
+gpgcheck=1
+packages=(
+  bash \
+  bind-utils \
+  bzip2 \
+  coreutils \
+  curl \
+  dnf \
+  dnf-plugins-core \
+  file \
+  findutils \
+  gnupg2 \
+  hostname \
+  iproute \
+  iputils \
+  less \
+  make \
+  nmap-ncat \
+  openssh-clients \
+  openssl \
+  passwd \
+  patch \
+  perl \
+  procps-ng \
+  psmisc \
+  python \
+  python3 \
+  rpm \
+  rsync \
+  socat \
+  sqlite \
+  sudo \
+  systemd \
+  tar \
+  util-linux \
+  vim-minimal \
+  which \
+  xz \
+)
+
+docker_image=docker.io/oszi/${name}:${version}
+docker_env="LANG=en_US.UTF-8 LC_COLLATE=POSIX"
+
+cachedir=/var/cache/dnf
+installroot=/var/tmp/${name}-${version}-x86_64
+reposdir=${scriptdir}/yum.repos.d
