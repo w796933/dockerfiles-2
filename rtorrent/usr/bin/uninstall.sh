@@ -1,3 +1,3 @@
 #!/bin/bash
-rm -rfv ${HOST}/mnt/torrent/.{bash,rt,ru}* \
+rm -rfv ${HOST}/var/lib/rtorrent/ \
 ${HOST}/etc/systemd/system/{multi-user.target.wants/,}rtorrent.service

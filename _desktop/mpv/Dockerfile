@@ -1,6 +1,5 @@
 FROM oszi/base-desktop:fc23-devel
 
-# Dependencies from Fedora
 RUN dnf -y install \
 	alsa-lib-devel \
 	enca-devel \
@@ -26,9 +25,7 @@ RUN dnf -y install \
 	pulseaudio-libs-devel \
 	rubberband-devel \
 	youtube-dl \
-	&& dnf clean all
-
-RUN dnf -y install /usr/share/rpmfusion/*release-23.noarch.rpm \
+	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
 	&& dnf -y install ffmpeg-devel \
 	&& dnf clean all
 

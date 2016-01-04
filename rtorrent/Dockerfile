@@ -19,7 +19,10 @@ RUN dnf -y install rtorrent \
 	php-fpm \
 	php-pecl-geoip \
 	mediainfo \
+	unzip \
 	supervisor \
+	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
+	&& dnf -y install unrar \
 	&& dnf clean all \
 	&& useradd -lmd /data --key={UID,GID}_MIN=55665 rtorrent
 

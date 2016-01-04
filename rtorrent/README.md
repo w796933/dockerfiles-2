@@ -13,8 +13,6 @@ with the [ruTorrent](https://github.com/Novik/ruTorrent) WebUI.
 
  * SSL should be configured by a reverse proxy for public access.
 
- * The ffmeg and unrar packages are missing (for plugins) because of licensing reasons.
-
  * All logs are redirected to stdout.
 
  * Multiple instances (service templates) are not supported yet.
