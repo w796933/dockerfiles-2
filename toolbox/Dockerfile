@@ -31,6 +31,7 @@ RUN dnf -y install \
 	iperf \
 	irssi \
 	kubernetes \
+	lftp \
 	lsof \
 	ltrace \
 	lxc \
@@ -62,6 +63,16 @@ RUN dnf -y install \
 	whois \
 	xfsprogs \
 	zmap \
+	\
+	pycryptopp \
+	python-boto \
+	python-keystoneclient \
+	python-paramiko \
+	python-pexpect \
+	python-requests \
+	python-requests-oauthlib \
+	python-swiftclient \
+	python-urllib3 \
 	&& dnf clean all
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged \

@@ -1,15 +1,15 @@
 FROM oszi/toolbox:fc23
 
 RUN dnf -y install \
-	valgrind \
 	american-fuzzy-lop \
-	python{3,}-afl \
-	python-afl-bin \
-	python-z3 \
+	steghide \
+	valgrind \
 	z3 \
 	\
 	libini_config-devel.* \
 	pyserial \
+	python{3,}-afl \
+	python-afl-bin \
 	python-argh \
 	python-dateutil \
 	python-docopt \
@@ -18,6 +18,7 @@ RUN dnf -y install \
 	python-prettytable \
 	python-pyelftools \
 	python-requests \
+	python-z3 \
 	PyYAML \
 	scapy \
 	&& dnf clean all \
