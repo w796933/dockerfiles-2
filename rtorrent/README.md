@@ -9,43 +9,25 @@ with the [ruTorrent](https://github.com/Novik/ruTorrent) WebUI.
 
  * The default user:password is rtorrent:rtorrent in `/data/.rutorrent/htpasswd`.
 
- * You can add more mount points with the $OPTIONS environment variable in a systemd drop-in.
+ * You can change the service environment variables in systemd drop-ins.
+
+ * For multiple instances you have to override the port variables...
 
  * SSL should be configured by a reverse proxy for public access.
 
  * All logs are redirected to stdout.
 
- * Multiple instances (service templates) are not supported yet.
-
-## Test run
-
-Start a container without touching the host system:
-
-```
-atomic run --opt1=8080 oszi/rtorrent
-```
-
-Manually on any distribution:
-
-```
-export IMAGE="oszi/rtorrent"
-export NAME="rtorrent"
-docker pull ${IMAGE}
-eval $(docker inspect -f "{{.Config.Labels.RUN}}" ${IMAGE})
-```
-
-Your data persists only until the container exists.
-
 ## Install
 
 ```
-atomic install oszi/rtorrent
+atomic install --name=rt1 oszi/rtorrent
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE="oszi/rtorrent"
+export IMAGE=oszi/rtorrent
+export NAME=rt1
 docker pull ${IMAGE}
-eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

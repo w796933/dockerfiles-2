@@ -1,12 +1,21 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh -itu root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/limnoria:/host/var/lib/limnoria:rw \
+	-v /var/lib/limnoria/\${NAME}:/data:rw \
+	-e DATA=/var/lib/limnoria/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh -u root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/limnoria:/host/var/lib/limnoria:rw \
+	-e DATA=/var/lib/limnoria/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
+
+LABEL RUN /usr/bin/systemctl start limnoria@\${NAME}
+
+LABEL STOP /usr/bin/systemctl stop limnoria@\${NAME}
 
 RUN dnf -y install \
 	python-babel \
@@ -39,4 +48,4 @@ USER limnoria
 VOLUME /data
 WORKDIR /data
 
-CMD ["supybot", "--help"]
+ENTRYPOINT ["supybot"]

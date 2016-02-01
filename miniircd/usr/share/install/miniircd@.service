@@ -1,21 +1,20 @@
 [Unit]
-Description=ZNC
-After=docker.service dns.service miniircd@.service tircd@.service
+Description=MiniIRCd
+After=docker.service dns.service
 Requires=docker.service
 
 [Service]
 Restart=on-failure
 RestartSec=1
-Environment=NAME=znc-%i
-Environment=DATA=/var/lib/znc/%i
+Environment=NAME=miniircd-%i
+Environment=DATA=/var/lib/miniircd/%i
 Environment=NET=default
 Environment=MEM=64m
 Environment=SWAP=128m
-Environment=PORT=7000
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --cap-drop=ALL --read-only \
---net=${NET} -m ${MEM} --memory-swap=${SWAP} -v ${DATA}:/data:Z -p ${PORT}:${PORT} __IMAGE__
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} -v ${DATA}:/data:Z __IMAGE__
 
 ExecStop=/usr/bin/docker stop ${NAME}
 

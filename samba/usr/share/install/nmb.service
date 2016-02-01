@@ -5,7 +5,9 @@ Requires=smb.service
 
 [Service]
 Restart=on-failure
-ExecStart=/usr/bin/docker exec samba nmbd
+RestartSec=1
+Environment=NAME=samba
+ExecStart=/usr/bin/docker exec ${NAME} nmbd
 
 [Install]
 WantedBy=multi-user.target

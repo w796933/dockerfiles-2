@@ -34,7 +34,7 @@ atomic install oszi/toolbox
 Manually on any distribution:
 
 ```
-export IMAGE="oszi/toolbox"
+export IMAGE=oszi/toolbox
 docker pull ${IMAGE}
-eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

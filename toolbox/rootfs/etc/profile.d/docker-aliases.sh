@@ -9,7 +9,7 @@ alias dinspect-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=conta
 alias dinspect='docker inspect'
 alias dnet='docker network'
 alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
-alias drun='docker run -it --rm'
+alias drun='docker run --rm -ite TERM'
 alias dvol='docker volume'
 alias dxargs='xargs -n1 -r docker'
 alias dxargsi='xargs -n1 -r -I{} docker'

@@ -1,4 +1,12 @@
-#!/bin/bash
-rm -rfv ${HOST}/var/lib/znc-* \
-${HOST}/usr/local/sbin/znc-setup \
-${HOST}/etc/systemd/system/{multi-user.target.wants/,}znc@*.service
+#!/bin/bash -u
+pushd ${HOST}/etc/systemd/system/
+rm -fv *.wants/znc@${NAME}.*
+
+if [ $# -ge 1 ] && [[ $1 =~ (erase|purge) ]]; then
+  rm -rfv ${HOST}/${DATA} znc@${NAME}.*
+fi
+
+if [ $(find *.wants -name 'znc@*' | wc -l) -eq 0 ]; then
+  rm -fv znc@.service
+fi
+popd

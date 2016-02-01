@@ -10,7 +10,7 @@ Docker image for [Samba](https://www.samba.org) servers and clients.
 
  * ...and whitespace characters must be escaped.
 
- * You can add more mount points with the $OPTIONS environment variable in a systemd drop-in.
+ * You can change the service environment variables in systemd drop-ins.
 
  * Logs are redirected to stdout.
 

@@ -30,19 +30,21 @@ COPY rootfs /
 RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/ \
 	&& install-adblock-filters.sh
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+	-v /usr/local:/host/usr/local:rw \
+	-v /etc/systemd/user:/host/etc/systemd/user:rw \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+	-v /usr/local:/host/usr/local:rw \
+	-v /etc/systemd/user:/host/etc/systemd/user:rw \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/docker run --rm --name=\${NAME} \
-	--user=\${UID}:\${GID} \
 	--cap-drop=ALL \
 	--security-opt=label:disable \
 	--net=\${NET:-host} \
+	-u \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \
@@ -65,7 +67,5 @@ LABEL RUN /usr/bin/docker run --rm --name=\${NAME} \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \"\${OPTS[@]}\" \${IMAGE}
 
 ENV HOME /data
-
 WORKDIR /data
-
 VOLUME /data

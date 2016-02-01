@@ -1,5 +1,17 @@
 FROM oszi/buildpack:fc23
 
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+	-v /usr/local/bin:/host/usr/local/bin:rw \
+	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+	-v /usr/local/bin:/host/usr/local/bin:rw \
+	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+
+LABEL RUN /usr/bin/docker run --rm -itu \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} \
+	--net=host --cap-drop=ALL --read-only --security-opt=label:disable \
+	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" --name=\${NAME} \${IMAGE}
+
 RUN dnf -y install \
 	ruby-devel \
 	rubygem-activesupport \
@@ -19,10 +31,8 @@ RUN dnf -y install \
 	python-pygments \
 	&& dnf clean all
 
-ENV VERSION 3
-
 RUN gem install \
-	jekyll:${VERSION} \
+	jekyll \
 	jekyll-coffeescript \
 	jekyll-compose \
 	jekyll-feed \
@@ -31,14 +41,6 @@ RUN gem install \
 	jekyll-sass-converter \
 	jekyll-sitemap \
 	pygments.rb
-
-LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
 
 COPY usr /usr
 

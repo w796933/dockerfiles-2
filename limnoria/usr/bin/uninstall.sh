@@ -1,4 +1,12 @@
-#!/bin/bash
-rm -rfv ${HOST}/var/lib/supybot-* \
-${HOST}/usr/local/sbin/supybot-setup \
-${HOST}/etc/systemd/system/{multi-user.target.wants/,}supybot*.service*
+#!/bin/bash -u
+pushd ${HOST}/etc/systemd/system/
+rm -fv *.wants/limnoria@${NAME}.*
+
+if [ $# -ge 1 ] && [[ $1 =~ (erase|purge) ]]; then
+  rm -rfv ${HOST}/${DATA} limnoria@${NAME}.*
+fi
+
+if [ $(find *.wants -name 'limnoria@*' | wc -l) -eq 0 ]; then
+  rm -fv limnoria@.service
+fi
+popd

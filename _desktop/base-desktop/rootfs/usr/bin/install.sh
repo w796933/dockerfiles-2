@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}')
 
 if [[ ${INAME} =~ ':' ]]; then
@@ -21,7 +21,7 @@ find . -type f -executable -exec cp -av "{}" ${HOST}/usr/local/bin/ \;
 find ${HOST}/usr/local/bin/ -name "*${INAME}*" -exec sed -i "s;__IMAGE__;${IMAGE};g" "{}" \;
 
 # Install systemd user services if any
-find . -name "*${INAME}*.service*" -exec cp -av "{}" ${HOST}/etc/systemd/user/ \;
+find . -name "${INAME}*.service" -exec cp -av "{}" ${HOST}/etc/systemd/user/ \;
 
 popd
 popd

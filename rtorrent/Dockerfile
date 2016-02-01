@@ -1,15 +1,20 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh -u root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/rtorrent:/host/var/lib/rtorrent:rw \
+	-e DATA=/var/lib/rtorrent/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh -u root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/rtorrent:/host/var/lib/rtorrent:rw \
+	-e DATA=/var/lib/rtorrent/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run -d -p \${OPT1:-8080}:8080 --cap-drop=ALL --read-only \
-	--name=\${NAME} -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL RUN /usr/bin/systemctl start rtorrent@\${NAME}
+
+LABEL STOP /usr/bin/systemctl stop rtorrent@\${NAME}
 
 RUN dnf -y install rtorrent \
 	httpd-tools \

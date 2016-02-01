@@ -5,14 +5,22 @@ Requires=docker.service
 
 [Service]
 Restart=on-failure
+RestartSec=1
+Environment=NAME=samba
+Environment=CONF=/etc/samba
+Environment=DATA=/var/lib/samba
+Environment=MNT=/mnt
+Environment=NET=host
+Environment=MEM=1536m
+Environment=SWAP=3072m
 
-ExecStartPre=-/usr/bin/docker rm -fv samba
-ExecStart=/usr/bin/docker run --name=samba -m 2048m --memory-swap=3072m \
--v /etc/samba:/etc/samba:ro,Z -v /var/lib/samba:/var/lib/samba:Z \
--p 137-138:137-138/udp -p 139:139/tcp -p 445:445/tcp \
---env-file=/etc/samba/environment --read-only ${OPTIONS} __IMAGE__
+ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
+ExecStart=/usr/bin/docker run --name=${NAME} --read-only --security-opt=label:disable \
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} --env-file=${CONF}/environment \
+-v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v /etc/shadow:/etc/shadow:ro \
+-v ${CONF}:/etc/samba:ro -v ${DATA}:/var/lib/samba:rw -v ${MNT}:/mnt:rw __IMAGE__
 
-ExecStop=/usr/bin/docker stop samba
+ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]
 WantedBy=multi-user.target

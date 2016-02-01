@@ -11,10 +11,11 @@ port_range = 55665-55665
 encryption = allow_incoming,try_outgoing,enable_retry
 use_udp_trackers = yes
 peer_exchange = yes
+dht_port = 55666
 dht = off
 check_hash = no
 
 execute = {initplugins.sh}
+#log.execute = /dev/stderr
 log.open_file = stderr,/dev/stderr
 log.add_output = info,stderr
-#log.execute = /dev/stderr

@@ -30,3 +30,18 @@ Start Limnoria with your existing configuration:
 ```
 docker run --rm --name supy -v /path/to/supy:/data:Z oszi/limnoria supybot <name>.conf
 ```
+
+## Install
+
+```
+atomic install --name=bot1 oszi/limnoria
+```
+
+Manually on any distribution:
+
+```
+export IMAGE=oszi/limnoria
+export NAME=bot1
+docker pull ${IMAGE}
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
+```

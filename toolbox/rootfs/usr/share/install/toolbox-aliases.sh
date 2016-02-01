@@ -1,23 +1,24 @@
+: ${TOOLBOX:="__IMAGE__"}
+
 toolbox() {
-  docker run -it -e TERM --rm "__IMAGE__" "$@"
+  drun ${TOOLBOX} "$@"
 }
 
 ptoolbox() {
-  docker run -it -e TERM --rm --privileged "__IMAGE__" "$@"
+  drun --privileged ${TOOLBOX} "$@"
 }
-
-alias toolbox-privileged='ptoolbox'
 
 ctoolbox() {
-  docker run -it -e TERM --rm --privileged --volumes-from="$1" \
-  --net="container:$1" --ipc="container:$1" --pid=host "__IMAGE__" "${@:2:$#}"
+  drun --privileged --net="container:$1" --ipc="container:$1" --pid=host \
+  --volumes-from="$1" ${TOOLBOX} "${@:2:$#}"
 }
 
-alias toolbox-attach='ctoolbox'
-
 htoolbox() {
-  IMAGE="__IMAGE__"
+  IMAGE=${TOOLBOX}
+  NAME=""
   eval $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'
 }
 
+alias toolbox-privileged='ptoolbox'
+alias toolbox-attach='ctoolbox'
 alias toolbox-host='htoolbox'

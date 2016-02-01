@@ -50,5 +50,11 @@ RUN set -e; \
 	ln -s /opt/weevely3/weevely.py weevely; \
 	chmod +x *
 
-LABEL RUN /usr/bin/docker run -it --name=\${NAME} -e NAME=\${NAME} \
-	-e IMAGE=\${IMAGE} \${IMAGE}
+LABEL RUN /usr/bin/docker run -it --rm --net=host --name=\${NAME} \
+	--security-opt=label:disable \
+	-v /etc/environment:/etc/environment:ro \
+	-v /etc/group:/etc/group:ro \
+	-v /etc/passwd:/etc/passwd:ro \
+	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
+	-e TERM=\$(tset -q) \
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}

@@ -21,6 +21,8 @@ easyrsa -h
 
 You can create a `pre-up.sh` file to be executed before startup.
 
+Running `atomic install --name=tun0 oszi/openvpn` takes you through the entire process.
+
 ## Usage
 
 Start OpenVPN with server.conf:

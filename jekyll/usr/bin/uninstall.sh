@@ -1,2 +1,2 @@
-#!/bin/bash
-rm -fv ${HOST}/usr/local/bin/jekyll*
+#!/bin/bash -u
+rm -fv ${HOST}/usr/local/bin/jekyll

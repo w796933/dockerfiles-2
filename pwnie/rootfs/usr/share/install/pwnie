@@ -1,15 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 IMAGE="__IMAGE__"
-NAME="pwnie-${USER}-$(echo "${IMAGE}$@" | md5sum - | head -c 16)"
-
-docker create --name="$NAME" --security-opt=label:disable \
--e TERM -v "$HOME"/Downloads:/root/Downloads "$@" \
-"$IMAGE" sleep inf 2> /dev/null
-
-docker start "$NAME" 2> /dev/null
-
-docker exec -it "$NAME" bash
-
-if [ "$(docker top "$NAME" 2> /dev/null | wc -l)" -le 2 ]; then
-  docker kill "$NAME" &> /dev/null
-fi
+NAME=""
+eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

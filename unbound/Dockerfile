@@ -1,25 +1,34 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /etc/unbound:/host/etc/unbound:rw \
+	-v /var/lib/unbound:/host/var/lib/unbound:rw \
+	-e CONF=/etc/unbound -e DATA=/var/lib/unbound \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /etc/unbound:/host/etc/unbound:rw \
+	-v /var/lib/unbound:/host/var/lib/unbound:rw \
+	-e CONF=/etc/unbound -e DATA=/var/lib/unbound \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run -d -p \${OPT1:-53}:53/udp -p \${OPT1:-53}:53/tcp --read-only \
-	--name=\${NAME} -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL RUN /usr/bin/systemctl start unbound
+
+LABEL STOP /usr/bin/systemctl stop unbound
 
 RUN dnf -y install unbound python3-unbound \
 	&& dnf clean all \
-	&& unbound-control-setup -d /etc/unbound/conf.d
+	&& unbound-control-setup \
+	&& find /usr -perm /6000 -exec chmod -s '{}' \;
 
-COPY etc /etc
-COPY usr /usr
+COPY . /
 
 VOLUME ["/var/lib/unbound", "/var/run/unbound"]
 
-EXPOSE 53/udp 53/tcp
+EXPOSE 53/udp 53/tcp 953/tcp
 
-CMD ["unbound"]
+CMD ["unbound", "-d"]

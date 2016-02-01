@@ -1,15 +1,21 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=install.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh -itu root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/znc:/host/var/lib/znc:rw \
+	-v /var/lib/znc/\${NAME}:/data:rw \
+	-e DATA=/var/lib/znc/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged -u root \
-	-v /:/host --entrypoint=uninstall.sh \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh -u root \
+	-v /etc/systemd/system:/host/etc/systemd/system:rw \
+	-v /var/lib/znc:/host/var/lib/znc:rw \
+	-e DATA=/var/lib/znc/\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run -it -p \${OPT1:-7000}:\${OPT1:-7000} --cap-drop=ALL --read-only \
-	--name=\${NAME} -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE} --makeconf
+LABEL RUN /usr/bin/systemctl start znc@\${NAME}
+
+LABEL STOP /usr/bin/systemctl stop znc@\${NAME}
 
 RUN dnf -y install znc znc-mod{perl,python} \
 	&& dnf clean all \
@@ -34,5 +40,6 @@ RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
 
 USER znc
 VOLUME /data
+WORKDIR /data
 
 ENTRYPOINT ["znc", "--foreground", "--datadir=/data"]
