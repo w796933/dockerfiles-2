@@ -4,20 +4,14 @@ After=docker.service dns.service
 Requires=docker.service
 
 [Service]
+EnvironmentFile=/etc/sysconfig/containers/%p/%i
 Restart=on-failure
 RestartSec=1
-Environment=NAME=openvpn-%i
-Environment=CONF=/etc/openvpn/%i
-Environment=DATA=/var/lib/openvpn/%i
-Environment=NET=host
-Environment=MEM=128m
-Environment=SWAP=256m
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
-ExecStart=/usr/bin/docker run --name=${NAME} --cap-add=NET_ADMIN \
---net=${NET} -m ${MEM} --memory-swap=${SWAP} --security-opt=label:disable \
--v ${CONF}:/etc/openvpn:ro,Z -v ${DATA}:/var/lib/openvpn:rw,Z __IMAGE__ --config %i.conf
-
+ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-add=NET_ADMIN --security-opt=label:disable \
+-v ${CONFDIR}:/etc/openvpn:ro,Z -v ${DATADIR}:/var/lib/openvpn:Z ${IMAGE} --config %i.conf
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

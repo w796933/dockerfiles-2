@@ -1,15 +1,17 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh -u root \
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install -u root \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /var/lib/miniircd:/host/var/lib/miniircd:rw \
-	-e DATA=/var/lib/miniircd/\${NAME} \
+	-e DATADIR=/var/lib/miniircd/\${NAME} \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh -u root \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall -u root \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /var/lib/miniircd:/host/var/lib/miniircd:rw \
-	-e DATA=/var/lib/miniircd/\${NAME} \
+	-e DATADIR=/var/lib/miniircd/\${NAME} \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/systemctl start miniircd@\${NAME}

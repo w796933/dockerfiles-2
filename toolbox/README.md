@@ -22,8 +22,8 @@ Share everything from the host system:
 -v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
 ```
 
-There are useful aliases in [toolbox-aliases.sh](rootfs/usr/share/install/toolbox-aliases.sh)
-and [profile.d](rootfs/etc/profile.d) ...
+There are useful aliases in [toolbox-aliases.sh](usr/share/install/profile.d/toolbox-aliases.sh)
+and [docker-aliases.sh](etc/profile.d/docker-aliases.sh) ...
 
 ## Install
 
@@ -34,7 +34,7 @@ atomic install oszi/toolbox
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/toolbox
+export IMAGE=oszi/toolbox NAME=toolbox
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+. /etc/sysconfig/containers/samba/*
+exec docker exec -it ${NAME} smbstatus "$@"

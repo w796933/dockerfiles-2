@@ -11,7 +11,7 @@ atomic install oszi/jekyll
 Manually on any distribution:
 
 ```
-export IMAGE="oszi/jekyll"
+export IMAGE=oszi/jekyll NAME=jekyll
 docker pull ${IMAGE}
-eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

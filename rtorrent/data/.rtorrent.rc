@@ -1,17 +1,16 @@
 ## rtorrent.rc ##
+# Ports are set from environment variables by rtorrent-entrypoint!
 
-session = /data/.rtsession
 directory = /data
+# Hint: /mnt is also bind mounted.
 
 schedule = watch_directory,5,5,load_start=/data/watch/*.torrent
 schedule = untied_directory,5,5,stop_untied=
 schedule = session_save,240,300,session_save=
 
-port_range = 55665-55665
 encryption = allow_incoming,try_outgoing,enable_retry
 use_udp_trackers = yes
 peer_exchange = yes
-dht_port = 55666
 dht = off
 check_hash = no
 

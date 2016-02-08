@@ -1,0 +1,26 @@
+#!/bin/bash -eu
+INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}' | awk -F: '{print $1}')
+ENVFILE=${HOST}/etc/sysconfig/containers/${INAME}/${NAME}
+
+: ${HOST_SYSTEMD:=${HOST}/etc/systemd/system}
+: ${HOST_ETC:=${HOST}/etc}
+: ${HOST_USR:=${HOST}/usr/local}
+
+# Parse variables in a file
+function parse_file() {
+eval echo "\"$(cat <<EOF
+$(<$1)
+EOF
+)\""
+}
+
+# Initialize a volume directory
+function mkvol() {
+  mkdir -pvm 0750 "$1" && chmod -c 0750 "$1"
+  id ${INAME} &> /dev/null && chown -c ${INAME}: "$1" || :
+}
+
+# List names of installed instances
+function find_instances() {
+  find $(dirname ${ENVFILE}) -type f -not -name '*~' -printf "%f\n" 2> /dev/null
+}

@@ -1,7 +1,0 @@
-## Environment variables defined here will be parsed as options,
-## given the container is started with --env-file=/etc/samba/environment.
-##
-## Prefix with SMBD_ for smbd, NMBD_ for nmbd or SAMBA_ for both.
-## Whitespace characters must be escaped!
-##
-# SAMBA_WORKGROUP=WORKGROUP

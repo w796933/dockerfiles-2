@@ -41,7 +41,7 @@ atomic install oszi/pwnie
 Manually on any distribution:
 
 ```
-export IMAGE="oszi/pwnie"
+export IMAGE=oszi/pwnie NAME=pwnie
 docker pull ${IMAGE}
-eval $(docker inspect -f "{{.Config.Labels.INSTALL}}" ${IMAGE})
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

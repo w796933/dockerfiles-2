@@ -1,0 +1,6 @@
+IMAGE=${IMAGE}
+NAME=miniircd-${NAME}
+DATADIR=${DATADIR}
+NET=default
+MEM=64m
+SWAP=128m

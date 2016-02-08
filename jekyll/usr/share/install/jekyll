@@ -1,6 +1,0 @@
-#!/bin/sh
-SUDO_UID=$(id -u)
-SUDO_GID=$(id -g)
-IMAGE="__IMAGE__"
-NAME=""
-eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

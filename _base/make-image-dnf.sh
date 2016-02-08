@@ -52,8 +52,7 @@ for config in "$installroot"/etc/yum.conf "$installroot"/etc/dnf/dnf.conf; do
   fi
 done
 
-cp -rv "$scriptdir"/rpmfusion "$installroot"/usr/share/
-cp -rv "$scriptdir"/ca-trust-anchors/* "$installroot"/etc/pki/ca-trust/source/anchors/
+cp -av --no-preserve=ownership "$scriptdir"/rootfs/* "$installroot"/
 chroot "$installroot" /bin/update-ca-trust
 chroot "$installroot" /bin/rsync -a --delete /etc/skel/ /root/
 chroot "$installroot" /sbin/groupadd -og $(/bin/id -g nobody) nogroup

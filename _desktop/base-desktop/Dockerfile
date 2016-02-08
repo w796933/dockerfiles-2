@@ -30,12 +30,12 @@ COPY rootfs /
 RUN rsync -a --chmod=ugo=rwX /etc/skel/ /data/ \
 	&& install-adblock-filters.sh
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /usr/local:/host/usr/local:rw \
 	-v /etc/systemd/user:/host/etc/systemd/user:rw \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /usr/local:/host/usr/local:rw \
 	-v /etc/systemd/user:/host/etc/systemd/user:rw \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}

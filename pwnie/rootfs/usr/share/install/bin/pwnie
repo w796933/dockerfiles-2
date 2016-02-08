@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+. /etc/sysconfig/containers/pwnie/*
+eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

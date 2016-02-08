@@ -1,19 +1,21 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/unbound:/host/etc/unbound:rw \
 	-v /var/lib/unbound:/host/var/lib/unbound:rw \
-	-e CONF=/etc/unbound -e DATA=/var/lib/unbound \
+	-e CONFDIR=/etc/unbound -e DATADIR=/var/lib/unbound \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/unbound:/host/etc/unbound:rw \
 	-v /var/lib/unbound:/host/var/lib/unbound:rw \
-	-e CONF=/etc/unbound -e DATA=/var/lib/unbound \
+	-e CONFDIR=/etc/unbound -e DATADIR=/var/lib/unbound \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/systemctl start unbound

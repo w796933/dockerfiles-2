@@ -1,0 +1,6 @@
+IMAGE=${IMAGE}
+NAME=limnoria-${NAME}
+DATADIR=${DATADIR}
+NET=default
+MEM=64m
+SWAP=128m

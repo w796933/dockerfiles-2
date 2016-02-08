@@ -11,24 +11,25 @@ Warning: Recursive queries are allowed by default!
 Start unbound with the default configuration:
 
 ```
-docker run --rm --name dns -p 53:53/udp -p 53:53/tcp oszi/unbound
-```
-
-You can override the local configuration directory with:
-
-```
--v /path/to/unbound:/etc/unbound/conf.d:ro,Z
-```
-
-But first, you have to run unbound-control-setup:
-
-```
-docker run --rm -v /path/to/unbound:/etc/unbound/conf.d:Z oszi/unbound \
-unbound-control-setup -d /etc/unbound/conf.d
+docker run -d --name=unbound -p 53:53/udp -p 53:53/tcp oszi/unbound
 ```
 
 Accessing unbound-control in a running container:
 
 ```
-docker exec dns unbound-control --help
+docker exec -it unbound unbound-control --help
+```
+
+## Install
+
+```
+atomic install oszi/unbound
+```
+
+Manually on any distribution:
+
+```
+export IMAGE=oszi/unbound NAME=unbound
+docker pull ${IMAGE}
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

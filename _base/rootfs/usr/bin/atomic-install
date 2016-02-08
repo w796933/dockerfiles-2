@@ -1,0 +1,35 @@
+#!/bin/bash -eu
+. /etc/atomic-install
+
+pushd /usr/share/install > /dev/null
+trap 'popd > /dev/null' EXIT
+
+# Install the environment file!
+if [ -f environment ] && [ ! -f ${ENVFILE} ]; then
+  mkdir -p $(dirname ${ENVFILE})
+  parse_file environment > ${ENVFILE}
+  echo "ENV FILE: ${ENVFILE}"
+fi
+
+# Install systemd services
+find -maxdepth 1 -name '*.service*' -exec cp -av "{}" "${HOST_SYSTEMD}"/ \;
+
+# Install scripts and aliases
+[ -d profile.d ] && cp -avL profile.d "${HOST_ETC}"/
+[ -d sbin ] && cp -avL sbin "${HOST_USR}"/
+[ -d  bin ] && cp -avL  bin "${HOST_USR}"/
+
+# Update instead of install?
+if [ $# -ge 1 ] && [[ "$1" =~ ^(update|upgrade)$ ]]; then
+  # Execute extension...
+  [ -f update.sh ] && . update.sh
+  exit 0
+fi
+
+# Initialize the volumes
+[ -n "${CONFDIR:-}" ] && mkvol "${HOST}/${CONFDIR}"
+[ -n "${DATADIR:-}" ] && mkvol "${HOST}/${DATADIR}"
+[ -n "${LOGDIR:-}"  ] && mkvol "${HOST}/${LOGDIR}"
+
+# Execute extension...
+[ -f install.sh ] && . install.sh

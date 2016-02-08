@@ -9,9 +9,9 @@ with the [ruTorrent](https://github.com/Novik/ruTorrent) WebUI.
 
  * The default user:password is rtorrent:rtorrent in `/data/.rutorrent/htpasswd`.
 
- * You can change the service environment variables in systemd drop-ins.
+ * For multiple instances you have to change the port variables...
 
- * For multiple instances you have to override the port variables...
+ * You can set the environment variables in `/etc/sysconfig/containers/rtorrent/NAME`.
 
  * SSL should be configured by a reverse proxy for public access.
 
@@ -26,8 +26,7 @@ atomic install --name=rt1 oszi/rtorrent
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/rtorrent
-export NAME=rt1
+export IMAGE=oszi/rtorrent NAME=rt1
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

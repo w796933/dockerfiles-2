@@ -4,20 +4,14 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+EnvironmentFile=/etc/sysconfig/containers/unbound/unbound
 Restart=on-failure
 RestartSec=1
-Environment=NAME=unbound
-Environment=CONF=/etc/unbound
-Environment=DATA=/var/lib/unbound
-Environment=NET=default
-Environment=MEM=64m
-Environment=SWAP=128m
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
-ExecStart=/usr/bin/docker run --name=${NAME} --read-only \
---net=${NET} -m ${MEM} --memory-swap=${SWAP} -p 53:53/udp -p 53:53/tcp \
--v ${CONF}:/etc/unbound:ro,Z -v ${DATA}:/var/lib/unbound:Z __IMAGE__
-
+ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/unbound/unbound \
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only -p 53:53/udp -p 53:53/tcp \
+-v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z ${IMAGE}
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

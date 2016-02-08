@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+. /etc/sysconfig/containers/unbound/*
+exec docker exec -it ${NAME} unbound-control "$@"

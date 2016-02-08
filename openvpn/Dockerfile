@@ -1,21 +1,23 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run -it --rm --privileged --entrypoint=install.sh \
+LABEL INSTALL /usr/bin/docker run -it --rm --privileged --entrypoint=atomic-install \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/openvpn:/host/etc/openvpn:rw \
 	-v /etc/openvpn/\${NAME}:/etc/openvpn:rw \
 	-v /var/lib/openvpn:/host/var/lib/openvpn:rw \
 	-v /var/lib/openvpn/\${NAME}:/var/lib/openvpn:rw \
-	-e CONF=/etc/openvpn/\${NAME} \
-	-e DATA=/var/lib/openvpn/\${NAME} \
+	-e CONFDIR=/etc/openvpn/\${NAME} \
+	-e DATADIR=/var/lib/openvpn/\${NAME} \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/openvpn:/host/etc/openvpn:rw \
 	-v /var/lib/openvpn:/host/var/lib/openvpn:rw \
-	-e CONF=/etc/openvpn/\${NAME} \
-	-e DATA=/var/lib/openvpn/\${NAME} \
+	-e CONFDIR=/etc/openvpn/\${NAME} \
+	-e DATADIR=/var/lib/openvpn/\${NAME} \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/systemctl start openvpn@\${NAME}

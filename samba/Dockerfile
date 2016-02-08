@@ -1,17 +1,21 @@
 FROM oszi/fedora:23
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/samba:/host/etc/samba:rw \
 	-v /var/lib/samba:/host/var/lib/samba:rw \
-	-e CONF=/etc/samba -e DATA=/var/lib/samba \
+	-e CONFDIR=/etc/samba -e DATADIR=/var/lib/samba \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/samba:/host/etc/samba:rw \
 	-v /var/lib/samba:/host/var/lib/samba:rw \
-	-e CONF=/etc/samba -e DATA=/var/lib/samba \
+	-e CONFDIR=/etc/samba -e DATADIR=/var/lib/samba \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/systemctl start smb nmb
@@ -26,7 +30,7 @@ RUN dnf -y install \
 	samba-winbind-clients \
 	&& dnf clean all
 
-COPY . /
+COPY usr /usr
 
 VOLUME ["/var/lib/samba", "/run", "/tmp"]
 

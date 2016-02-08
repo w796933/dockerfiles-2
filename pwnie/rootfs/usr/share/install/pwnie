@@ -1,4 +1,0 @@
-#!/bin/sh
-IMAGE="__IMAGE__"
-NAME=""
-eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

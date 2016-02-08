@@ -22,7 +22,7 @@ RUN dnf -y install \
 	PyYAML \
 	scapy \
 	&& dnf clean all \
-	&& rm -rf /usr/share/install/
+	&& rm -rf /usr/share/install/*/
 
 COPY rootfs /
 
@@ -57,4 +57,4 @@ LABEL RUN /usr/bin/docker run -it --rm --net=host --name=\${NAME} \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
 	-e TERM=\$(tset -q) \
-	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1} \${IMAGE}
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1:-} \${IMAGE}

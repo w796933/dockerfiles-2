@@ -1,0 +1,14 @@
+IMAGE=${IMAGE}
+NAME=${NAME}
+CONFDIR=${CONFDIR}
+DATADIR=${DATADIR}
+MNT=/mnt
+NET=host
+MEM=1536m
+SWAP=3072m
+
+## Environment variables defined here will be parsed as options...
+## Prefix with SMBD_ for smbd, NMBD_ for nmbd or SAMBA_ for both.
+## Whitespace characters must be escaped!
+##
+# SAMBA_WORKGROUP=WORKGROUP

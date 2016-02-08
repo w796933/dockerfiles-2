@@ -75,15 +75,17 @@ RUN dnf -y install \
 	python-urllib3 \
 	&& dnf clean all
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=install.sh \
+LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
 	-v /usr/local:/host/usr/local:rw \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=uninstall.sh \
+LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
 	-v /usr/local:/host/usr/local:rw \
-	-e HOST=/host -e IMAGE=\${IMAGE} \${IMAGE}
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/docker run -it --rm --privileged --name=\${NAME} \
 	--net=host --ipc=host --pid=host \
@@ -109,7 +111,7 @@ ENV DOCKER_DRIVER overlay
 
 EXPOSE 2375 5001 8080 1337 1337/udp
 
-COPY rootfs /
+COPY . /
 
 WORKDIR /root
 
