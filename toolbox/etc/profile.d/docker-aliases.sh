@@ -8,8 +8,10 @@ alias dimg='docker images'
 alias dinspect-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=container'
 alias dinspect='docker inspect'
 alias dnet='docker network'
+alias dnetinsp='docker network inspect'
 alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
 alias drun='docker run --rm -ite TERM'
+alias dupdate='docker update'
 alias dvol='docker volume'
 alias dxargs='xargs -n1 -r docker'
 alias dxargsi='xargs -n1 -r -I{} docker'
@@ -39,8 +41,12 @@ dstats() {
   dpsgrep "$@" | xargs -r docker stats --no-stream=true
 }
 
-dupdate() {
+dpullgrep() {
   dimggrep "$@" | xargs -L1 -P3 -r docker pull
+}
+
+dpushgrep() {
+  dimggrep "$@" | xargs -n1 -r docker push
 }
 
 dlogs() {

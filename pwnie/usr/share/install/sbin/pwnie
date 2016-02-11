@@ -1,0 +1,11 @@
+#!/bin/bash -eu
+. /etc/sysconfig/containers/pwnie/*
+NAME=${NAME}-${RANDOM}
+OPT1=''
+while [ $# -ge 1 ]; do
+  case "$1" in
+  -*) OPT1="${OPT1} $1"; shift;;
+   *) break;;
+  esac
+done
+eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

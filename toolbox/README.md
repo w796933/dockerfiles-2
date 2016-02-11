@@ -22,8 +22,7 @@ Share everything from the host system:
 -v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
 ```
 
-There are useful aliases in [toolbox-aliases.sh](usr/share/install/profile.d/toolbox-aliases.sh)
-and [docker-aliases.sh](etc/profile.d/docker-aliases.sh) ...
+There are useful aliases in [docker-aliases.sh](etc/profile.d/docker-aliases.sh)
 
 ## Install
 

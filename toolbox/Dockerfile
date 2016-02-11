@@ -3,15 +3,12 @@ FROM oszi/buildpack:fc23
 # Expect all packages from the base images...
 
 RUN dnf -y install \
-	arptools \
 	atomic \
 	atop \
-	binwalk \
 	blktrace \
 	btrfs-progs \
 	checksec \
 	device-mapper \
-	dnsenum \
 	docker \
 	docker-compose \
 	duplicity \
@@ -19,7 +16,6 @@ RUN dnf -y install \
 	etcd \
 	ethtool \
 	fatrace \
-	foremost \
 	fpaste \
 	gdb \
 	goaccess \
@@ -42,27 +38,24 @@ RUN dnf -y install \
 	numactl \
 	openssh-server \
 	p7zip \
-	pcapdiff \
 	pciutils \
 	rsnapshot \
 	speedtest-cli \
 	sslscan \
-	sslsplit \
 	strace \
 	subnetcalc \
 	sysstat \
 	tcpdump \
 	tcpreplay \
 	telnet \
+	testdisk \
 	tmux \
-	tor \
 	traceroute \
 	tree \
 	vim-enhanced \
 	w3m \
 	whois \
 	xfsprogs \
-	zmap \
 	\
 	pycryptopp \
 	python-boto \
@@ -78,13 +71,13 @@ RUN dnf -y install \
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
-	-v /usr/local:/host/usr/local:rw \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
-	-v /usr/local:/host/usr/local:rw \
+	-v /usr/local/sbin:/host/usr/local/sbin:rw \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
 LABEL RUN /usr/bin/docker run -it --rm --privileged --name=\${NAME} \

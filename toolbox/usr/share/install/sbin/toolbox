@@ -1,0 +1,11 @@
+#!/bin/bash -eu
+. /etc/sysconfig/containers/toolbox/*
+NAME=${NAME}-${RANDOM}
+OPTS=(-ite TERM --rm --name=${NAME})
+while [ $# -ge 1 ]; do
+  case "$1" in
+  -*) OPTS+=("$1"); shift;;
+   *) break;;
+  esac
+done
+exec docker run "${OPTS[@]}" ${IMAGE} "$@"

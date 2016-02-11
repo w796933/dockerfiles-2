@@ -1,1 +1,6 @@
-rootfs/opt/*/.git*
+*
+!opt
+!root
+!usr
+*/*/.git*
+*/*/*/.git*

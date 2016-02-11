@@ -1,10 +1,21 @@
 FROM oszi/toolbox:fc23
 
+# Expect all packages from the base images...
+
 RUN dnf -y install \
 	american-fuzzy-lop \
+	arptools \
+	binwalk \
+	dnsenum \
+	foremost \
+	masscan \
+	pcapdiff \
+	sslsplit \
 	steghide \
+	tor \
 	valgrind \
 	z3 \
+	zmap \
 	\
 	libini_config-devel.* \
 	pyserial \
@@ -22,9 +33,10 @@ RUN dnf -y install \
 	PyYAML \
 	scapy \
 	&& dnf clean all \
+	&& mv /usr/bin/checksec /usr/local/bin/ \
 	&& rm -rf /usr/share/install/*/
 
-COPY rootfs /
+COPY . /
 
 RUN set -e; \
 	for dir in ROPgadget pwntools HashPump xortool; do \
@@ -50,11 +62,10 @@ RUN set -e; \
 	ln -s /opt/weevely3/weevely.py weevely; \
 	chmod +x *
 
-LABEL RUN /usr/bin/docker run -it --rm --net=host --name=\${NAME} \
-	--security-opt=label:disable \
-	-v /etc/environment:/etc/environment:ro \
+LABEL RUN /usr/bin/docker run \${OPT1:-} -it --rm --name=\${NAME} \
+	--net=host --security-opt=label:disable \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
 	-e TERM=\$(tset -q) \
-	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${OPT1:-} \${IMAGE}
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
