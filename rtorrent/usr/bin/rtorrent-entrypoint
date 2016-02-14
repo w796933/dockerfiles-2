@@ -1,7 +1,4 @@
 #!/bin/sh -u
-rm -f /data/.rtsession/rtorrent.lock
-exec rtorrent -s /data/.rtsession \
--O scgi_port=127.0.0.1:5000 \
--O port_range=${PORT_P2P}-${PORT_P2P} \
--O dht_port=${PORT_DHT} \
-"$@"
+rm -fv ${RTSESSION}/rtorrent.lock >&2
+exec rtorrent -s ${RTSESSION} -o scgi_port=127.0.0.1:5000 \
+-o port_range=${PORT_RANGE},dht_port=${DHT_PORT}

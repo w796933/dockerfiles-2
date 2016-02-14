@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set(getenv('TIMEZONE') ?: 'UTC');
 	@define('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:42.0) Gecko/20100101 Firefox/42.0', true);
 	@define('HTTP_TIME_OUT', 30, true);
 	@define('HTTP_USE_GZIP', true, true);
@@ -9,7 +10,7 @@
 	@define('LOG_RPC_FAULTS', true, true);
 
 	$topDirectory = '/';
-	$tempDirectory = '/tmp';
+	$tempDirectory = '/var/tmp';
 	$log_file = '/dev/stderr';
 	$do_diagnostic = true;
 	$saveUploadedTorrents = true;
@@ -18,9 +19,8 @@
 	$canUseXSendFile = true;
 	$schedule_rand = 10;
 
-	date_default_timezone_set(getenv('RUTORRENT_TIMEZONE'));
 	$profilePath = getenv('RUTORRENT_DATA');
-	$profileMask = 0777;
+	$profileMask = 0770;
 
 	$scgi_host = '127.0.0.1';
 	$scgi_port = 5000;

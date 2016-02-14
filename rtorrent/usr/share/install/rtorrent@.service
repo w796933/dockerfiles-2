@@ -11,8 +11,8 @@ RestartSec=1
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-drop=ALL --read-only \
--p ${PORT_HTTP}:8080/tcp -p ${PORT_P2P}:${PORT_P2P}/tcp \
--p ${PORT_P2P}:${PORT_P2P}/udp -p ${PORT_DHT}:${PORT_DHT}/udp \
+-p ${HTTP_PORT}:8080/tcp -p ${PORT_RANGE}:${PORT_RANGE}/tcp \
+-p ${PORT_RANGE}:${PORT_RANGE}/udp -p ${DHT_PORT}:${DHT_PORT}/udp \
 -v ${DATADIR}:/data:Z -v ${MNT}:/mnt:z ${IMAGE}
 ExecStop=/usr/bin/docker stop ${NAME}
 

@@ -33,15 +33,15 @@ RUN dnf -y install rtorrent \
 	&& dnf clean all \
 	&& useradd -lmd /data --key={UID,GID}_MIN=55665 rtorrent
 
-ENV RUTORRENT_DATA=/data/.rutorrent \
-	RUTORRENT_TIMEZONE=UTC
+ENV RUTORRENT_DATA=/data/.rutorrent RTSESSION=/data/.rtsession \
+	PORT_RANGE=55665-55665 DHT_PORT=55666
 
 COPY . /
 
 RUN ln -sf /etc/rutorrent/config.php /var/www/rutorrent/conf/config.php \
 	&& chown -R rtorrent: /data/
 
-VOLUME ["/data", "/tmp"]
+VOLUME ["/data", "/tmp", "/var/tmp"]
 
 WORKDIR /data
 
