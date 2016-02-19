@@ -18,6 +18,7 @@ RUN dnf -y install \
 	\
 	bzip2-devel \
 	expat-devel \
+	file-devel \
 	glib2-devel \
 	glibc-devel.* \
 	libcurl-devel \
@@ -28,12 +29,14 @@ RUN dnf -y install \
 	libxml2-devel \
 	libxslt-devel \
 	libyaml-devel \
+	libzip-devel \
 	openssl-devel \
 	postgresql-devel \
 	readline-devel \
 	sqlite-devel \
 	zlib-devel \
 	\
+	lua-devel \
 	nodejs-devel \
 	npm \
 	perl-devel \
