@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /opt/commix
+exec python2 commix.py "$@"

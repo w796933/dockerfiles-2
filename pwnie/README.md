@@ -14,6 +14,8 @@ Binary:
 
  * [preeny](https://github.com/zardus/preeny)
 
+ * [radare2](https://github.com/radare/radare2)
+
 Crypto:
 
  * [HashPump](https://github.com/bwall/HashPump)

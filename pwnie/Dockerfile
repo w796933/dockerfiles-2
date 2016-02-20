@@ -17,6 +17,7 @@ RUN dnf -y install \
 	z3 \
 	zmap \
 	\
+	capstone-devel \
 	libini_config-devel.* \
 	pyserial \
 	python{3,}-afl \
@@ -33,34 +34,35 @@ RUN dnf -y install \
 	PyYAML \
 	scapy \
 	&& dnf clean all \
-	&& mv /usr/bin/checksec /usr/local/bin/ \
 	&& rm -rf /usr/share/install/*/
 
 COPY . /
 
 RUN set -e; \
-	for dir in ROPgadget pwntools HashPump xortool; do \
-		cd /opt/$dir; \
+	mv -f /usr/bin/checksec /tmp/; \
+	for APP in ROPgadget pwntools HashPump xortool; do \
+		cd /usr/src/${APP}; \
 		python setup.py install; \
 		python setup.py clean --all; \
 	done; \
-	cd /opt/HashPump; \
+	mv -f /tmp/checksec /usr/bin/; \
+	\
+	cd /usr/src/HashPump; \
 	make; \
 	make install; \
 	make clean; \
+	\
+	cd /opt/radare2; \
+	./sys/install.sh --without-pull; \
+	./sys/clean.sh; \
+	\
 	cd /opt/preeny; \
-	make; \
-	mv *-*-* bin64; \
-	CFLAGS=-m32 setarch i686 make; \
-	mv *-*-* bin32; \
+	make CFLAGS=-m32 && mv *-*-* lib32; \
+	make && mv *-*-* lib64; \
 	make clean; \
+	\
 	pip install -r /opt/weevely3/requirements.txt; \
-	cd /usr/bin; \
-	ln -s /opt/commix/commix.py commix; \
-	ln -s /opt/sqlmap/sqlmap.py sqlmap; \
-	ln -s /opt/sqlmap/sqlmapapi.py sqlmapapi; \
-	ln -s /opt/weevely3/weevely.py weevely; \
-	chmod +x *
+	rm -rf ~/.cache;
 
 LABEL RUN /usr/bin/docker run \${OPT1:-} -it --rm --name=\${NAME} \
 	--net=host --security-opt=label:disable \

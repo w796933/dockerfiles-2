@@ -38,24 +38,27 @@
 	path = znc/usr/src/znc/modules/chanfilter
 	url = https://github.com/jpnurmi/znc-chanfilter.git
 
-[submodule "pwnie/opt/ROPgadget"]
-	path = pwnie/opt/ROPgadget
+[submodule "pwnie/usr/src/ROPgadget"]
+	path = pwnie/usr/src/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
-[submodule "pwnie/opt/pwntools"]
-	path = pwnie/opt/pwntools
+[submodule "pwnie/usr/src/pwntools"]
+	path = pwnie/usr/src/pwntools
 	url = https://github.com/Gallopsled/pwntools.git
+[submodule "pwnie/usr/src/HashPump"]
+	path = pwnie/usr/src/HashPump
+	url = https://github.com/bwall/HashPump.git
+[submodule "pwnie/usr/src/xortool"]
+	path = pwnie/usr/src/xortool
+	url = https://github.com/hellman/xortool.git
 [submodule "pwnie/opt/peda"]
 	path = pwnie/opt/peda
 	url = https://github.com/zachriggle/peda.git
 [submodule "pwnie/opt/preeny"]
 	path = pwnie/opt/preeny
 	url = https://github.com/zardus/preeny.git
-[submodule "pwnie/opt/HashPump"]
-	path = pwnie/opt/HashPump
-	url = https://github.com/bwall/HashPump.git
-[submodule "pwnie/opt/xortool"]
-	path = pwnie/opt/xortool
-	url = https://github.com/hellman/xortool.git
+[submodule "pwnie/opt/radare2"]
+	path = pwnie/opt/radare2
+	url = https://github.com/radare/radare2.git
 [submodule "pwnie/opt/sqlmap"]
 	path = pwnie/opt/sqlmap
 	url = https://github.com/sqlmapproject/sqlmap.git
