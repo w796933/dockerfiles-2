@@ -3,6 +3,8 @@ FROM oszi/buildpack:fc23
 # Expect all packages from the base images...
 
 RUN dnf -y install \
+	ansible \
+	ansible-lint \
 	atomic \
 	atop \
 	blktrace \
@@ -56,6 +58,7 @@ RUN dnf -y install \
 	w3m \
 	whois \
 	xfsprogs \
+	zbackup \
 	\
 	pycryptopp \
 	python-boto \
