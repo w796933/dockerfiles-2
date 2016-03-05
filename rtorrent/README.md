@@ -1,7 +1,10 @@
 ## docker-rtorrent
 
-The [rTorrent](https://github.com/rakshasa/rtorrent) BitTorrent client
-with the [ruTorrent](https://github.com/Novik/ruTorrent) WebUI.
+The [rTorrent] BitTorrent client with the [ruTorrent] WebUI and [autodl-irssi].
+
+[rTorrent]:https://github.com/rakshasa/rtorrent
+[ruTorrent]:https://github.com/Novik/ruTorrent
+[autodl-irssi]:https://github.com/autodl-community
 
 ## Notes
 

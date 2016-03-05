@@ -14,6 +14,12 @@
 [submodule "rtorrent/var/www/rutorrent"]
 	path = rtorrent/var/www/rutorrent
 	url = https://github.com/Novik/ruTorrent.git
+[submodule "rtorrent/usr/share/autodl-irssi"]
+	path = rtorrent/usr/share/autodl-irssi
+	url = https://github.com/autodl-community/autodl-irssi.git
+[submodule "rtorrent/usr/share/autodl-rutorrent"]
+	path = rtorrent/usr/share/autodl-rutorrent
+	url = https://github.com/autodl-community/autodl-rutorrent.git
 
 [submodule "limnoria/usr/src/limnoria"]
 	path = limnoria/usr/src/limnoria
@@ -78,3 +84,4 @@
 	path = _desktop/keepassx/usr/src/keepassx
 	url = https://github.com/keepassx/keepassx.git
 	branch = 2.0
+

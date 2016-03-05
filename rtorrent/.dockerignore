@@ -3,5 +3,6 @@
 !etc
 !usr
 !var
+usr/share/*/.git*
 var/www/rutorrent/.git*
 var/www/rutorrent/plugins/screenshots

@@ -20,26 +20,37 @@ LABEL STOP /usr/bin/systemctl stop rtorrent@\${NAME}
 
 RUN dnf -y install rtorrent \
 	httpd-tools \
+	irssi \
 	lighttpd \
 	lighttpd-fastcgi \
+	mediainfo \
+	perl-Archive-Zip \
+	perl-Digest-SHA \
+	perl-HTML-Parser \
+	perl-JSON \
+	perl-JSON-XS \
+	perl-Net-SSLeay \
+	perl-XML-LibXML \
 	php-cli \
 	php-fpm \
 	php-pecl-geoip \
-	mediainfo \
-	unzip \
 	supervisor \
+	unzip \
 	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
 	&& dnf -y install unrar \
 	&& dnf clean all \
 	&& useradd -lmd /data --key={UID,GID}_MIN=55665 rtorrent
 
-ENV RUTORRENT_DATA=/data/.rutorrent RTSESSION=/data/.rtsession \
-	PORT_RANGE=55665-55665 DHT_PORT=55666
-
 COPY . /
 
-RUN ln -sf /etc/rutorrent/config.php /var/www/rutorrent/conf/config.php \
+RUN cd /var/www/rutorrent \
+	&& cp -sa /usr/share/autodl-rutorrent plugins/autodl-irssi \
+	&& ln -sf /etc/rutorrent/autodl.php plugins/autodl-irssi/conf.php \
+	&& ln -sf /etc/rutorrent/config.php conf/config.php \
 	&& chown -R rtorrent: /data/
+
+ENV RUTORRENT_DATA=/data/.rutorrent RTSESSION=/data/.rtsession \
+	PORT_RANGE=55665-55665 DHT_PORT=55666
 
 VOLUME ["/data", "/tmp", "/var/tmp"]
 
