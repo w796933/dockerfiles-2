@@ -7,41 +7,26 @@ and [GLolol](https://github.com/GLolol/SupyPlugins).
 
 ## Usage
 
-If you mount /data yourself, it must be writable by the container user:
-
-```
-docker run --rm --entrypoint sh oszi/limnoria -c id
-```
-
-Interactive first time configuration:
-
-```
-docker run -it --rm -v /path/to/supy:/data:Z oszi/limnoria supybot-wizard --allow-home
-```
-
 List all available plugins:
 
 ```
-docker run -it --rm oszi/limnoria ls /usr/src/limnoria/plugins/
-```
-
-Start Limnoria with your existing configuration:
-
-```
-docker run --rm --name supy -v /path/to/supy:/data:Z oszi/limnoria supybot <name>.conf
+docker run -t --rm --entrypoint ls oszi/limnoria /usr/src/limnoria/plugins/
 ```
 
 ## Install
 
 ```
-atomic install --name=bot1 oszi/limnoria
+atomic install --name=mybot oszi/limnoria
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/limnoria
-export NAME=bot1
+export IMAGE=oszi/limnoria NAME=mybot
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
+```
+
+```
+systemctl enable --now limnoria@mybot
 ```

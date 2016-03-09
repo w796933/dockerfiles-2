@@ -1,0 +1,1 @@
+../share/tircd/tircd.pl

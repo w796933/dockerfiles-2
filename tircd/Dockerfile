@@ -19,22 +19,26 @@ LABEL RUN /usr/bin/systemctl start tircd@\${NAME}
 LABEL STOP /usr/bin/systemctl stop tircd@\${NAME}
 
 RUN dnf -y install \
+	perl-Digest-SHA1 \
+	perl-HTML-Parser \
 	perl-JSON-Any \
 	perl-LWP-Protocol-https \
 	perl-Net-OAuth \
 	perl-Net-Twitter-Lite \
 	perl-POE-Filter-IRCD \
+	perl-Storable \
+	perl-Time-Local \
+	perl-URI \
 	perl-URI-Find \
 	&& dnf clean all \
 	&& useradd -lmd /data --key={UID,GID}_MIN=26180 tircd
 
-COPY usr /usr
-ADD tircd.cfg /usr/src/tircd/
+COPY . /
 
 EXPOSE 6667
+
 USER tircd
 
 VOLUME /data
-WORKDIR /usr/src/tircd
 
-ENTRYPOINT ["perl", "tircd.pl"]
+ENTRYPOINT ["tircd.pl"]

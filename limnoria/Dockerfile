@@ -40,10 +40,9 @@ RUN dnf -y install \
 COPY usr /usr
 
 RUN cd /usr/src/limnoria \
-	&& pip install -r requirements.txt \
 	&& (cd plugins && find ../../plugins*/ -mindepth 1 -maxdepth 1 -type d -exec ln -s "{}" \;) \
 	&& python setup.py install \
-	&& rm -rf build ~/.cache \
+	&& python setup.py clean --all \
 	&& useradd -lmd /data --key={UID,GID}_MIN=13296 limnoria
 
 USER limnoria

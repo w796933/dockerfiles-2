@@ -1,4 +1,7 @@
-usr/src/*/.git*
-usr/src/*/.dockerignore
-usr/src/*/Dockerfile
-usr/src/tircd/tircd.cfg
+*
+!etc
+!usr
+usr/share/*/.git*
+usr/share/*/.dockerignore
+usr/share/*/Dockerfile
+usr/share/tircd/tircd.cfg

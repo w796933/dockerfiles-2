@@ -28,7 +28,4 @@ USER miniircd
 
 VOLUME /data
 
-WORKDIR /usr/src/miniircd
-
-ENTRYPOINT ["python", "miniircd"]
-CMD ["--statedir=/data"]
+ENTRYPOINT ["miniircd", "--statedir=/data"]
