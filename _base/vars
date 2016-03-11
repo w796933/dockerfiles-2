@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/bash -u
 # Configuration file
 
-name=fedora
-version=23
-repos=(fedora fedora-updates)
-gpgcheck=1
-packages=(
+NAME=$2
+RELEASE=$3
+REPOS=(fedora fedora-updates)
+GPGCHECK=1
+PACKAGES=(
   bash \
   bind-utils \
   bzip2 \
@@ -44,9 +44,9 @@ packages=(
   xz \
 )
 
-docker_image=docker.io/oszi/${name}:${version}
-docker_env="LANG=en_US.UTF-8 LC_COLLATE=POSIX"
+DOCKER_IMAGE=${1}/${2}:${3}
+DOCKER_ENV="LANG=en_US.UTF-8 LC_COLLATE=POSIX container=docker"
 
-cachedir=/var/cache/dnf
-installroot=/var/tmp/${name}-${version}-x86_64
-reposdir=${scriptdir}/yum.repos.d
+CACHEDIR=/var/cache/dnf
+CHROOT=/var/tmp/${NAME}-${RELEASE}-$(arch)
+REPOSDIR=${SCRIPTDIR}/yum.repos.d
