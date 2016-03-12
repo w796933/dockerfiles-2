@@ -1,16 +1,14 @@
-include ../config.mk
-
 export NAME := $(notdir $(CURDIR))
 export IMAGE = $(REPO)/$(NAME):$(TAG)
 
 all: build
 	$(MAKE) push
-ifeq ($(HEAD),$(MASTER))
+ifeq ($(HEAD),master)
 	$(MAKE) latest
 endif
 
 build:
-	git submodule update --init --recursive --checkout .
+	$(SUBMODULE) .
 	$(BUILD) $(FLAGS) -t $(IMAGE) .
 
 latest:
@@ -23,10 +21,12 @@ push:
 pull:
 	$(PULL) $(IMAGE)
 
-LABEL = $(shell echo $@ | tr 'a-z' 'A-Z')
+LABEL = $(shell echo $@ | tr a-z A-Z)
 
 install uninstall run:
 	$(shell $(INSPECT) -f {{.Config.Labels.$(LABEL)}} $(IMAGE))
 
 clean:
 	git clean -fdx .
+
+.PHONY: build latest push pull install uninstall run clean

@@ -1,6 +1,6 @@
 ## docker-fedora
 
-Fedora 23 base image created with DNF.
+Fedora base image created with DNF.
 
 ## Notes
 

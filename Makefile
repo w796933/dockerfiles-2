@@ -1,20 +1,25 @@
-include ./config.mk
+include config.mk
 
 TARGETS := $(shell ls */Makefile | xargs dirname)
-BASE_TARGET := _base
 
 all: $(TARGETS)
 
-toolbox jekyll: buildpack
-
-pwnie: toolbox
-
-$(TARGETS): $(BASE_TARGET)
+$(TARGETS):
 	$(MAKE) -C $@
 
-clean:
-	-docker images -qf dangling=true | xargs -r docker rmi
-	git reset --hard HEAD
-	git clean -fdx
+$(BASE):
+	$(info .base=$(BASE):$(RELEASE))
 
-.PHONY: $(TARGETS) all clean
+.deps.mk~: Makefile
+	@for x in $(wildcard */Dockerfile); do \
+		echo -n "$$(dirname $$x): "; \
+		head -n1 $$x | awk -F/ '{print $$(NF)}' | awk -F: '{print $$1}'; \
+	done > $@
+
+-include .deps.mk~
+
+clean:
+	$(RM) .*.mk~
+	git clean -fdx .base */
+
+.PHONY: $(BASE) $(TARGETS) clean

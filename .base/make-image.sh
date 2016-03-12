@@ -2,7 +2,7 @@
 # Based on kaorimatz/docker-base-images
 
 if [ $# -ne 3 ]; then
-  echo "Usage: $0 REPO NAME RELEASE"
+  echo "Usage: $0 REGISTRY NAME RELEASE"
   exit 1
 fi
 

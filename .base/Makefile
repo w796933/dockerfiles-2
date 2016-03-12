@@ -4,7 +4,6 @@ all: build
 	$(MAKE) push
 
 build:
-	git submodule update --init --recursive --checkout .
 	./make-image.sh $(REPO) $(BASE) $(RELEASE)
 
 push:
@@ -16,3 +15,5 @@ pull:
 clean:
 	$(RM) -r /var/cache/dnf/* /var/tmp/$(BASE)-*-*
 	git clean -fdx .
+
+.PHONY: build push pull clean

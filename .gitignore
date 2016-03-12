@@ -1,0 +1,10 @@
+*~
+
+# Vim
+*.s[a-w][a-z]
+.netrwhist
+
+# IntelliJ
+*.iml
+.idea
+.ipr

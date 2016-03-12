@@ -1,4 +1,4 @@
-FROM oszi/buildpack:fc23
+FROM docker.io/oszi/buildpack:fc23
 
 RUN dnf -y install \
 	ruby-devel \
