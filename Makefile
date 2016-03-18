@@ -8,7 +8,9 @@ $(TARGETS):
 	$(MAKE) -C $@
 
 $(BASE):
-	$(info .base=$(BASE):$(RELEASE))
+ifneq (,$(findstring B,$(MAKEFLAGS)))
+	$(MAKE) -C .base
+endif
 
 .deps.mk~: Makefile
 	@for x in $(wildcard */Dockerfile); do \

@@ -8,7 +8,7 @@ ifeq ($(HEAD),master)
 endif
 
 build:
-	$(SUBMODULE) .
+	git submodule update --init --recursive --checkout .
 	$(BUILD) $(FLAGS) -t $(IMAGE) .
 
 latest:

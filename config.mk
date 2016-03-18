@@ -9,5 +9,5 @@ INSPECT := docker inspect
 PULL    := docker pull
 PUSH    := docker push
 
-HEAD := $(shell git symbolic-ref -q --short HEAD)
-SUBMODULE := git submodule update --init --recursive --checkout
+FLAGS   := $(if $(findstring B,$(MAKEFLAGS)),--no-cache)
+HEAD    := $(shell git symbolic-ref -q --short HEAD)
