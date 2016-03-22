@@ -1,8 +1,8 @@
 FROM docker.io/oszi/fedora:23
 
-ARG VERSION=0.9.15.6.1714-7be11e1
+ARG VERSION=0.9.16.3.1840-cece46d
 
-ARG SHA256=0f283dd125589f6b094cd1bd4737172703c7526ae3ea68f72a1cd5657120d3cf
+ARG SHA256=eda5e924e0c3ab8bf373496f3fdb9d8d069fefacfad0e30a80c7281454b4395c
 
 ARG DOWNLOAD=https://downloads.plex.tv/plex-media-server/\
 ${VERSION}/plexmediaserver-${VERSION}.x86_64.rpm
@@ -35,7 +35,7 @@ ENV PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/data \
 	PLEX_MEDIA_SERVER_TMPDIR=/tmp \
 	PLEX_USER=container
 
-COPY . /
+COPY usr /usr
 
 EXPOSE 32400
 
