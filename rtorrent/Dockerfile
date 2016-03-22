@@ -38,8 +38,7 @@ RUN dnf -y install rtorrent \
 	unzip \
 	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
 	&& dnf -y install unrar \
-	&& dnf clean all \
-	&& useradd -lmd /data --key={UID,GID}_MIN=55665 rtorrent
+	&& dnf clean all
 
 COPY . /
 
@@ -47,17 +46,17 @@ RUN cd /var/www/rutorrent \
 	&& cp -sa /usr/share/autodl-rutorrent plugins/autodl-irssi \
 	&& ln -sf /etc/rutorrent/autodl.php plugins/autodl-irssi/conf.php \
 	&& ln -sf /etc/rutorrent/config.php conf/config.php \
-	&& chown -R rtorrent: /data/
+	&& chown -R container: /data/
 
-ENV RUTORRENT_DATA=/data/.rutorrent RTSESSION=/data/.rtsession \
-	PORT_RANGE=55665-55665 DHT_PORT=55666
-
-VOLUME ["/data", "/tmp", "/var/tmp"]
-
-WORKDIR /data
+ENV RUTORRENT_DATA=/data/.rutorrent \
+	RTSESSION=/data/.rtsession \
+	PORT_RANGE=55665-55665 \
+	DHT_PORT=55666
 
 EXPOSE 8080
 
-USER rtorrent
+USER container
+
+VOLUME ["/data", "/tmp", "/var/tmp"]
 
 CMD ["supervisord"]

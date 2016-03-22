@@ -1,7 +1,5 @@
 FROM docker.io/oszi/fedora:23
 
-ARG USER_ID=32066
-
 ARG VERSION=0.9.15.6.1714-7be11e1
 
 ARG SHA256=0f283dd125589f6b094cd1bd4737172703c7526ae3ea68f72a1cd5657120d3cf
@@ -27,21 +25,21 @@ LABEL RUN /usr/bin/systemctl start plex@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop plex@\${NAME}
 
-RUN useradd -lmd /data --key={UID,GID}_MIN=${USER_ID} plex \
-	&& curl -sL ${DOWNLOAD} > /tmp/plex.rpm \
+RUN curl -s ${DOWNLOAD} > /tmp/plex.rpm \
 	&& echo ${SHA256} /tmp/plex.rpm | sha256sum -c - \
 	&& dnf -y install /tmp/plex.rpm \
 	&& dnf clean all && rm -rf /tmp/*
 
 ENV PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/data \
 	PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver \
-	PLEX_MEDIA_SERVER_TMPDIR=/tmp
+	PLEX_MEDIA_SERVER_TMPDIR=/tmp \
+	PLEX_USER=container
 
 COPY . /
 
 EXPOSE 32400
 
-USER plex
+USER container
 
 VOLUME ["/data", "/tmp"]
 

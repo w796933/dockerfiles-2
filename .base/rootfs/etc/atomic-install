@@ -16,8 +16,9 @@ EOF
 
 # Initialize a volume directory
 function mkvol() {
-  mkdir -pvm 0750 "$1" && chmod -c 0750 "$1"
-  id ${INAME} &> /dev/null && chown -c ${INAME}: "$1" || :
+  mkdir -pvm 0750 "$1"
+  chmod -c 0750 "$1"
+  chown -c "$XUSER": "$1"
 }
 
 # List names of installed instances

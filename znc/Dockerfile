@@ -20,9 +20,7 @@ LABEL RUN /usr/bin/systemctl start znc@\${NAME}
 LABEL STOP /usr/bin/systemctl stop znc@\${NAME}
 
 RUN dnf -y install znc znc-mod{perl,python} \
-	&& dnf clean all \
-	&& (userdel znc || true) \
-	&& useradd -lmd /data --key={UID,GID}_MIN=13035 znc
+	&& dnf clean all
 
 COPY usr /usr
 
@@ -40,8 +38,8 @@ RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
 	&& dnf -y autoremove \
 	&& dnf clean all
 
-USER znc
-VOLUME /data
-WORKDIR /data
+USER container
 
-ENTRYPOINT ["znc", "--foreground", "--datadir=/data"]
+VOLUME ["/data", "/tmp"]
+
+ENTRYPOINT ["znc", "-fd", "/data"]

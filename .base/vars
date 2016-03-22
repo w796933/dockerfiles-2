@@ -44,8 +44,14 @@ PACKAGES=(
   xz \
 )
 
+XUSER=container
+XHOME=/data
+XUID=65000
+XGID=65000
+
 DOCKER_IMAGE=${1}/${2}:${3}
-DOCKER_ENV="LANG=en_US.UTF-8 LC_COLLATE=POSIX container=docker"
+DOCKER_ENV="LANG=en_US.UTF-8 LC_COLLATE=POSIX container=docker \
+XUSER=${XUSER} XHOME=${XHOME} XUID=${XUID} XGID=${XGID}"
 
 CACHEDIR=/var/cache/dnf
 CHROOT=/var/tmp/${NAME}-${RELEASE}-$(arch)

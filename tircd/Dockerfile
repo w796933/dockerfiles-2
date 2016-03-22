@@ -30,14 +30,13 @@ RUN dnf -y install \
 	perl-Time-Local \
 	perl-URI \
 	perl-URI-Find \
-	&& dnf clean all \
-	&& useradd -lmd /data --key={UID,GID}_MIN=26180 tircd
+	&& dnf clean all
 
 COPY . /
 
 EXPOSE 6667
 
-USER tircd
+USER container
 
 VOLUME /data
 

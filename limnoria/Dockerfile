@@ -40,13 +40,14 @@ RUN dnf -y install \
 COPY usr /usr
 
 RUN cd /usr/src/limnoria \
-	&& (cd plugins && find ../../plugins*/ -mindepth 1 -maxdepth 1 -type d -exec ln -s "{}" \;) \
+	&& find ../plugins*/ -mindepth 1 -maxdepth 1 -type d -exec ln -s "../{}" plugins/ \; \
 	&& python setup.py install \
-	&& python setup.py clean --all \
-	&& useradd -lmd /data --key={UID,GID}_MIN=13296 limnoria
+	&& python setup.py clean --all
 
-USER limnoria
+USER container
+
 VOLUME /data
+
 WORKDIR /data
 
 ENTRYPOINT ["supybot"]

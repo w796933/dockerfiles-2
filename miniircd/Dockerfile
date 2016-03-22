@@ -18,13 +18,11 @@ LABEL RUN /usr/bin/systemctl start miniircd@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop miniircd@\${NAME}
 
-RUN useradd -lmd /data --key={UID,GID}_MIN=26658 miniircd
-
 COPY usr /usr
 
 EXPOSE 6667
 
-USER miniircd
+USER container
 
 VOLUME /data
 

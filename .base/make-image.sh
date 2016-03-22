@@ -61,6 +61,8 @@ cp -av --no-preserve=ownership "$SCRIPTDIR"/rootfs/* "$CHROOT"/
 chroot "$CHROOT" /bin/update-ca-trust
 chroot "$CHROOT" /bin/rsync -a --delete /etc/skel/ /root/
 chroot "$CHROOT" /sbin/groupadd -og $(/bin/id -g nobody) nogroup
+chroot "$CHROOT" /sbin/groupadd -g "$XGID" "$XUSER"
+chroot "$CHROOT" /sbin/useradd -lg "$XGID" -u "$XUID" -md "$XHOME" "$XUSER"
 rm -rf "$CHROOT"/etc/machine-id
 rm -rf "$CHROOT"/{boot,media,mnt,tmp}/*
 

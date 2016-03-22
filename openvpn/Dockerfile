@@ -38,4 +38,5 @@ VOLUME ["/etc/openvpn", "/var/lib/openvpn"]
 WORKDIR /etc/openvpn
 
 ENTRYPOINT ["entrypoint"]
+
 CMD ["--config", "server.conf"]

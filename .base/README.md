@@ -12,6 +12,8 @@ Fedora base image created with DNF.
 
  * The `en_US.UTF-8` locale is the default and only locale.
 
- * Current RPMFusion installers can be found in `/usr/share/rpmfusion`.
+ * There is a `container` user and group: `HOME=/data` `UID=65000`
 
  * `nogroup` is an alias for `nobody` for compatibility.
+
+ * Current RPMFusion installers can be found in `/usr/share/rpmfusion`.
