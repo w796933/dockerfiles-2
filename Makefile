@@ -1,15 +1,15 @@
 include config.mk
 
-TARGETS := $(shell ls */Makefile | xargs dirname)
+TARGETS := $(shell dirname $(wildcard */Makefile))
 
 all: $(TARGETS)
 
 $(TARGETS):
-	$(MAKE) -C $@
+	$(MAKE) -C $@ $(TARGET)
 
 $(BASE):
 ifneq (,$(findstring B,$(MAKEFLAGS)))
-	$(MAKE) -C .base
+	$(MAKE) -C .base $(TARGET)
 endif
 
 .deps.mk~: Makefile
@@ -21,7 +21,7 @@ endif
 -include .deps.mk~
 
 clean:
-	$(RM) .*.mk~
-	git clean -fdx .base */
+	$(RM) .*~
+	$(GIT) clean -fdx .base */
 
 .PHONY: $(BASE) $(TARGETS) clean

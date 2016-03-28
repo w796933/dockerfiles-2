@@ -1,5 +1,6 @@
-export NAME := $(notdir $(CURDIR))
-export IMAGE = $(REPO)/$(NAME):$(TAG)
+INAME := $(notdir $(CURDIR))
+export IMAGE := $(REPO)/$(INAME):$(TAG)
+export NAME  := $(INAME)
 
 all: build
 	$(MAKE) push
@@ -8,12 +9,12 @@ ifeq ($(HEAD),master)
 endif
 
 build:
-	git submodule update --init --recursive --checkout .
-	$(BUILD) $(FLAGS) -t $(IMAGE) .
+	$(GIT) submodule update --init --recursive --checkout .
+	$(BUILD) $(BFLAGS) -t $(IMAGE) .
 
 latest:
-	$(DTAG) -f $(IMAGE) $(REPO)/$(NAME)
-	$(PUSH) $(REPO)/$(NAME)
+	$(DTAG) -f $(IMAGE) $(REPO)/$(INAME)
+	$(PUSH) $(REPO)/$(INAME)
 
 push:
 	$(PUSH) $(IMAGE)
@@ -24,9 +25,12 @@ pull:
 LABEL = $(shell echo $@ | tr a-z A-Z)
 
 install uninstall run:
-	$(shell $(INSPECT) -f {{.Config.Labels.$(LABEL)}} $(IMAGE))
+	$(shell $(INSPECT) -f {{.Config.Labels.$(LABEL)}} $(IMAGE)) $(ARGV)
+
+erase: ARGV = erase
+erase: uninstall
 
 clean:
-	git clean -fdx .
+	$(GIT) clean -fdx .
 
 .PHONY: build latest push pull install uninstall run clean

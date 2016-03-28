@@ -4,6 +4,7 @@ all: build
 	$(MAKE) push
 
 build:
+	$(GIT) submodule update --init --recursive --checkout .
 	./make-image.sh $(REPO) $(BASE) $(RELEASE)
 
 push:
@@ -12,8 +13,11 @@ push:
 pull:
 	$(PULL) $(REPO)/$(BASE):$(RELEASE)
 
+latest:
+	$(info Base images must be tagged)
+
 clean:
 	$(RM) -r /var/cache/dnf/* /var/tmp/$(BASE)-*-*
-	git clean -fdx .
+	$(GIT) clean -fdx .
 
-.PHONY: build push pull clean
+.PHONY: build push pull latest clean
