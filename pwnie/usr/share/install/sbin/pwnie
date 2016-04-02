@@ -4,8 +4,10 @@ NAME=${NAME}-${RANDOM}
 OPT1=''
 while [ $# -ge 1 ]; do
   case "$1" in
-  -*) OPT1="${OPT1} $1"; shift;;
+  :*) IMAGE=$(echo ${IMAGE} | sed -E 's/:\w*$//')${1};;
+  -*) OPT1="${OPT1} ${1}";;
    *) break;;
   esac
+  shift
 done
 eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

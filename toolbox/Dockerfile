@@ -17,7 +17,6 @@ RUN dnf -y install \
 	e2fsprogs \
 	etcd \
 	ethtool \
-	fatrace \
 	fpaste \
 	gdb \
 	goaccess \
@@ -26,6 +25,7 @@ RUN dnf -y install \
 	httpd-tools \
 	hwloc \
 	iftop \
+	iotop \
 	iperf \
 	irssi \
 	kubernetes \
@@ -35,13 +35,15 @@ RUN dnf -y install \
 	lxc \
 	mailx \
 	mc \
+	nano \
 	net-tools \
+	netsniff-ng \
 	nmap \
 	numactl \
 	openssh-server \
 	p7zip \
-	pciutils \
-	rsnapshot \
+	perf \
+	screen \
 	speedtest-cli \
 	sslscan \
 	strace \
@@ -60,6 +62,7 @@ RUN dnf -y install \
 	xfsprogs \
 	zbackup \
 	\
+	GeoIP-GeoLite-data-extra \
 	pycryptopp \
 	python-boto \
 	python-keystoneclient \

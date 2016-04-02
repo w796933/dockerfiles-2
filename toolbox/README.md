@@ -19,10 +19,36 @@ Share a running container's volumes, network and IPC namespaces:
 Share everything from the host system:
 
 ```
--v /:/host --{net,ipc,pid,uts}=host --security-opt=label:disable
+-v /:/host --{net,ipc,pid}=host --privileged
 ```
 
-There are useful aliases in [docker-aliases.sh](etc/profile.d/docker-aliases.sh)
+[Script](usr/share/install/sbin/toolbox-host) for super-privileged containers:
+
+```
+toolbox-host [command]
+```
+
+[Script](usr/share/install/sbin/toolbox-attach) for attaching to other containers:
+
+```
+toolbox-attach container [run-opts] [command]
+```
+
+[Script](usr/share/install/sbin/toolbox) for running non-privileged containers:
+
+```
+toolbox [:tag] [run-opts] [command]
+```
+
+For example, to run docker on the latest image:
+
+```
+toolbox :latest -p=2375:2375 --privileged docker daemon -H=0.0.0.0:2375
+```
+
+Please note that spaces in run options are not handled properly.
+
+Aliases in [docker-aliases.sh](etc/profile.d/docker-aliases.sh) will also be installed.
 
 ## Install
 

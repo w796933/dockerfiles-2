@@ -5,16 +5,16 @@ alias dgcimg='docker images -qf dangling=true | xargs -r docker rmi'
 alias dgcvol='docker volume ls -qf dangling=true | xargs -r docker volume rm'
 alias dhist='docker history'
 alias dimg='docker images'
-alias dinspect-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=container'
-alias dinspect='docker inspect'
+alias dinsp='docker inspect'
+alias dinsp-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=container'
 alias dnet='docker network'
 alias dnetinsp='docker network inspect'
 alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
 alias drun='docker run --rm -ite TERM'
 alias dupdate='docker update'
 alias dvol='docker volume'
+alias dvolinsp='docker volume inspect'
 alias dxargs='xargs -n1 -r docker'
-alias dxargsi='xargs -n1 -r -I{} docker'
 alias fig='docker-compose'
 
 dvertest() {
@@ -24,21 +24,25 @@ dvertest() {
 }
 
 dcleanup() {
-  dgc -f -v
-  dgcimg
+  dgc -f
   dvertest 1.9 && dgcvol
+  dgcimg
 }
 
 dimggrep() {
-  docker images | tail -n+2 | grep -v '<none>' | grep "$@" | awk '{print $1":"$2}'
+  docker images | tail -n+2 | grep "$@" | awk '{if ($1!="<none>") print $1":"$2}'
 }
 
 dpsgrep() {
   docker ps -a --format='{{.Names}}\t{{.Image}}\t{{.Status}}' | grep "$@" | awk '{print $1}'
 }
 
+drmgrep() {
+  dpsgrep "$@" | xargs -r docker rm --force
+}
+
 dstats() {
-  dpsgrep "$@" | xargs -r docker stats --no-stream=true
+  dpsgrep "$@" | xargs -r docker stats --no-stream
 }
 
 dpullgrep() {
