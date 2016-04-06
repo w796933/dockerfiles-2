@@ -9,9 +9,11 @@ RUN dnf -y install \
 	flex \
 	gcc-c++ \
 	git \
+	inotify-tools \
 	mercurial \
 	rpm-build \
 	rpm-ostree \
+	rpmdevtools \
 	subversion \
 	waf \
 	yasm \
@@ -37,8 +39,6 @@ RUN dnf -y install \
 	zlib-devel \
 	\
 	lua-devel \
-	nodejs-devel \
-	npm \
 	perl-devel \
 	perl-CPAN \
 	python{3,}-devel \
