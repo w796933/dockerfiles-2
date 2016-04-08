@@ -1,8 +1,8 @@
 FROM docker.io/oszi/fedora:23
 
-ARG VERSION=0.9.16.3.1840-cece46d
+ARG VERSION=0.9.16.4.1911-ee6e505
 
-ARG SHA256=eda5e924e0c3ab8bf373496f3fdb9d8d069fefacfad0e30a80c7281454b4395c
+ARG SHA256=cd5dfcd71f5e5126ea6bd6a079feb92d8df6bee860590f396809b06a3da30053
 
 ARG DOWNLOAD=https://downloads.plex.tv/plex-media-server/\
 ${VERSION}/plexmediaserver-${VERSION}.x86_64.rpm
