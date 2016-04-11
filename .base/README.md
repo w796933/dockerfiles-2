@@ -15,5 +15,3 @@ Fedora base image created with DNF.
  * There is a `container` user and group: `HOME=/data` `UID=65000`
 
  * `nogroup` is an alias for `nobody` for compatibility.
-
- * Current RPMFusion installers can be found in `/usr/share/rpmfusion`.

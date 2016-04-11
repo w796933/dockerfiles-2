@@ -21,31 +21,17 @@ LABEL STOP /usr/bin/systemctl stop rtorrent@\${NAME}
 USER root
 
 RUN dnf -y install rtorrent \
-	irssi \
 	mediainfo \
-	perl-Archive-Zip \
-	perl-Digest-SHA \
-	perl-HTML-Parser \
-	perl-JSON \
-	perl-JSON-XS \
-	perl-Net-SSLeay \
-	perl-XML-LibXML \
 	php-cli \
 	php-fpm \
 	php-pecl-geoip \
 	supervisor \
-	unzip \
-	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
-	&& dnf -y install unrar \
 	&& dnf clean all \
 	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /usr/share/install
 
 COPY . /
 
-RUN cd /var/www/rutorrent \
-	&& cp -sa /usr/share/autodl-rutorrent plugins/autodl-irssi \
-	&& ln -sf /etc/rutorrent/autodl.php plugins/autodl-irssi/conf.php \
-	&& ln -sf /etc/rutorrent/config.php conf/config.php \
+RUN ln -sf /etc/rutorrent/config.php /var/www/rutorrent/conf/config.php \
 	&& chown -R container: /data/
 
 ENV RUTORRENT_DATA=/data/.rutorrent \
