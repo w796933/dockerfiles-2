@@ -1,4 +1,4 @@
-FROM docker.io/oszi/fedora:23
+FROM docker.io/oszi/nginx:fc23
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install -u root \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
@@ -18,11 +18,10 @@ LABEL RUN /usr/bin/systemctl start rtorrent@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop rtorrent@\${NAME}
 
+USER root
+
 RUN dnf -y install rtorrent \
-	httpd-tools \
 	irssi \
-	lighttpd \
-	lighttpd-fastcgi \
 	mediainfo \
 	perl-Archive-Zip \
 	perl-Digest-SHA \
@@ -38,7 +37,8 @@ RUN dnf -y install rtorrent \
 	unzip \
 	&& dnf -y install /usr/share/rpmfusion/*-$(rpm -E %fedora).noarch.rpm \
 	&& dnf -y install unrar \
-	&& dnf clean all
+	&& dnf clean all \
+	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /usr/share/install
 
 COPY . /
 

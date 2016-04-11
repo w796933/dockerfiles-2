@@ -1,0 +1,14 @@
+client_max_body_size            1k;
+client_body_buffer_size         1k;
+client_header_buffer_size       1k;
+large_client_header_buffers  2  1k;
+
+# https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+add_header X-Content-Type-Options nosniff;
+add_header X-Frame-Options SAMEORIGIN;
+add_header X-XSS-Protection "1; mode=block";
+
+# Empty response for unused methods
+if ($request_method !~ ^(GET|HEAD|POST)$) {
+	return 444;
+}

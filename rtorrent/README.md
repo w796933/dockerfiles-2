@@ -10,7 +10,7 @@ The [rTorrent] BitTorrent client with the [ruTorrent] WebUI and [autodl-irssi].
 
  * The default published HTTP port is 8080.
 
- * The default user:password is rtorrent:rtorrent in `/data/.rutorrent/htpasswd`.
+ * The default user:password is rtorrent:rtorrent in `/data/.htpasswd`.
 
  * For multiple instances you have to change the port variables...
 
