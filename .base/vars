@@ -17,6 +17,7 @@ PACKAGES=(
   findutils \
   gnupg2 \
   hostname \
+  icu \
   iproute \
   iputils \
   less \
@@ -42,6 +43,7 @@ PACKAGES=(
   vim-minimal \
   which \
   xz \
+  zip \
 )
 
 XUSER=container
