@@ -6,4 +6,3 @@
 usr/share/*/.git*
 var/www/rutorrent/.git*
 var/www/rutorrent/plugins/screenshots
-var/www/rutorrent/plugins/unpack

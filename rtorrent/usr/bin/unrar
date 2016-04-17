@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+[ "$1" != "x" ] && {
+  echo 'This script can only extract.' >&2
+  exit 1
+}
+shift
+
+OPTS=()
+while [ $# -ge 1 ]; do
+  case "$1" in
+    -p-) ;;
+    -p*) OPTS+=(-p "${1:2}");;
+    -o+) OPTS+=(-f);;
+    -o-) OPTS+=(-s);;
+  -inul) OPTS+=(-q);;
+     -*) ;;
+      *) break;;
+  esac
+  shift
+done
+
+[ "$1" == "" ] && {
+  echo 'Archive not specified.' >&2
+  exit 1
+}
+
+AR="$1"
+[ -d "$AR" ] && {
+  AR=$(find "$AR" -maxdepth 1 -type f \( -name '*.r00*' -or -name '*.rar' \) | head -n1)
+}
+
+exec unar "${OPTS[@]}" -o "${2:-.}" "$AR"

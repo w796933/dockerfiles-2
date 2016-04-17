@@ -56,6 +56,7 @@ RUN dnf -y install \
 	tmux \
 	traceroute \
 	tree \
+	unar \
 	vim-enhanced \
 	w3m \
 	whois \

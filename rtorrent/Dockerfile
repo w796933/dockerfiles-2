@@ -26,6 +26,8 @@ RUN dnf -y install rtorrent \
 	php-fpm \
 	php-pecl-geoip \
 	supervisor \
+	unar \
+	unzip \
 	&& dnf clean all \
 	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /usr/share/install
 
