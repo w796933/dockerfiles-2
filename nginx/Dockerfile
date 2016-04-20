@@ -30,6 +30,8 @@ RUN dnf -y install nginx \
 
 COPY . /
 
+EXPOSE 8080 8443
+
 USER container
 
 VOLUME ["/var/lib/nginx", "/tmp"]

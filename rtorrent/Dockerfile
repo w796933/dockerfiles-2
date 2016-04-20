@@ -34,6 +34,7 @@ RUN dnf -y install rtorrent \
 COPY . /
 
 RUN ln -sf /etc/rutorrent/config.php /var/www/rutorrent/conf/config.php \
+	&& sed -i -E 's/^(worker_processes).*/\1 1;/' /etc/nginx/nginx.conf \
 	&& chown -R container: /data/
 
 ENV RUTORRENT_DATA=/data/.rutorrent \
