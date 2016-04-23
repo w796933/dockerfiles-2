@@ -20,7 +20,7 @@ RUN dnf -y install \
 	capstone-devel \
 	libini_config-devel.* \
 	pyserial \
-	python{3,}-afl \
+	python*-afl \
 	python-afl-bin \
 	python-argh \
 	python-dateutil \

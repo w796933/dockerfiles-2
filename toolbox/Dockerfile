@@ -43,6 +43,7 @@ RUN dnf -y install \
 	openssh-server \
 	p7zip \
 	perf \
+	runc \
 	screen \
 	speedtest-cli \
 	sslscan \
