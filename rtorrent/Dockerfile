@@ -1,4 +1,4 @@
-FROM docker.io/oszi/nginx:fc23
+FROM ${REPO}/nginx:${DIST}
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install -u root \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \

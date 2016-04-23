@@ -1,4 +1,4 @@
-FROM docker.io/oszi/fedora:23
+FROM ${REPO}/${BASE}:${RELEASE}
 
 # SCM, build essentials and common development packages
 RUN dnf -y install \

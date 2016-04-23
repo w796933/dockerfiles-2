@@ -1,4 +1,4 @@
-FROM docker.io/oszi/fedora:23
+FROM ${REPO}/${BASE}:${RELEASE}
 
 LABEL INSTALL /usr/bin/docker run -it --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \

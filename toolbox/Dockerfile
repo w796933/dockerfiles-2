@@ -1,4 +1,4 @@
-FROM docker.io/oszi/buildpack:fc23
+FROM ${REPO}/buildpack:${DIST}
 
 # Expect all packages from the base images...
 

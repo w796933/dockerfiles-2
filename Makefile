@@ -16,7 +16,7 @@ endif
 	@for x in $(wildcard */Dockerfile); do \
 		echo -n "$$(dirname $$x): "; \
 		head -n1 $$x | awk -F/ '{print $$(NF)}' | awk -F: '{print $$1}'; \
-	done > $@
+	done | $(SEDVARS) > $@
 
 -include .deps.mk~
 

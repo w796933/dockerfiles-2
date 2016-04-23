@@ -1,4 +1,4 @@
-FROM docker.io/oszi/fedora:23
+FROM ${REPO}/${BASE}:${RELEASE}
 
 ARG VERSION=0.9.16.4.1911-ee6e505
 

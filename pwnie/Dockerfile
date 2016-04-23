@@ -1,4 +1,4 @@
-FROM docker.io/oszi/toolbox:fc23
+FROM ${REPO}/toolbox:${DIST}
 
 # Expect all packages from the base images...
 
