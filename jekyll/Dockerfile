@@ -11,6 +11,7 @@ RUN dnf -y install \
 	rubygem-nokogiri \
 	rubygem-posix-spawn \
 	rubygem-rdiscount \
+	rubygem-rdoc \
 	rubygem-redcarpet \
 	rubygem-RedCloth \
 	rubygem-therubyracer \
