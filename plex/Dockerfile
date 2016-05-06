@@ -1,8 +1,8 @@
 FROM ${REPO}/${BASE}:${RELEASE}
 
-ARG VERSION=0.9.16.4.1911-ee6e505
+ARG VERSION=0.9.16.6.1993-5089475
 
-ARG SHA256=cd5dfcd71f5e5126ea6bd6a079feb92d8df6bee860590f396809b06a3da30053
+ARG SHA256=7843247084e55fce4bcce0b7a1e0ac4bcf9896adb63cd7535c7264cb56bfbdfd
 
 ARG DOWNLOAD=https://downloads.plex.tv/plex-media-server/\
 ${VERSION}/plexmediaserver-${VERSION}.x86_64.rpm
