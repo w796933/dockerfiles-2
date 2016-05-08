@@ -1,4 +1,4 @@
-FROM ${REPO}/buildpack:${DIST}
+FROM ${REGISTRY}/buildpack:${DIST}
 
 RUN dnf -y install \
 	ruby-devel \

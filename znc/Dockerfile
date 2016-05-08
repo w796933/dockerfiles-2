@@ -1,4 +1,4 @@
-FROM ${REPO}/${BASE}:${RELEASE}
+FROM ${REGISTRY}/${BASE}:${OSREL}
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install -itu root \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \

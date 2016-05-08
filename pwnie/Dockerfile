@@ -1,4 +1,4 @@
-FROM ${REPO}/toolbox:${DIST}
+FROM ${REGISTRY}/toolbox:${DIST}
 
 # Expect all packages from the base images...
 

@@ -1,4 +1,4 @@
-FROM ${REPO}/${BASE}:${RELEASE}
+FROM ${REGISTRY}/${BASE}:${OSREL}
 
 # SCM, build essentials and common development packages
 RUN dnf -y install \

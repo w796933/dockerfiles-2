@@ -4,9 +4,7 @@ Fedora base image created with DNF.
 
 ## Notes
 
- * The list of installed packages is configured in the [vars](vars) file.
-
- * Any missing RPM signing key will be installed on the host.
+ * The list of installed packages is configured in the [config.mk](config.mk) file.
 
  * My personal root CA is imported in the image.
 

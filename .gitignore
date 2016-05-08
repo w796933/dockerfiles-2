@@ -1,4 +1,5 @@
 *~
+rootfs*.tar
 
 # Vim
 *.s[a-w][a-z]

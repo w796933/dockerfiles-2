@@ -1,4 +1,4 @@
-FROM ${REPO}/buildpack:${DIST}
+FROM ${REGISTRY}/buildpack:${DIST}
 
 # Expect all packages from the base images...
 

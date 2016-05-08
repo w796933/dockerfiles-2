@@ -1,9 +1,9 @@
-REPO    := docker.io/oszi
+REGISTRY:= docker.io/oszi
 BASE    := fedora
-RELEASE := 23
-DIST    := fc$(RELEASE)
+OSREL   := 23
+DIST    := fc$(OSREL)
 
-VARS    := REPO BASE RELEASE DIST
+VARS    := REGISTRY BASE OSREL DIST
 DOCKER  := docker
 GIT     := git
 SED     := sed

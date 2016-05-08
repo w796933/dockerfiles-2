@@ -1,6 +1,6 @@
 include config.mk
 
-TARGETS := $(shell dirname $(wildcard */Makefile))
+TARGETS := $(shell dirname $(wildcard [!_]*/Makefile))
 
 all: $(TARGETS)
 
@@ -9,11 +9,11 @@ $(TARGETS):
 
 $(BASE):
 ifneq (,$(findstring B,$(MAKEFLAGS)))
-	$(MAKE) -C .base $(TARGET)
+	$(MAKE) -C _base $(TARGET)
 endif
 
 .deps.mk~: Makefile
-	@for x in $(wildcard */Dockerfile); do \
+	@for x in $(wildcard [!_]*/Dockerfile); do \
 		echo -n "$$(dirname $$x): "; \
 		head -n1 $$x | awk -F/ '{print $$(NF)}' | awk -F: '{print $$1}'; \
 	done | $(SEDVARS) > $@
@@ -22,6 +22,6 @@ endif
 
 clean:
 	$(RM) .*~
-	$(GIT) clean -fdx .base */
+	$(GIT) clean -fdx */
 
 .PHONY: $(BASE) $(TARGETS) clean

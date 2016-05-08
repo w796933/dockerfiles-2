@@ -1,4 +1,4 @@
-FROM ${REPO}/${BASE}:${RELEASE}
+FROM ${REGISTRY}/${BASE}:${OSREL}
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \

@@ -1,21 +1,21 @@
 INAME := $(notdir $(CURDIR))
-export IMAGE := $(REPO)/$(INAME):$(DIST)
+export IMAGE := $(REGISTRY)/$(INAME):$(DIST)
 export NAME  := $(INAME)
 
 all: build
 	$(MAKE) push
-ifeq ($(origin RELEASE) $(HEAD),file master)
+ifeq ($(origin OSREL) $(HEAD),file master)
 	$(MAKE) latest
 endif
 
 build:
-	@$(SEDVARS) Dockerfile > .Dockerfile~
 	$(GIT) submodule update --init --recursive --checkout .
+	@$(SEDVARS) Dockerfile > .Dockerfile~
 	$(DOCKER) build $(BFLAGS) -t $(IMAGE) -f .Dockerfile~ .
 
 latest:
-	$(DOCKER) tag -f $(IMAGE) $(REPO)/$(INAME)
-	$(DOCKER) push $(REPO)/$(INAME)
+	$(DOCKER) tag -f $(IMAGE) $(REGISTRY)/$(INAME)
+	$(DOCKER) push $(REGISTRY)/$(INAME)
 
 push pull rmi:
 	$(DOCKER) $@ $(IMAGE)
