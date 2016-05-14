@@ -34,9 +34,18 @@
 [submodule "limnoria/usr/src/plugins-glolol"]
 	path = limnoria/usr/src/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
+[submodule "limnoria/usr/src/plugins-imdb"]
+	path = limnoria/usr/src/plugins-imdb
+	url = https://github.com/ddan39/Supybot-IMDb.git
 [submodule "limnoria/usr/src/plugins-various/TVMaze"]
 	path = limnoria/usr/src/plugins-various/TVMaze
 	url = https://github.com/Znuff/limnoria-tvmaze.git
+[submodule "limnoria/usr/src/plugins-various/UrbanDictionary"]
+	path = limnoria/usr/src/plugins-various/UrbanDictionary
+	url = https://github.com/reticulatingspline/UrbanDictionary.git
+[submodule "limnoria/usr/src/plugins-various/DuckHunt"]
+	path = limnoria/usr/src/plugins-various/DuckHunt
+	url = https://github.com/veggiematts/supybot-duckhunt.git
 
 [submodule "pwnie/usr/src/ROPgadget"]
 	path = pwnie/usr/src/ROPgadget
