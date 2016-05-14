@@ -13,6 +13,8 @@ fi
 
 # Install systemd services
 find -maxdepth 1 -name '*.service*' -exec cp -av "{}" "${HOST_SYSTEMD}"/ \;
+find -maxdepth 1 -name '*.service*' -exec chcon \
+  -R --reference="${HOST_SYSTEMD}" "${HOST_SYSTEMD}/{}" \; || :
 
 # Install scripts and aliases
 [ -d profile.d ] && cp -avL profile.d "${HOST_ETC}"/
@@ -21,6 +23,7 @@ find -maxdepth 1 -name '*.service*' -exec cp -av "{}" "${HOST_SYSTEMD}"/ \;
 
 # Update instead of install?
 if [ $# -ge 1 ] && [[ "$1" =~ ^(update|upgrade)$ ]]; then
+  sed -i -E "s|^(IMAGE=).*|\1${IMAGE}|" ${ENVFILE}
   # Execute extension...
   [ -f update.sh ] && . update.sh
   exit 0
