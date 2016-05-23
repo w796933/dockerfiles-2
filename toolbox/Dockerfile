@@ -46,8 +46,10 @@ RUN dnf -y install \
 	runc \
 	screen \
 	speedtest-cli \
+	sshuttle \
 	sslscan \
 	strace \
+	stunnel \
 	subnetcalc \
 	sysstat \
 	tcpdump \
