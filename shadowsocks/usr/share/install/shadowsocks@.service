@@ -1,0 +1,20 @@
+[Unit]
+Description=Shadowsocks-libev
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/containers/%p/%i
+Restart=on-failure
+RestartSec=1
+
+ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
+ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-drop=ALL --read-only \
+-p ${ADDRESS}:${EXTERNAL_PORT}:${INTERNAL_PORT}/tcp \
+-p ${ADDRESS}:${EXTERNAL_PORT}:${INTERNAL_PORT}/udp \
+-v ${CONFDIR}:/etc/shadowsocks-libev:ro,Z ${IMAGE} $CMD
+ExecStop=/usr/bin/docker stop ${NAME}
+
+[Install]
+WantedBy=multi-user.target
