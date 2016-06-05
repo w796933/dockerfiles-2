@@ -6,6 +6,7 @@ MNT=/mnt
 NET=host
 MEM=1536m
 SWAP=3072m
+#DOCKER_OPTS=
 
 ## Environment variables defined here will be parsed as options...
 ## Prefix with SMBD_ for smbd, NMBD_ for nmbd or SAMBA_ for both.

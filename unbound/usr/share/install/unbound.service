@@ -10,8 +10,8 @@ RestartSec=1
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/unbound/unbound \
---net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only -p 53:53/udp -p 53:53/tcp \
--v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z ${IMAGE}
+--net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only -p ${FORWARD}/udp -p ${FORWARD}/tcp \
+-v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z $DOCKER_OPTS ${IMAGE}
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

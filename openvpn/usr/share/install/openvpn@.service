@@ -11,7 +11,7 @@ RestartSec=1
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-add=NET_ADMIN --security-opt=label:disable \
--v ${CONFDIR}:/etc/openvpn:ro,Z -v ${DATADIR}:/var/lib/openvpn:Z ${IMAGE} --config %i.conf
+-v ${CONFDIR}:/etc/openvpn:ro,Z -v ${DATADIR}:/var/lib/openvpn:Z $DOCKER_OPTS ${IMAGE} --config %i.conf
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

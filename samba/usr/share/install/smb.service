@@ -12,7 +12,7 @@ ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/samba/samba \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only --security-opt=label:disable \
 -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -v /etc/shadow:/etc/shadow:ro \
--v ${CONFDIR}:/etc/samba:ro -v ${DATADIR}:/var/lib/samba:rw -v ${MNT}:/mnt:rw ${IMAGE}
+-v ${CONFDIR}:/etc/samba:ro -v ${DATADIR}:/var/lib/samba:rw -v ${MNT}:/mnt:rw $DOCKER_OPTS ${IMAGE}
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]
