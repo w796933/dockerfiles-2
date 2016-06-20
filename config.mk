@@ -1,6 +1,6 @@
 REGISTRY:= docker.io/oszi
 BASE    := fedora
-OSREL   := 23
+OSREL   := 24
 DIST    := fc$(OSREL)
 
 VARS    := REGISTRY BASE OSREL DIST
