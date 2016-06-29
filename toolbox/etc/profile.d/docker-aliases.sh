@@ -1,5 +1,10 @@
 alias d='docker'
+alias dbuild='docker build'
+alias dcp='docker cp'
+alias dcreate='docker create'
+alias ddiff='docker diff'
 alias dexec='docker exec -it'
+alias dexec-priv='docker exec -itu root --privileged'
 alias dgc='docker ps -aqf status=dead -f status=exited -f status=created | xargs -r docker rm'
 alias dgcimg='docker images -qf dangling=true | xargs -r docker rmi'
 alias dgcvol='docker volume ls -qf dangling=true | xargs -r docker volume rm'
@@ -7,10 +12,16 @@ alias dhist='docker history'
 alias dimg='docker images'
 alias dinsp='docker inspect'
 alias dinsp-ip='docker inspect -f {{.NetworkSettings.IPAddress}} --type=container'
+alias dkill='docker kill'
 alias dnet='docker network'
 alias dnetinsp='docker network inspect'
+alias dpause='docker pause'
 alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
+alias drestart='docker restart'
 alias drun='docker run --rm -ite TERM'
+alias dstart='docker start'
+alias dstop='docker stop'
+alias dunpause='docker unpause'
 alias dupdate='docker update'
 alias dvol='docker volume'
 alias dvolinsp='docker volume inspect'
@@ -41,7 +52,7 @@ drmgrep() {
   dpsgrep "$@" | xargs -r docker rm --force
 }
 
-dstats() {
+dstatsgrep() {
   dpsgrep "$@" | xargs -r docker stats --no-stream
 }
 
