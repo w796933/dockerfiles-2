@@ -22,9 +22,11 @@ LABEL RUN /usr/bin/systemctl start unbound
 
 LABEL STOP /usr/bin/systemctl stop unbound
 
-RUN dnf -y install unbound python3-unbound \
+RUN dnf -y install unbound python*-unbound \
 	&& dnf clean all \
 	&& unbound-control-setup \
+	&& usermod -a -G unbound container \
+	&& chmod -R g=u /var/*/unbound \
 	&& find /usr -perm /6000 -exec chmod -s '{}' \;
 
 COPY . /
