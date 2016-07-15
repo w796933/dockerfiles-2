@@ -55,8 +55,8 @@ chroot /rootfs /sbin/groupadd -g "$XGID" "$XUSER"
 chroot /rootfs /sbin/useradd -lg "$XGID" -u "$XUID" -md "$XHOME" "$XUSER"
 
 # Clean up the filesystem...
-rm -rf /rootfs/{boot,media,mnt,tmp,var/{cache,tmp}}/*
-rm -rf /rootfs/etc/machine-id
+rm -rf /rootfs/{media,mnt,tmp,var/{cache,tmp}}/*
+rm -rf /rootfs/{boot,srv,etc/machine-id}
 
 # Tar up the rootfs
 tar -cC /rootfs -f "$1" .

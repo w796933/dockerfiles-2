@@ -1,3 +1,6 @@
+*
+!artifacts
+!usr
 usr/src/*/.git*
 usr/src/*/*/.git*
 usr/src/limnoria/debian

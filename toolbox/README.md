@@ -22,19 +22,19 @@ Share everything from the host system:
 -v /:/host --{net,ipc,pid}=host --privileged
 ```
 
-[Script](usr/share/install/sbin/toolbox-host) for super-privileged containers:
+[Script](artifacts/sbin/toolbox-host) for super-privileged containers:
 
 ```
 toolbox-host [command]
 ```
 
-[Script](usr/share/install/sbin/toolbox-attach) for attaching to other containers:
+[Script](artifacts/sbin/toolbox-attach) for attaching to other containers:
 
 ```
 toolbox-attach container [run-opts] [command]
 ```
 
-[Script](usr/share/install/sbin/toolbox) for running non-privileged containers:
+[Script](artifacts/sbin/toolbox) for running non-privileged containers:
 
 ```
 toolbox [:tag] [run-opts] [command]

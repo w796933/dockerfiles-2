@@ -1,10 +1,8 @@
 #!/bin/bash -eu
 . /etc/atomic-install
+pushd /artifacts > /dev/null
 
-pushd /usr/share/install > /dev/null
-trap 'popd > /dev/null' EXIT
-
-# Source and move the env file
+# Source and move the env file!
 if [ -f ${ENVFILE} ]; then
   . ${ENVFILE}
   mv -v ${ENVFILE}{,~}
@@ -12,7 +10,7 @@ fi
 
 # Delete obsoleted installed files...
 if [ $(find_instances | wc -l) -eq 0 ]; then
-  find . -maxdepth 1 -mindepth 1 -name '*.service*' \
+  find . -maxdepth 1 -regex '.+\.\(service\|timer\)\(\.d\)?$' \
     -exec rm -rfv "${HOST_SYSTEMD}/{}" \;
   find . -maxdepth 2 -mindepth 2 -wholename './profile.d/*' \
     -exec rm -rfv "${HOST_ETC}/{}" \;
@@ -21,15 +19,18 @@ if [ $(find_instances | wc -l) -eq 0 ]; then
 fi
 
 # Execute extension...
-if [ -f uninstall.sh ]; then
-  . uninstall.sh
+if [ -f atomic-uninstall.sh ]; then
+  . atomic-uninstall.sh
 fi
 
 # Delete everything if requested...
 if [ $# -ge 1 ] && [[ "$1" =~ ^(erase|purge)$ ]]; then
   rm -f ${ENVFILE}{,~} 2> /dev/null || :
   rmdir $(dirname ${ENVFILE}) 2> /dev/null || :
-  [ -n "${CONFDIR:-}" ] && rm -rfv "${HOST}/${CONFDIR}" || :
-  [ -n "${DATADIR:-}" ] && rm -rfv "${HOST}/${DATADIR}" || :
-  [ -n "${LOGDIR:-}"  ] && rm -rfv "${HOST}/${LOGDIR}"  || :
+  [ -n "${CONFDIR}" ] && rm -rfv "${HOST}/${CONFDIR}" || :
+  [ -n "${DATADIR}" ] && rm -rfv "${HOST}/${DATADIR}" || :
+  [ -n "${LOGDIR}"  ] && rm -rfv "${HOST}/${LOGDIR}"  || :
 fi
+
+popd > /dev/null
+exit 0

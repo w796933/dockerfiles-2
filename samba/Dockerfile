@@ -30,7 +30,7 @@ RUN dnf -y install \
 	samba-winbind-clients \
 	&& dnf clean all
 
-COPY usr /usr
+COPY . /
 
 VOLUME ["/var/lib/samba", "/run", "/tmp"]
 

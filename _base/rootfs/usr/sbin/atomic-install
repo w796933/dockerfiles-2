@@ -1,8 +1,6 @@
 #!/bin/bash -eu
 . /etc/atomic-install
-
-pushd /usr/share/install > /dev/null
-trap 'popd > /dev/null' EXIT
+pushd /artifacts > /dev/null
 
 # Install the environment file!
 if [ -f environment ] && [ ! -f ${ENVFILE} ]; then
@@ -11,10 +9,10 @@ if [ -f environment ] && [ ! -f ${ENVFILE} ]; then
   echo "ENV FILE: ${ENVFILE}"
 fi
 
-# Install systemd services
-find -maxdepth 1 -name '*.service*' -exec cp -av "{}" "${HOST_SYSTEMD}"/ \;
-find -maxdepth 1 -name '*.service*' -exec chcon \
-  -R --reference="${HOST_SYSTEMD}" "${HOST_SYSTEMD}/{}" \; || :
+# Install systemd unit files
+find . -maxdepth 1 -regex '.+\.\(service\|timer\)\(\.d\)?$' \
+  -exec cp -av "{}" "${HOST_SYSTEMD}"/ \; \
+  -exec chcon -R --reference="${HOST_SYSTEMD}" "${HOST_SYSTEMD}/{}" \;
 
 # Install scripts and aliases
 [ -d profile.d ] && cp -avL profile.d "${HOST_ETC}"/
@@ -25,14 +23,22 @@ find -maxdepth 1 -name '*.service*' -exec chcon \
 if [ $# -ge 1 ] && [[ "$1" =~ ^(update|upgrade)$ ]]; then
   sed -i -E "s|^(IMAGE=).*|\1${IMAGE}|" ${ENVFILE}
   # Execute extension...
-  [ -f update.sh ] && . update.sh
+  if [ -f atomic-update.sh ]; then
+    . atomic-update.sh
+  fi
+  popd > /dev/null
   exit 0
 fi
 
-# Initialize the volumes
-[ -n "${CONFDIR:-}" ] && mkvol "${HOST}/${CONFDIR}"
-[ -n "${DATADIR:-}" ] && mkvol "${HOST}/${DATADIR}"
-[ -n "${LOGDIR:-}"  ] && mkvol "${HOST}/${LOGDIR}"
+# Initialize the volumes...
+[ -n "${CONFDIR}" ] && mkvol "${HOST}/${CONFDIR}"
+[ -n "${DATADIR}" ] && mkvol "${HOST}/${DATADIR}"
+[ -n "${LOGDIR}"  ] && mkvol "${HOST}/${LOGDIR}"
 
 # Execute extension...
-[ -f install.sh ] && . install.sh
+if [ -f atomic-install.sh ]; then
+  . atomic-install.sh
+fi
+
+popd > /dev/null
+exit 0

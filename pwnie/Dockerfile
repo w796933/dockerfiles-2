@@ -29,12 +29,12 @@ RUN dnf -y install \
 	python-paramiko \
 	python-prettytable \
 	python-pyelftools \
-	python-requests \
+	python2-requests \
 	python-z3 \
 	PyYAML \
 	scapy \
 	&& dnf clean all \
-	&& rm -rf /usr/share/install/*/
+	&& rm -rf /artifacts/*/
 
 COPY . /
 
@@ -64,10 +64,10 @@ RUN set -e; \
 	pip install -r /opt/weevely3/requirements.txt; \
 	rm -rf ~/.cache;
 
-LABEL RUN /usr/bin/docker run \${OPT1:-} -it --rm --name=\${NAME} \
+LABEL RUN /usr/bin/docker run -it --rm --name=\${NAME} \
 	--net=host --security-opt=label:disable \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
-	-e TERM=\$(tset -q) \
-	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
+	-e TERM=\$(tset -q) -e NAME=\${NAME} -e IMAGE=\${IMAGE} \
+	\${DOCKER_OPTS-} \${IMAGE}

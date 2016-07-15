@@ -45,6 +45,6 @@ LABEL RUN /usr/bin/docker run --rm -itu \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} 
 	--net=host --cap-drop=ALL --read-only --security-opt=label:disable \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" --name=\${NAME} \${IMAGE}
 
-COPY usr /usr
+COPY . /
 
 ENTRYPOINT ["jekyll"]

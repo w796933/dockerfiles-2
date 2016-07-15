@@ -22,7 +22,7 @@ LABEL STOP /usr/bin/systemctl stop znc@\${NAME}
 RUN dnf -y install znc znc-mod{perl,python} \
 	&& dnf clean all
 
-COPY usr /usr
+COPY . /
 
 RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
 	&& dnf -y install $BUILD_DEPS \

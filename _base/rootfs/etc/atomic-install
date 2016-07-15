@@ -2,9 +2,15 @@
 INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}' | awk -F: '{print $1}')
 ENVFILE=${HOST}/etc/sysconfig/containers/${INAME}/${NAME}
 
-: ${HOST_SYSTEMD:=${HOST}/etc/systemd/system}
+# Destinations for artifacts
 : ${HOST_ETC:=${HOST}/etc}
+: ${HOST_SYSTEMD:=${HOST_ETC}/systemd/system}
 : ${HOST_USR:=${HOST}/usr/local}
+
+# Empty defaults for volumes
+: ${CONFDIR:=}
+: ${DATADIR:=}
+: ${LOGDIR:=}
 
 # Parse variables in a file
 function parse_file() {

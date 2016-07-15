@@ -37,7 +37,7 @@ RUN dnf -y install \
 	pytz \
 	&& dnf clean all
 
-COPY usr /usr
+COPY . /
 
 RUN cd /usr/src/limnoria \
 	&& find ../plugins*/ -mindepth 1 -maxdepth 1 -type d -exec ln -s "../{}" plugins/ \; \

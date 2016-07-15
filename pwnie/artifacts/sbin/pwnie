@@ -1,11 +1,11 @@
 #!/bin/bash -eu
 . /etc/sysconfig/containers/pwnie/*
 NAME=${NAME}-${RANDOM}
-OPT1=''
+DOCKER_OPTS=''
 while [ $# -ge 1 ]; do
   case "$1" in
   :*) IMAGE=$(echo ${IMAGE} | sed -E 's/:\w*$//')${1};;
-  -*) OPT1="${OPT1} ${1}";;
+  -*) DOCKER_OPTS="${DOCKER_OPTS} ${1}";;
    *) break;;
   esac
   shift

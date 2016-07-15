@@ -1,3 +1,4 @@
+*
+!artifacts
+!usr
 usr/src/znc/modules/*/.git*
-usr/src/znc/modules/push/*.png
-usr/src/znc/modules/push/doc/*.png

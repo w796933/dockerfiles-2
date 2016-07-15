@@ -4,11 +4,12 @@ alias l='ls -CF'
 alias rm='rm -i'
 alias cp='cp -i'
 
-alias c='chroot-host coredumpctl'
-alias j='chroot-host journalctl'
-alias m='chroot-host machinectl'
-alias n='chroot-host networkctl'
-alias s='chroot-host systemctl'
+alias chr="chroot ${HOST:-/host}"
+alias c='chr coredumpctl'
+alias j='chr journalctl'
+alias m='chr machinectl'
+alias n='chr networkctl'
+alias s='chr systemctl'
 
 alias a='atomic'
 alias e='etcdctl'

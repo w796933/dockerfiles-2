@@ -31,7 +31,7 @@ RUN dnf -y install openvpn bridge-utils \
 ENV EASYRSA=/usr/share/easy-rsa/easyrsa3 \
 	EASYRSA_PKI=/etc/openvpn/pki
 
-COPY usr /usr
+COPY . /
 
 VOLUME ["/etc/openvpn", "/var/lib/openvpn"]
 

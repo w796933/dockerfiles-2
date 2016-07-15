@@ -18,7 +18,7 @@ LABEL RUN /usr/bin/systemctl start miniircd@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop miniircd@\${NAME}
 
-COPY usr /usr
+COPY . /
 
 EXPOSE 6667
 

@@ -1,1 +1,4 @@
+*
+!artifacts
+!usr
 usr/share/*/.git*

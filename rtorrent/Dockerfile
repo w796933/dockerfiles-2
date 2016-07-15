@@ -29,12 +29,12 @@ RUN dnf -y install rtorrent \
 	unar \
 	unzip \
 	&& dnf clean all \
-	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /usr/share/install
+	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /artifacts/*
 
 COPY . /
 
-RUN ln -sf /etc/rutorrent/config.php /var/www/rutorrent/conf/config.php \
-	&& sed -i -E 's/^(worker_processes).*/\1 1;/' /etc/nginx/nginx.conf \
+RUN ln -sf /etc/rutorrent/config.php /usr/share/rutorrent/conf/config.php \
+	&& sed -i -E 's/^(worker_processes)\s.*/\1 1;/' /etc/nginx/nginx.conf \
 	&& chown -R container: /data/
 
 ENV RUTORRENT_DATA=/data/.rutorrent \

@@ -2,8 +2,8 @@
 	path = openvpn/usr/share/easy-rsa
 	url = https://github.com/OpenVPN/easy-rsa.git
 
-[submodule "rtorrent/var/www/rutorrent"]
-	path = rtorrent/var/www/rutorrent
+[submodule "rtorrent/usr/share/rutorrent"]
+	path = rtorrent/usr/share/rutorrent
 	url = https://github.com/Novik/ruTorrent.git
 
 [submodule "miniircd/usr/share/miniircd"]
