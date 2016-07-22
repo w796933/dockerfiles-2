@@ -26,4 +26,4 @@ USER container
 
 VOLUME /data
 
-ENTRYPOINT ["miniircd", "--statedir=/data"]
+ENTRYPOINT ["miniircd", "--state-dir=/data"]
