@@ -13,7 +13,6 @@ RUN dnf -y install \
 	device-mapper \
 	docker \
 	docker-compose \
-	duplicity \
 	e2fsprogs \
 	etcd \
 	ethtool \
@@ -45,6 +44,7 @@ RUN dnf -y install \
 	perf \
 	runc \
 	screen \
+	skopeo \
 	speedtest-cli \
 	sshuttle \
 	sslscan \
@@ -64,19 +64,10 @@ RUN dnf -y install \
 	w3m \
 	whois \
 	xfsprogs \
-	zbackup \
-	\
 	GeoIP-GeoLite-data-extra \
-	pycryptopp \
-	python-boto \
-	python-keystoneclient \
-	python-paramiko \
-	python-pexpect \
-	python-requests \
-	python-requests-oauthlib \
-	python-swiftclient \
-	python-urllib3 \
 	&& dnf clean all
+
+COPY . /
 
 LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
@@ -90,8 +81,8 @@ LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninst
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
 	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
 
-LABEL RUN /usr/bin/docker run -it --rm --privileged --name=\${NAME} \
-	--net=host --ipc=host --pid=host \
+LABEL RUN /usr/bin/docker run -it --rm --name=\${NAME} \
+	--net=host --ipc=host --pid=host --privileged \
 	-v /:/host:rw -e HOST=/host -w /host \
 	-v /boot:/boot:ro \
 	-v /etc/environment:/etc/environment:ro \
@@ -106,15 +97,12 @@ LABEL RUN /usr/bin/docker run -it --rm --privileged --name=\${NAME} \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /tmp:/tmp:rw \
 	-e TERM=\$(tset -q) \
-	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-VOLUME ["/var/lib/docker"]
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
+	\${DOCKER_OPTS-} \${IMAGE}
 
 ENV DOCKER_DRIVER overlay
 
-EXPOSE 2375 5001 8080 1337 1337/udp
-
-COPY . /
+VOLUME ["/var/lib/docker", "/var/tmp", "/tmp"]
 
 WORKDIR /root
 

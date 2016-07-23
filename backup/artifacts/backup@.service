@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup Service
+After=docker.service dns.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/containers/%p/%i
+ExecStartPre=-/usr/bin/docker rm -v ${NAME}
+ExecStart=/usr/bin/docker run --rm --env-file=/etc/sysconfig/containers/%p/%i \
+--name=${NAME} --security-opt=label:disable --uts=host \
+$DOCKER_OPTS ${IMAGE} $CMD

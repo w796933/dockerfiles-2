@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup Service Timer
+
+[Timer]
+OnCalendar=daily
+AccuracySec=1us
+RandomizedDelaySec=60m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
