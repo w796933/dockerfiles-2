@@ -64,3 +64,5 @@ export IMAGE=oszi/backup NAME=something
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```
+
+Check out some [examples](examples)...

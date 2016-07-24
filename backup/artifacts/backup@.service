@@ -5,6 +5,8 @@ Requires=docker.service
 
 [Service]
 EnvironmentFile=/etc/sysconfig/containers/%p/%i
+Type=oneshot
+
 ExecStartPre=-/usr/bin/docker rm -v ${NAME}
 ExecStart=/usr/bin/docker run --rm --env-file=/etc/sysconfig/containers/%p/%i \
 --name=${NAME} --security-opt=label:disable --uts=host \
