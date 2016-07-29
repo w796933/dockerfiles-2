@@ -4,15 +4,14 @@
 
 ```
 [Service]
-ExecStartPre=/opt/backup-databases.sh
+ExecStartPre=-/bin/sh -c '/usr/bin/yum list installed > /etc/yum-installed.save'
+ExecStartPre=-/bin/sh -c '/usr/bin/docker images > /etc/docker-images.save'
 ```
-
-Dump your databases with `/opt/backup-databases.sh`.
 
 Lock and load:
 
 ```
-systemctl daemon-reload && systemctl enable --now backup@NAME.timer
+systemctl daemon-reload
 ```
 
-See also systemd.unit(5) and systemd.service(5).
+See also systemd.unit, systemd.service, systemd.timer man pages.

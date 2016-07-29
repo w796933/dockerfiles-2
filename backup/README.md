@@ -23,6 +23,7 @@ Default mount points:
 | Host   | Container | Mode |
 |--------|-----------|------|
 | /      | /host     | ro   |
+| /home  | /home     | ro   |
 | /media | /media    | rw   |
 | /mnt   | /mnt      | rw   |
 | /root  | /root     | rw   |

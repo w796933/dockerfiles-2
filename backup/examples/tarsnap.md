@@ -1,6 +1,13 @@
 ##example-tarsnap
 
-First time setup for existing backup chains:
+Register the machine with tarsnap:
+
+```
+backup-container tarsnap-keygen --keyfile /root/tarsnap.key \
+--user root@example.com --machine $(hostname -s)
+```
+
+First time setup for existing backups:
 
 ```
 backup-container tarsnap --fsck --keyfile /root/tarsnap.key \

@@ -11,8 +11,7 @@ backup-container borg init /mnt/Borg
 ```
 IMAGE=oszi/backup
 NAME=backup-borgmatic
-DOCKER_OPTS='-v /:/host:ro -v /mnt/Borg:/mnt/Borg:rw --net=none'
-#DOCKER_OPTS='-v /:/host:ro -v /root:/root:rw --net=host'
+DOCKER_OPTS='-v /:/host:ro -v /root:/root:rw -v /mnt/Borg:/mnt/Borg:rw'
 CMD='borgmatic -v 1 -c /host/etc/borgmatic/config --excludes /host/etc/borgmatic/excludes'
 ```
 
@@ -24,7 +23,7 @@ CMD='borgmatic -v 1 -c /host/etc/borgmatic/config --excludes /host/etc/borgmatic
 source_directories: /host/etc /host/home /host/root /host/opt
 
 # Stay on same file system.
-one_file_system: True
+#one_file_system: True
 
 # Alternate remote executable (defaults to "borg"):
 #remote_path: borg1
@@ -41,7 +40,7 @@ encryption_passphrase: topsecret
 compression: lz4
 
 # Umask to be used for borg create.
-umask: 0077
+#umask: 0022
 
 [retention]
 # Retention policy for how many backups to keep in each category.
