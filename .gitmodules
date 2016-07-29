@@ -1,10 +1,6 @@
 [submodule "backup/usr/src/borgmatic"]
 	path = backup/usr/src/borgmatic
 	url = https://github.com/witten/borgmatic.git
-[submodule "backup/usr/src/tarsnap"]
-	path = backup/usr/src/tarsnap
-	url = https://github.com/Tarsnap/tarsnap.git
-	branch = 1.0.37
 
 [submodule "openvpn/usr/share/easy-rsa"]
 	path = openvpn/usr/share/easy-rsa
