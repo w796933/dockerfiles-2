@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-[ "$1" != "x" ] && {
-  echo 'This script can only extract.' >&2
+[ "$1" != 'e' ] && [ "$1" != 'x' ] && {
+  echo "Usage: $0 e|x [-pPASS] archive [target]" >&2
   exit 1
 }
 shift
@@ -27,7 +27,7 @@ done
 
 AR="$1"
 [ -d "$AR" ] && {
-  AR=$(find "$AR" -maxdepth 1 -type f \( -name '*.r00*' -or -name '*.rar' \) | head -n1)
+  AR=$(find "$AR" -maxdepth 1 -type f -iregex '.*\.\(r0+\|rar\)' | head -n1)
 }
 
 exec unar "${OPTS[@]}" -o "${2:-.}" "$AR"
