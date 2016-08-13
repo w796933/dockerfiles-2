@@ -2,7 +2,7 @@ FROM ${REGISTRY}/buildpack:${DIST}
 
 # Expect all packages from the base images...
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	ansible \
 	ansible-lint \
 	atomic \
@@ -65,7 +65,7 @@ RUN dnf -y install \
 	whois \
 	xfsprogs \
 	GeoIP-GeoLite-data-extra \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 COPY . /
 

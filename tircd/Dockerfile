@@ -18,7 +18,7 @@ LABEL RUN /usr/bin/systemctl start tircd@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop tircd@\${NAME}
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	perl-Digest-SHA1 \
 	perl-HTML-Parser \
 	perl-JSON-Any \
@@ -30,7 +30,7 @@ RUN dnf -y install \
 	perl-Time-Local \
 	perl-URI \
 	perl-URI-Find \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 COPY . /
 

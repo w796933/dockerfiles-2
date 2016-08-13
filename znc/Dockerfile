@@ -19,13 +19,13 @@ LABEL RUN /usr/bin/systemctl start znc@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop znc@\${NAME}
 
-RUN dnf -y install znc znc-mod{perl,python} \
-	&& dnf clean all
+RUN ${YUM} -y install znc znc-mod{perl,python} \
+	&& ${YUM} clean all
 
 COPY . /
 
 RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
-	&& dnf -y install $BUILD_DEPS \
+	&& ${YUM} -y install $BUILD_DEPS \
 	&& cd /usr/lib*/znc \
 	&& CXXFLAGS='-DUSE_CURL' LIBS='-lcurl' znc-buildmod /usr/src/znc/modules/push/push.cpp \
 	&& for NAME in $(ls /usr/src/znc/modules); do \
@@ -34,9 +34,9 @@ RUN BUILD_DEPS=$(echo gcc-c++ redhat-rpm-config {libcurl,libicu,znc}-devel) \
 			znc-buildmod ${DIR}/${NAME}.cpp || exit 1; \
 		fi; \
 	done \
-	&& dnf -y erase $BUILD_DEPS \
-	&& dnf -y autoremove \
-	&& dnf clean all
+	&& ${YUM} -y erase $BUILD_DEPS \
+	&& ${YUM} -y autoremove \
+	&& ${YUM} clean all
 
 USER container
 

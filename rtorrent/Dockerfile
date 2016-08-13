@@ -20,7 +20,7 @@ LABEL STOP /usr/bin/systemctl stop rtorrent@\${NAME}
 
 USER root
 
-RUN dnf -y install rtorrent \
+RUN ${YUM} -y install rtorrent \
 	mediainfo \
 	php-cli \
 	php-fpm \
@@ -28,7 +28,7 @@ RUN dnf -y install rtorrent \
 	supervisor \
 	unar \
 	unzip \
-	&& dnf clean all \
+	&& ${YUM} clean all \
 	&& rm -rf /etc/nginx/*.d /etc/php-fpm* /artifacts/*
 
 COPY . /

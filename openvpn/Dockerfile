@@ -24,8 +24,8 @@ LABEL RUN /usr/bin/systemctl start openvpn@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop openvpn@\${NAME}
 
-RUN dnf -y install openvpn bridge-utils \
-	&& dnf clean all \
+RUN ${YUM} -y install openvpn bridge-utils \
+	&& ${YUM} clean all \
 	&& find /usr -perm /6000 -exec chmod -s '{}' \;
 
 ENV EASYRSA=/usr/share/easy-rsa/easyrsa3 \

@@ -3,11 +3,11 @@ BASE    := fedora
 OSREL   := 24
 DIST    := fc$(OSREL)
 
-VARS    := REGISTRY BASE OSREL DIST
+VARS    := REGISTRY BASE OSREL DIST YUM
 DOCKER  := docker
 GIT     := git
-SED     := sed
+YUM     := dnf
 
 BFLAGS  := $(if $(findstring B,$(MAKEFLAGS)),--no-cache)
 HEAD    := $(shell $(GIT) symbolic-ref --short HEAD)
-SEDVARS  = $(SED) '$(foreach x,$(VARS),s!$${$(x)}!$($(x))!g;)'
+SEDVARS  = sed '$(foreach x,$(VARS),s|$${$(x)}|$($(x))|g;)'

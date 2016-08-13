@@ -22,9 +22,9 @@ LABEL RUN /usr/bin/systemctl start nginx@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop nginx@\${NAME}
 
-RUN dnf -y install nginx \
+RUN ${YUM} -y install nginx \
 	httpd-tools \
-	&& dnf clean all \
+	&& ${YUM} clean all \
 	&& chown -R container: /var/*/nginx \
 	&& rm -f /etc/nginx/*.default
 

@@ -1,7 +1,7 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
 # SCM, build essentials and common development packages
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	autoconf \
 	automake \
 	bison \
@@ -45,4 +45,4 @@ RUN dnf -y install \
 	python{3,}-pip \
 	ruby-devel \
 	rubygems \
-	&& dnf clean all
+	&& ${YUM} clean all

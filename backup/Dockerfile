@@ -2,7 +2,7 @@ FROM ${REGISTRY}/buildpack:${DIST}
 
 # Expect all packages from the base images...
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	borgbackup \
 	duplicity \
 	duply \
@@ -19,7 +19,7 @@ RUN dnf -y install \
 	python-requests-oauthlib \
 	python-swiftclient \
 	python-urllib3 \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 COPY . /
 

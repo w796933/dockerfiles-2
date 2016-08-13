@@ -2,7 +2,7 @@ FROM ${REGISTRY}/toolbox:${DIST}
 
 # Expect all packages from the base images...
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	american-fuzzy-lop \
 	arptools \
 	binwalk \
@@ -33,7 +33,7 @@ RUN dnf -y install \
 	python-z3 \
 	PyYAML \
 	scapy \
-	&& dnf clean all \
+	&& ${YUM} clean all \
 	&& rm -rf /artifacts/*/
 
 COPY . /

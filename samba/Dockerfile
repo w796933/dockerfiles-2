@@ -22,13 +22,13 @@ LABEL RUN /usr/bin/systemctl start smb nmb
 
 LABEL STOP /usr/bin/systemctl stop smb nmb
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	samba \
 	samba-client \
 	samba-dc \
 	samba-winbind \
 	samba-winbind-clients \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 COPY . /
 

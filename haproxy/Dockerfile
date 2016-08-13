@@ -18,8 +18,8 @@ LABEL RUN /usr/bin/systemctl start haproxy@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop haproxy@\${NAME}
 
-RUN dnf -y install haproxy \
-	&& dnf clean all \
+RUN ${YUM} -y install haproxy \
+	&& ${YUM} clean all \
 	&& chown -R container: /var/*/haproxy
 
 COPY . /

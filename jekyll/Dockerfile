@@ -1,6 +1,6 @@
 FROM ${REGISTRY}/buildpack:${DIST}
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	ruby-devel \
 	rubygem-activesupport \
 	rubygem-i18n \
@@ -18,7 +18,7 @@ RUN dnf -y install \
 	rubygem-thread_safe \
 	rubygem-tzinfo \
 	python-pygments \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 RUN gem install \
 	jekyll \

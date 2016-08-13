@@ -19,7 +19,7 @@ LABEL RUN /usr/bin/systemctl start limnoria@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop limnoria@\${NAME}
 
-RUN dnf -y install \
+RUN ${YUM} -y install \
 	python-babel \
 	python-beautifulsoup4 \
 	python-chardet \
@@ -35,7 +35,7 @@ RUN dnf -y install \
 	python-sqlalchemy \
 	python-twitter \
 	pytz \
-	&& dnf clean all
+	&& ${YUM} clean all
 
 COPY . /
 

@@ -10,7 +10,7 @@ mknod -m 0666 /rootfs/dev/tty c 5 0
 mknod -m 0600 /rootfs/dev/console c 5 1
 
 # Install the requested packages
-$(which dnf || which yum) -y \
+${YUM} -y \
   --installroot=/rootfs \
   --disablerepo='*' \
   $(for i in ${REPOS}; do echo "--enablerepo=$i"; done) \

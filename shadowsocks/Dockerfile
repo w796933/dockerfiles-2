@@ -18,9 +18,9 @@ LABEL RUN /usr/bin/systemctl start shadowsocks@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop shadowsocks@\${NAME}
 
-RUN dnf -y copr enable librehat/shadowsocks \
-	&& dnf -y install shadowsocks-libev \
-	&& dnf clean all
+RUN ${YUM} -y copr enable librehat/shadowsocks \
+	&& ${YUM} -y install shadowsocks-libev \
+	&& ${YUM} clean all
 
 COPY . /
 
