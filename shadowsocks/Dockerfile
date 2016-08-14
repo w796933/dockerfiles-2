@@ -18,11 +18,10 @@ LABEL RUN /usr/bin/systemctl start shadowsocks@\${NAME}
 
 LABEL STOP /usr/bin/systemctl stop shadowsocks@\${NAME}
 
-RUN ${YUM} -y copr enable librehat/shadowsocks \
-	&& ${YUM} -y install shadowsocks-libev \
-	&& ${YUM} clean all
-
 COPY . /
+
+RUN ${YUM} -y install shadowsocks-libev \
+	&& ${YUM} clean all
 
 USER container
 

@@ -1,0 +1,7 @@
+[librehat-shadowsocks]
+name=Copr repo for shadowsocks by librehat
+baseurl=https://copr-be.cloud.fedoraproject.org/results/librehat/shadowsocks/fedora-$releasever-$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-librehat-shadowsocks
+gpgcheck=1
+enabled_metadata=1
+enabled=1
