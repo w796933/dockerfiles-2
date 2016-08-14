@@ -11,9 +11,9 @@ RestartSec=1
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/unbound/unbound \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only -p ${FORWARD}/udp -p ${FORWARD}/tcp \
--v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z $DOCKER_OPTS ${IMAGE}
+-v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z \
+--dns=127.0.0.1 $DOCKER_OPTS ${IMAGE}
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]
-Alias=dns.service
 WantedBy=multi-user.target

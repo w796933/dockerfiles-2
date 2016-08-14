@@ -1,7 +1,8 @@
 [Unit]
 Description=ZNC IRC Bouncer
-After=docker.service dns.service miniircd@.service tircd@.service
+After=docker.service miniircd@.service tircd@.service network-online.target
 Requires=docker.service
+Wants=network-online.target
 
 [Service]
 EnvironmentFile=/etc/sysconfig/containers/%p/%i

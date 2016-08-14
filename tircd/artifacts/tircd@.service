@@ -1,7 +1,8 @@
 [Unit]
 Description=Twitter IRCd
-After=docker.service dns.service
+After=docker.service network-online.target
 Requires=docker.service
+Wants=network-online.target
 
 [Service]
 EnvironmentFile=/etc/sysconfig/containers/%p/%i

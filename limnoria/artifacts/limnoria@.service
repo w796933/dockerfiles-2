@@ -1,7 +1,8 @@
 [Unit]
 Description=Limnoria/Supybot
-After=docker.service dns.service miniircd@.service znc@.service
+After=docker.service miniircd@.service znc@.service network-online.target
 Requires=docker.service
+Wants=network-online.target
 
 [Service]
 EnvironmentFile=/etc/sysconfig/containers/%p/%i
