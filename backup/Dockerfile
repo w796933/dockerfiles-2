@@ -32,8 +32,8 @@ ARG TARSNAP_DOWNLOAD=https://www.tarsnap.com/download
 RUN cd /tmp \
 	&& curl -sO ${TARSNAP_DOWNLOAD}/tarsnap-autoconf-${TARSNAP_VERSION}.tgz \
 	&& curl -sO ${TARSNAP_DOWNLOAD}/tarsnap-sigs-${TARSNAP_VERSION}.asc \
-	&& gpg2 --keyserver ha.pool.sks-keyservers.net --recv-keys ${TARSNAP_SIG_KEY} \
-	&& gpg2 --decrypt tarsnap-sigs*.asc \
+	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${TARSNAP_SIG_KEY} \
+	&& gpg --decrypt tarsnap-sigs*.asc \
 	&& sha256sum -c tarsnap-sigs*.asc \
 	&& tar -xzf tarsnap*.tgz \
 	&& (cd tarsnap*/ && ./configure && make && make install) \
