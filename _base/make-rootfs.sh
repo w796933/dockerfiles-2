@@ -43,6 +43,13 @@ for i in /rootfs/etc/yum.conf /rootfs/etc/dnf/dnf.conf; do
   fi
 done
 
+# Prepare systemd for containerized environments
+rm -f /rootfs/etc/systemd/system/*.wants/* \
+  /rootfs/lib/systemd/system/{basic,multi-user,local-fs}.target.wants/* \
+  /rootfs/lib/systemd/system/sockets.target.wants/*{initctl,udev}*
+find /rootfs/lib/systemd/system/sysinit.target.wants/ -not -type d \
+  -not -name systemd-tmpfiles-setup.service -delete
+
 # Set up root's home directory
 rm -rf /rootfs/root
 cp -av --no-preserve=ownership /rootfs/etc/skel /rootfs/root

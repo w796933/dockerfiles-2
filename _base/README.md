@@ -13,3 +13,9 @@ Fedora base image created with DNF.
  * There is a `container` user and group: `HOME=/data` `UID=65000`
 
  * `nogroup` is an alias for `nobody` for compatibility.
+
+### Containerized systemd
+
+```
+docker run -t -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run --tmpfs=/tmp ${IMAGE} init
+```
