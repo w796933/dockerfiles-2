@@ -20,7 +20,7 @@ RUN ${YUM} -y install \
 	capstone-devel \
 	libini_config-devel.* \
 	pyserial \
-	python*-afl \
+	python-afl \
 	python-afl-bin \
 	python-argh \
 	python-dateutil \
