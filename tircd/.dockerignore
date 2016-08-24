@@ -1,8 +1,0 @@
-*
-!artifacts
-!etc
-!usr
-usr/share/*/.git*
-usr/share/*/.dockerignore
-usr/share/*/Dockerfile
-usr/share/tircd/tircd.cfg

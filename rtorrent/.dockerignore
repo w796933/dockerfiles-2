@@ -1,7 +1,0 @@
-*
-!artifacts
-!data
-!etc
-!usr
-usr/share/*/.git*
-usr/share/rutorrent/plugins/screenshots

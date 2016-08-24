@@ -6,51 +6,6 @@
 	path = openvpn/usr/share/easy-rsa
 	url = https://github.com/OpenVPN/easy-rsa.git
 
-[submodule "rtorrent/usr/share/rutorrent"]
-	path = rtorrent/usr/share/rutorrent
-	url = https://github.com/Novik/ruTorrent.git
-
-[submodule "miniircd/usr/share/miniircd"]
-	path = miniircd/usr/share/miniircd
-	url = https://github.com/jrosdahl/miniircd.git
-
-[submodule "tircd/usr/share/tircd"]
-	path = tircd/usr/share/tircd
-	url = https://github.com/DexterTheDragon/tircd.git
-	branch = my_version
-
-[submodule "znc/usr/src/znc/modules/push"]
-	path = znc/usr/src/znc/modules/push
-	url = https://github.com/jreese/znc-push.git
-[submodule "znc/usr/src/znc/modules/clientbuffer"]
-	path = znc/usr/src/znc/modules/clientbuffer
-	url = https://github.com/jpnurmi/znc-clientbuffer.git
-[submodule "znc/usr/src/znc/modules/chanfilter"]
-	path = znc/usr/src/znc/modules/chanfilter
-	url = https://github.com/jpnurmi/znc-chanfilter.git
-
-[submodule "limnoria/usr/src/limnoria"]
-	path = limnoria/usr/src/limnoria
-	url = https://github.com/ProgVal/Limnoria.git
-[submodule "limnoria/usr/src/plugins-progval"]
-	path = limnoria/usr/src/plugins-progval
-	url = https://github.com/ProgVal/Supybot-plugins.git
-[submodule "limnoria/usr/src/plugins-glolol"]
-	path = limnoria/usr/src/plugins-glolol
-	url = https://github.com/GLolol/SupyPlugins.git
-[submodule "limnoria/usr/src/plugins-imdb"]
-	path = limnoria/usr/src/plugins-imdb
-	url = https://github.com/ddan39/Supybot-IMDb.git
-[submodule "limnoria/usr/src/plugins-various/TVMaze"]
-	path = limnoria/usr/src/plugins-various/TVMaze
-	url = https://github.com/Znuff/limnoria-tvmaze.git
-[submodule "limnoria/usr/src/plugins-various/UrbanDictionary"]
-	path = limnoria/usr/src/plugins-various/UrbanDictionary
-	url = https://github.com/reticulatingspline/UrbanDictionary.git
-[submodule "limnoria/usr/src/plugins-various/DuckHunt"]
-	path = limnoria/usr/src/plugins-various/DuckHunt
-	url = https://github.com/veggiematts/supybot-duckhunt.git
-
 [submodule "pwnie/usr/src/ROPgadget"]
 	path = pwnie/usr/src/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
@@ -81,3 +36,26 @@
 [submodule "pwnie/opt/weevely3"]
 	path = pwnie/opt/weevely3
 	url = https://github.com/epinna/weevely3.git
+
+[submodule "limnoria/usr/src/limnoria"]
+	path = limnoria/usr/src/limnoria
+	url = https://github.com/ProgVal/Limnoria.git
+[submodule "limnoria/usr/src/plugins-progval"]
+	path = limnoria/usr/src/plugins-progval
+	url = https://github.com/ProgVal/Supybot-plugins.git
+[submodule "limnoria/usr/src/plugins-glolol"]
+	path = limnoria/usr/src/plugins-glolol
+	url = https://github.com/GLolol/SupyPlugins.git
+[submodule "limnoria/usr/src/plugins-imdb"]
+	path = limnoria/usr/src/plugins-imdb
+	url = https://github.com/ddan39/Supybot-IMDb.git
+[submodule "limnoria/usr/src/plugins-various/TVMaze"]
+	path = limnoria/usr/src/plugins-various/TVMaze
+	url = https://github.com/Znuff/limnoria-tvmaze.git
+[submodule "limnoria/usr/src/plugins-various/UrbanDictionary"]
+	path = limnoria/usr/src/plugins-various/UrbanDictionary
+	url = https://github.com/reticulatingspline/UrbanDictionary.git
+[submodule "limnoria/usr/src/plugins-various/DuckHunt"]
+	path = limnoria/usr/src/plugins-various/DuckHunt
+	url = https://github.com/veggiematts/supybot-duckhunt.git
+
