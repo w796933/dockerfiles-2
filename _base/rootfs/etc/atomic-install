@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}' | awk -F: '{print $1}')
-ENVFILE=${HOST}/etc/sysconfig/containers/${INAME}/${NAME}
+ENVROOT=${HOST}/etc/sysconfig/containers
+ENVFILE=${ENVROOT}/${INAME}/${NAME}
 
 # Destinations for artifacts
 : ${HOST_ETC:=${HOST}/etc}

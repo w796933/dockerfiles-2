@@ -3,10 +3,15 @@
 pushd /artifacts > /dev/null
 
 # Install the environment file!
-if [ -f environment ] && [ ! -f ${ENVFILE} ]; then
+if [ -f environment ] && [ ! -e ${ENVFILE} ]; then
   mkdir -p $(dirname ${ENVFILE})
   parse_file environment > ${ENVFILE}
   echo "ENV FILE: ${ENVFILE}"
+fi
+
+# Global environment file
+if [ ! -e ${ENVROOT}/environment ]; then
+  ln -s /etc/environment ${ENVROOT}/environment
 fi
 
 # Install systemd unit files

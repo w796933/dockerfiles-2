@@ -5,6 +5,7 @@ Requires=docker.service
 Wants=network-online.target
 
 [Service]
+EnvironmentFile=-/etc/sysconfig/containers/environment
 EnvironmentFile=/etc/sysconfig/containers/%p/%i
 Restart=on-failure
 RestartSec=1

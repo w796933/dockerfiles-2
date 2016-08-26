@@ -3,6 +3,7 @@ Description=Backup Service
 Requires=docker.service
 
 [Service]
+EnvironmentFile=-/etc/sysconfig/containers/environment
 EnvironmentFile=/etc/sysconfig/containers/%p/%i
 Restart=on-abnormal
 RestartSec=600
