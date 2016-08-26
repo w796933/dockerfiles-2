@@ -2,6 +2,9 @@ include ../config.mk ./config.mk
 
 all: build
 	$(MAKE) push
+ifeq ($(HEAD) $(origin OSREL) $(origin DIST),$(BASE) file file)
+	$(MAKE) latest
+endif
 
 rootfs.$(DIST).tar:
 	@$(DOCKER) run --rm -v "$(CURDIR):/mnt:z" -w /mnt -v /rootfs \
@@ -16,7 +19,8 @@ push pull rmi:
 	$(DOCKER) $@ $(IMAGE)
 
 latest:
-	$(info Base images must be tagged)
+	$(DOCKER) tag $(IMAGE) $(REGISTRY)/$(BASE)
+	$(DOCKER) push $(REGISTRY)/$(BASE)
 
 clean:
 	$(GIT) clean -fdx .

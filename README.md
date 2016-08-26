@@ -1,7 +1,5 @@
 ## Dockerfiles
 
-Dockerfiles collection for various applications.
-
-The master branch follows the latest [Fedora](_base) release.
+Dockerfiles collection for various applications based on [Fedora](_base).
 
 Check out the other branches for more images.

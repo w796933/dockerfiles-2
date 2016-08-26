@@ -4,7 +4,7 @@ export NAME  := $(INAME)
 
 all: build
 	$(MAKE) push
-ifeq ($(origin OSREL) $(HEAD),file master)
+ifeq ($(HEAD) $(origin OSREL) $(origin DIST),$(MASTER) file file)
 	$(MAKE) latest
 endif
 
@@ -14,7 +14,7 @@ build:
 	$(DOCKER) build $(BFLAGS) -t $(IMAGE) -f .Dockerfile~ .
 
 latest:
-	$(DOCKER) tag -f $(IMAGE) $(REGISTRY)/$(INAME)
+	$(DOCKER) tag $(IMAGE) $(REGISTRY)/$(INAME)
 	$(DOCKER) push $(REGISTRY)/$(INAME)
 
 push pull rmi:
@@ -24,6 +24,9 @@ LABEL = $(shell echo $@ | tr a-z A-Z)
 
 install uninstall run stop:
 	$(shell $(DOCKER) inspect -f {{.Config.Labels.$(LABEL)}} $(IMAGE)) $(ARGV)
+
+update: ARGV = update
+update: install
 
 erase: ARGV = erase
 erase: uninstall
