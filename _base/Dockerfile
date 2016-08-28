@@ -1,8 +1,10 @@
 FROM scratch
 
-LABEL architecture=x86_64 \
+LABEL name=${BASE} version=${OSREL} release=${RELEASE} \
+	architecture=${ARCH} \
 	authoritative-source-url=${REGISTRY} \
-	vcs-url=https://github.com/oszi/dockerfiles.git
+	distribution-scope=authoritative-source-only \
+	vendor="David Osztertag"
 
 ENV LANG=en_US.UTF-8 \
 	LC_COLLATE=POSIX \

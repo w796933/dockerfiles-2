@@ -69,19 +69,18 @@ RUN ${YUM} -y install \
 
 COPY . /
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
+LABEL name=${INAME} version=${DIST} release=${RELEASE} \
+	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL RUN /usr/bin/docker run -it --rm --name=\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	RUN="/usr/bin/docker run -it --rm --name=\${NAME} \
 	--net=host --ipc=host --pid=host --privileged \
 	-v /:/host:rw -e HOST=/host -w /host \
 	-v /boot:/boot:ro \
@@ -98,7 +97,7 @@ LABEL RUN /usr/bin/docker run -it --rm --name=\${NAME} \
 	-v /tmp:/tmp:rw \
 	-e TERM=\$(tset -q) \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
-	\${DOCKER_OPTS-} \${IMAGE}
+	\${DOCKER_OPTS-} \${IMAGE}"
 
 ENV DOCKER_DRIVER overlay
 

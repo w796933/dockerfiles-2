@@ -2,12 +2,15 @@ REGISTRY:= docker.io/oszi
 BASE    := fedora
 OSREL   := 24
 DIST    := fc$(OSREL)
-MASTER  ?= fedora
+ARCH    := x86_64
 
-VARS    += REGISTRY BASE OSREL DIST YUM
 DOCKER  := docker
 GIT     := git
 YUM     := dnf
+
+MASTER  ?= fedora
+RELEASE ?= $(shell date '+%Y%m%d')
+VARS    += REGISTRY BASE OSREL DIST ARCH RELEASE YUM
 
 BFLAGS  += $(if $(findstring B,$(MAKEFLAGS)),--no-cache)
 HEAD    := $(shell $(GIT) symbolic-ref --short HEAD)

@@ -1,26 +1,24 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install -u root \
+LABEL name=${INAME} version=${DIST} release=${RELEASE} \
+	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install -u root \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/nginx:/host/etc/nginx:rw \
 	-v /var/www:/host/var/www:rw \
 	-e CONFDIR=/etc/nginx/\${NAME} \
 	-e DATADIR=/var/www/\${NAME} \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall -u root \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall -u root \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/nginx:/host/etc/nginx:rw \
 	-v /var/www:/host/var/www:rw \
 	-e CONFDIR=/etc/nginx/\${NAME} \
 	-e DATADIR=/var/www/\${NAME} \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL RUN /usr/bin/systemctl start nginx@\${NAME}
-
-LABEL STOP /usr/bin/systemctl stop nginx@\${NAME}
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	RUN="/usr/bin/systemctl start nginx@\${NAME}" \
+	STOP="/usr/bin/systemctl stop nginx@\${NAME}"
 
 RUN ${YUM} -y install nginx \
 	httpd-tools \

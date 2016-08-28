@@ -43,19 +43,18 @@ RUN cd /tmp \
 	&& python setup.py install \
 	&& python setup.py clean --all
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
+LABEL name=${INAME} version=${DIST} release=${RELEASE} \
+	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL RUN /usr/bin/docker run --rm --name=\${NAME} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	RUN="/usr/bin/docker run --rm --name=\${NAME} \
 	--net=host --security-opt=label:disable \
 	-v /:/host:ro -e HOST=/host \
 	-v /etc/group:/etc/group:ro \
@@ -69,7 +68,7 @@ LABEL RUN /usr/bin/docker run --rm --name=\${NAME} \
 	-v /root:/root:rw \
 	-i -t -e TERM=\$(tset -q) \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
-	\${DOCKER_OPTS-} \${IMAGE}
+	\${DOCKER_OPTS-} \${IMAGE}"
 
 VOLUME ["/root", "/var/tmp", "/tmp"]
 

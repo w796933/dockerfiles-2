@@ -31,19 +31,18 @@ RUN gem install \
 	jekyll-sitemap \
 	pygments.rb
 
-LABEL INSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
+LABEL name=${INAME} version=${DIST} release=${RELEASE} \
+	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /usr/local/bin:/host/usr/local/bin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL UNINSTALL /usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
 	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
 	-v /usr/local/bin:/host/usr/local/bin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}
-
-LABEL RUN /usr/bin/docker run --rm -itu \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} \
+	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+	RUN="/usr/bin/docker run --rm -itu \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} \
 	--net=host --cap-drop=ALL --read-only --security-opt=label:disable \
-	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" --name=\${NAME} \${IMAGE}
+	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" --name=\${NAME} \${IMAGE}"
 
 COPY . /
 

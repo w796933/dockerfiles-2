@@ -15,7 +15,7 @@ build: rootfs.$(DIST).tar
 	@$(SEDVARS) Dockerfile > .Dockerfile~
 	$(DOCKER) build $(BFLAGS) -t $(IMAGE) -f .Dockerfile~ .
 
-push pull rmi:
+push pull rmi history inspect:
 	$(DOCKER) $@ $(IMAGE)
 
 latest:
@@ -25,4 +25,4 @@ latest:
 clean:
 	$(GIT) clean -fdx .
 
-.PHONY: build push pull latest rmi clean
+.PHONY: build push pull rmi history inspect latest clean

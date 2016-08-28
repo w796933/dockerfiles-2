@@ -1,4 +1,6 @@
 INAME := $(notdir $(CURDIR))
+VARS  += INAME
+
 export IMAGE := $(REGISTRY)/$(INAME):$(DIST)
 export NAME  := $(INAME)
 
@@ -17,7 +19,7 @@ latest:
 	$(DOCKER) tag $(IMAGE) $(REGISTRY)/$(INAME)
 	$(DOCKER) push $(REGISTRY)/$(INAME)
 
-push pull rmi:
+push pull rmi history inspect:
 	$(DOCKER) $@ $(IMAGE)
 
 LABEL = $(shell echo $@ | tr a-z A-Z)
@@ -34,4 +36,4 @@ erase: uninstall
 clean:
 	$(GIT) clean -fdx .
 
-.PHONY: build latest push pull rmi install uninstall run stop clean
+.PHONY: build latest push pull rmi history inspect install uninstall run stop clean
