@@ -29,6 +29,7 @@ RUN ${YUM} -y install \
 	irssi \
 	kubernetes \
 	lftp \
+	lshw \
 	lsof \
 	ltrace \
 	lxc \
@@ -84,6 +85,7 @@ LABEL name=${INAME} version=${DIST} release=${RELEASE} \
 	--net=host --ipc=host --pid=host --privileged \
 	-v /:/host:rw -e HOST=/host -w /host \
 	-v /boot:/boot:ro \
+	-v /dev:/dev:rw \
 	-v /etc/environment:/etc/environment:ro \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \
