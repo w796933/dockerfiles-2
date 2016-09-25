@@ -30,9 +30,9 @@ RUN ${YUM} -y install \
 
 COPY . /
 
-VOLUME ["/var/lib/samba", "/run", "/tmp"]
+VOLUME ["/var/lib/samba", "/var/log/samba", "/run", "/tmp"]
 
 EXPOSE 137-138/udp 139/tcp 445/tcp
 
-# link to _entrypoint
+# Link to _entrypoint
 CMD ["smbd"]
