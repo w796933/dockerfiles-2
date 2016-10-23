@@ -2,34 +2,41 @@
 
 Docker image for OpenVPN - includes Easy-RSA3.
 
-## Setup
-
-Drop into a shell:
-
-```
-docker run -it --rm -v /etc/openvpn:/etc/openvpn:Z --entrypoint bash oszi/openvpn
-```
-
-Set up Easy-RSA and server.conf:
-
-```
-easyrsa init-pki
-cp -v ${EASYRSA}/vars.example ${EASYRSA_PKI}/vars
-touch server.conf
-easyrsa -h
-```
-
-You can create a `pre-up.sh` file to be executed before startup.
-
-Running `atomic install --name=tun0 oszi/openvpn` takes you through the entire process.
-
 ## Usage
 
 Start OpenVPN with server.conf:
 
 ```
-docker run --rm --name openvpn --cap-add NET_ADMIN -p 1194:1194/udp \
+docker run --rm --name=openvpn --cap-add=NET_ADMIN -p 1194:1194/udp \
 -v /etc/openvpn:/etc/openvpn:Z oszi/openvpn
 ```
 
-You need to take care of firewall rules outside of the container or in pre-up.sh.
+You need to take care of firewall rules outside of the container or in `pre-up.sh`.
+
+[Script](artifacts/openvpn-shell.sh) for configuration management purposes:
+
+```
+openvpn-shell <name> [easyrsa]
+```
+
+\* Does not share namespaces with the service container.
+
+## Install
+
+```
+atomic install -n server oszi/openvpn
+```
+
+Manually on any distribution:
+
+```
+export IMAGE=oszi/openvpn NAME=server
+docker pull ${IMAGE}
+eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
+```
+
+```
+systemctl enable --now openvpn@server
+```
+
+You can create a `pre-up.sh` file to be executed before startup.

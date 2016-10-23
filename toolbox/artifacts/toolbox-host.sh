@@ -1,5 +1,4 @@
 #!/bin/bash -eu
-SUDO_UID=$(id -u)
-SUDO_GID=$(id -g)
-. /etc/sysconfig/containers/jekyll/*
+. /etc/sysconfig/containers/toolbox/toolbox
+NAME=${NAME}-${RANDOM}
 eval exec $(docker inspect -f {{.Config.Labels.RUN}} ${IMAGE}) '"$@"'

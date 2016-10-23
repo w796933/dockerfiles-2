@@ -22,19 +22,19 @@ Share everything from the host system:
 -v /:/host --{net,ipc,pid}=host --privileged
 ```
 
-[Script](artifacts/sbin/toolbox-host) for super-privileged containers:
+[Script](artifacts/toolbox-host.sh) for super-privileged containers:
 
 ```
 toolbox-host [command]
 ```
 
-[Script](artifacts/sbin/toolbox-attach) for attaching to other containers:
+[Script](artifacts/toolbox-attach.sh) for attaching to other containers:
 
 ```
 toolbox-attach container [run-opts] [command]
 ```
 
-[Script](artifacts/sbin/toolbox) for running non-privileged containers:
+[Script](artifacts/toolbox.sh) for running non-privileged containers:
 
 ```
 toolbox [:tag] [run-opts] [command]
@@ -48,7 +48,7 @@ toolbox :latest -p=2375:2375 --privileged docker daemon -H=0.0.0.0:2375
 
 Please note that spaces in run options are not handled properly.
 
-Aliases in [docker-aliases.sh](etc/profile.d/docker-aliases.sh) will also be installed.
+Aliases in [docker_aliases.sh](etc/profile.d/docker_aliases.sh) will also be installed.
 
 ## Install
 

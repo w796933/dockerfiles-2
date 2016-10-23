@@ -1,19 +1,17 @@
 #!/bin/bash -eu
 INAME=$(echo ${IMAGE} | awk -F/ '{print $(NF)}' | awk -F: '{print $1}')
+
+# Destinations for artifacts
+HOST_SYSTEMD=${HOST}/etc/systemd/system
 ENVROOT=${HOST}/etc/sysconfig/containers
 ENVFILE=${ENVROOT}/${INAME}/${NAME}
 
-# Destinations for artifacts
-: ${HOST_ETC:=${HOST}/etc}
-: ${HOST_SYSTEMD:=${HOST_ETC}/systemd/system}
-: ${HOST_USR:=${HOST}/usr/local}
-
-# Empty defaults for volumes
-: ${CONFDIR:=}
-: ${DATADIR:=}
+# Defaults for volumes
+: ${CONFDIR:=/etc/containers/${INAME}/${NAME}}
+: ${DATADIR:=/var/containers/${INAME}/${NAME}}
 : ${LOGDIR:=}
 
-# Parse variables in a file
+# Expand variables in a file
 function parse_file() {
 eval echo "\"$(cat <<EOF
 $(<$1)

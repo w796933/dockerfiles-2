@@ -1,6 +1,6 @@
 #!/bin/bash -eu
-. /etc/sysconfig/containers/pwnie/*
-NAME=${NAME}-${RANDOM}
+IMAGE=$(egrep -rh '^IMAGE=' /etc/sysconfig/containers/backup | head -n1 | cut -d= -f2)
+NAME=backup-${RANDOM}
 DOCKER_OPTS=''
 while [ $# -ge 1 ]; do
   case "$1" in

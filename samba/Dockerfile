@@ -1,22 +1,6 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE} \
-	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /etc/samba:/host/etc/samba:rw \
-	-v /var/lib/samba:/host/var/lib/samba:rw \
-	-e CONFDIR=/etc/samba -e DATADIR=/var/lib/samba \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
-	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /etc/samba:/host/etc/samba:rw \
-	-v /var/lib/samba:/host/var/lib/samba:rw \
-	-e CONFDIR=/etc/samba -e DATADIR=/var/lib/samba \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	RUN="/usr/bin/systemctl start smb nmb" \
 	STOP="/usr/bin/systemctl stop smb nmb"
 

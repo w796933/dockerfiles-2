@@ -1,22 +1,6 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE} \
-	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /etc/unbound:/host/etc/unbound:rw \
-	-v /var/lib/unbound:/host/var/lib/unbound:rw \
-	-e CONFDIR=/etc/unbound -e DATADIR=/var/lib/unbound \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
-	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /etc/unbound:/host/etc/unbound:rw \
-	-v /var/lib/unbound:/host/var/lib/unbound:rw \
-	-e CONFDIR=/etc/unbound -e DATADIR=/var/lib/unbound \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	RUN="/usr/bin/systemctl start unbound" \
 	STOP="/usr/bin/systemctl stop unbound"
 
@@ -29,7 +13,7 @@ RUN ${YUM} -y install unbound python*-unbound \
 
 COPY . /
 
-VOLUME ["/var/lib/unbound", "/var/run/unbound"]
+VOLUME ["/var/lib/unbound", "/var/run/unbound", "/tmp"]
 
 EXPOSE 53/udp 53/tcp 953/tcp
 

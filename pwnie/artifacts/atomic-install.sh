@@ -4,7 +4,7 @@ if [ "$NAME" != "$INAME" ]; then
   exit 1
 fi
 
-cp -av jekyll.sh ${HOST}/${CONFDIR}/
-cat <<EOF > ${HOST}/etc/profile.d/jekyll_container.sh
-alias jekyll="${CONFDIR}/jekyll.sh"
+cp -av pwnie.sh ${HOST}/${CONFDIR}/
+cat <<EOF > ${HOST}/etc/profile.d/pwnie_container.sh
+alias pwnie="${CONFDIR}/pwnie.sh"
 EOF

@@ -28,7 +28,7 @@ Default mount points:
 | /mnt   | /mnt      | rw   |
 | /root  | /root     | rw   |
 
-[Script](artifacts/sbin/backup-container) for running interactive containers:
+[Script](artifacts/backup-container.sh) for running interactive containers:
 
 ```
 backup-container [:tag] [run-opts] [command]

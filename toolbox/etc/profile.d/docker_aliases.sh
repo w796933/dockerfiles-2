@@ -28,20 +28,12 @@ alias dvolinsp='docker volume inspect'
 alias dxargs='xargs -n1 -r docker'
 alias fig='docker-compose'
 
-dvertest() {
-  A=$(docker version -f {{.Client.Version}} | awk -F. '{printf("%03d%03d%03d",$1,$2,$3)}')
-  B=$(echo "$1" | awk -F. '{printf("%03d%03d%03d",$1,$2,$3)}')
-  test $A -ge $B
-}
-
 dcleanup() {
-  dgc -f
-  dvertest 1.9 && dgcvol
-  dgcimg
+  dgc -f && dgcvol && dgcimg
 }
 
 dimggrep() {
-  docker images | tail -n+2 | grep "$@" | awk '{if ($1!="<none>") print $1":"$2}'
+  docker images | tail -n+2 | grep "$@" | awk '{if ($2!="<none>") print $1":"$2}'
 }
 
 dpsgrep() {
@@ -65,11 +57,26 @@ dpushgrep() {
 }
 
 dlogs() {
-  case `docker inspect -f '{{.HostConfig.LogConfig.Type}}' --type=container "${!#}" 2> /dev/null \
+  case `dinsp -f '{{.HostConfig.LogConfig.Type}}' --type=container "${!#}" 2> /dev/null \
     || docker info | grep -m1 'Logging Driver' | awk '{print $(NF)}'` in
   journald)
     journalctl "${@:1:$#-1}" CONTAINER_NAME="${!#}";;
   *)
     docker logs "$@" | less;;
   esac
+}
+
+dlabeleval() {
+  if [ $# -lt 2 ]; then
+    echo 'Usage: dlabeleval <image> <label> [args]' >&2 && false
+  else
+    local IMAGE=$1 INAME=$(echo $1 | awk -F/ '{print $(NF)}' | awk -F: '{print $1}')
+    local NAME=${NAME:-${INAME}}
+    local LABEL=$(dinsp -f '{{index .Config.Labels "'$2'"}}' ${IMAGE})
+    if [ -z "${LABEL}" ]; then
+      echo 'Image/Label not found!' >&2 && false
+    else
+      eval ${LABEL} "${@:3:$#}"
+    fi
+  fi
 }

@@ -13,8 +13,8 @@ RestartSec=1
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
 ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-drop=ALL --read-only \
--p ${FORWARD} -p ${FORWARD_SSL} -v ${CONFDIR}:/etc/haproxy:ro,Z \
-$DOCKER_OPTS ${IMAGE} $CMD
+-v ${CONFDIR}:/etc/haproxy:ro,Z -v ${DATADIR}:/var/lib/haproxy:Z  \
+-p ${FORWARD} -p ${FORWARD_SSL} $DOCKER_OPTS ${IMAGE} $CMD
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

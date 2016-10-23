@@ -6,16 +6,15 @@ pushd /artifacts > /dev/null
 if [ -f ${ENVFILE} ]; then
   . ${ENVFILE}
   mv -v ${ENVFILE}{,~}
+# Source the old env file?
+elif [ -f ${ENVFILE}~ ]; then
+  . ${ENVFILE}~
 fi
 
-# Delete obsoleted installed files...
+# Delete obsolete unit files...
 if [ $(find_instances | wc -l) -eq 0 ]; then
-  find . -maxdepth 1 -regex '.+\.\(service\|timer\)\(\.d\)?$' \
+  find . -maxdepth 1 -regex '.+\.\(service\|socket\|timer\)\(\.d\)?$' \
     -exec rm -rfv "${HOST_SYSTEMD}/{}" \;
-  find . -maxdepth 2 -mindepth 2 -wholename './profile.d/*' \
-    -exec rm -rfv "${HOST_ETC}/{}" \;
-  find . -maxdepth 2 -mindepth 2 -wholename './*bin/*' \
-    -exec rm -rfv "${HOST_USR}/{}" \;
 fi
 
 # Execute extension...

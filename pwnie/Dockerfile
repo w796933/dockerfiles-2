@@ -33,8 +33,7 @@ RUN ${YUM} -y install \
 	python-z3 \
 	PyYAML \
 	scapy \
-	&& ${YUM} clean all \
-	&& rm -rf /artifacts/*/
+	&& ${YUM} clean all
 
 COPY . /
 
@@ -64,11 +63,12 @@ RUN set -e; \
 	pip install -r /opt/weevely3/requirements.txt; \
 	rm -rf ~/.cache;
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE} \
-	RUN="/usr/bin/docker run -it --rm --name=\${NAME} \
-	--net=host --security-opt=label:disable \
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
+	RUN="/usr/bin/docker run --rm --name=\${NAME} \
+	--net=host --security-opt=label=disable \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
-	-e TERM=\$(tset -q) -e NAME=\${NAME} -e IMAGE=\${IMAGE} \
+	-i -t -e TERM=\$(tset -q) \
+	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
 	\${DOCKER_OPTS-} \${IMAGE}"

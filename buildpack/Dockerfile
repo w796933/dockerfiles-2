@@ -47,4 +47,4 @@ RUN ${YUM} -y install \
 	rubygems \
 	&& ${YUM} clean all
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE}
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE}

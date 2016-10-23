@@ -6,3 +6,5 @@ touch -a ${NAME}.conf
 echo 'Dropping into an interactive shell...'
 bash -i || :
 popd > /dev/null
+
+. atomic-update.sh

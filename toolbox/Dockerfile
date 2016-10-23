@@ -70,18 +70,8 @@ RUN ${YUM} -y install \
 
 COPY . /
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE} \
-	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/profile.d:/host/etc/profile.d:rw \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
-	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/profile.d:/host/etc/profile.d:rw \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
-	RUN="/usr/bin/docker run -it --rm --name=\${NAME} \
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
+	RUN="/usr/bin/docker run --rm --name=\${NAME} \
 	--net=host --ipc=host --pid=host --privileged \
 	-v /:/host:rw -e HOST=/host -w /host \
 	-v /boot:/boot:ro \
@@ -97,7 +87,7 @@ LABEL name=${INAME} version=${DIST} release=${RELEASE} \
 	-v /run:/run:rw \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /tmp:/tmp:rw \
-	-e TERM=\$(tset -q) \
+	-i -t -e TERM=\$(tset -q) \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
 	\${DOCKER_OPTS-} \${IMAGE}"
 

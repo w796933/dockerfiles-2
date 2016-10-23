@@ -43,19 +43,9 @@ RUN cd /tmp \
 	&& python setup.py install \
 	&& python setup.py clean --all
 
-LABEL name=${INAME} version=${DIST} release=${RELEASE} \
-	INSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-install \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
-	UNINSTALL="/usr/bin/docker run --rm --privileged --entrypoint=atomic-uninstall \
-	-v /etc/sysconfig/containers:/host/etc/sysconfig/containers:rw \
-	-v /etc/systemd/system:/host/etc/systemd/system:rw \
-	-v /usr/local/sbin:/host/usr/local/sbin:rw \
-	-e HOST=/host -e NAME=\${NAME} -e IMAGE=\${IMAGE} \${IMAGE}" \
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	RUN="/usr/bin/docker run --rm --name=\${NAME} \
-	--net=host --security-opt=label:disable \
+	--net=host --security-opt=label=disable \
 	-v /:/host:ro -e HOST=/host \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/machine-id:/etc/machine-id:ro \

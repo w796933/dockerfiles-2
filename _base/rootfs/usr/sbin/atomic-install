@@ -8,21 +8,17 @@ if [ -f environment ] && [ ! -e ${ENVFILE} ]; then
   parse_file environment > ${ENVFILE}
   echo "ENV FILE: ${ENVFILE}"
 fi
+. ${ENVFILE}
 
-# Global environment file
+# Global environment file:
 if [ ! -e ${ENVROOT}/environment ]; then
   ln -s /etc/environment ${ENVROOT}/environment
 fi
 
-# Install systemd unit files
-find . -maxdepth 1 -regex '.+\.\(service\|timer\)\(\.d\)?$' \
-  -exec cp -av "{}" "${HOST_SYSTEMD}"/ \; \
+# Copy systemd unit files...
+find . -maxdepth 1 -regex '.+\.\(service\|socket\|timer\)\(\.d\)?$' \
+  -exec cp -avL "{}" "${HOST_SYSTEMD}"/ \; \
   -exec chcon -R --reference="${HOST_SYSTEMD}" "${HOST_SYSTEMD}/{}" \;
-
-# Install scripts and aliases
-[ -d profile.d ] && cp -avL profile.d "${HOST_ETC}"/
-[ -d sbin ] && cp -avL sbin "${HOST_USR}"/
-[ -d  bin ] && cp -avL  bin "${HOST_USR}"/
 
 # Update instead of install?
 if [ $# -ge 1 ] && [[ "$1" =~ ^(update|upgrade)$ ]]; then
