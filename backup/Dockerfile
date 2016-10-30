@@ -23,25 +23,16 @@ RUN ${YUM} -y install \
 
 COPY . /
 
-ARG TARSNAP_VERSION=1.0.37
-
-ARG TARSNAP_SIG_KEY=0xbc5cfa093da2bce3
-
-ARG TARSNAP_DOWNLOAD=https://www.tarsnap.com/download
-
-RUN cd /tmp \
-	&& curl -sO ${TARSNAP_DOWNLOAD}/tarsnap-autoconf-${TARSNAP_VERSION}.tgz \
-	&& curl -sO ${TARSNAP_DOWNLOAD}/tarsnap-sigs-${TARSNAP_VERSION}.asc \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${TARSNAP_SIG_KEY} \
-	&& gpg --decrypt tarsnap-sigs*.asc \
-	&& sha256sum -c tarsnap-sigs*.asc \
-	&& tar -xzf tarsnap*.tgz \
-	&& (cd tarsnap*/ && ./configure && make && make install) \
-	&& rm -rf tarsnap* \
-	\
-	&& cd /usr/src/borgmatic \
+RUN cd /usr/src/borgmatic \
 	&& python setup.py install \
-	&& python setup.py clean --all
+	&& python setup.py clean --all \
+	\
+	&& cd /usr/src/tarsnap \
+	&& autoreconf -i \
+	&& ./configure \
+	&& make \
+	&& make install \
+	&& make clean
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	RUN="/usr/bin/docker run --rm --name=\${NAME} \
