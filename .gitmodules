@@ -1,64 +1,84 @@
 [submodule "backup/usr/src/borgmatic"]
 	path = backup/usr/src/borgmatic
 	url = https://github.com/witten/borgmatic.git
+	autoupdate = true
 [submodule "backup/usr/src/tarsnap"]
 	path = backup/usr/src/tarsnap
 	url = https://github.com/Tarsnap/tarsnap.git
+	autoupdate = false
 
 [submodule "openvpn/usr/share/easy-rsa"]
 	path = openvpn/usr/share/easy-rsa
 	url = https://github.com/OpenVPN/easy-rsa.git
+	autoupdate = true
 
 [submodule "pwnie/usr/src/ROPgadget"]
 	path = pwnie/usr/src/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
+	autoupdate = true
 [submodule "pwnie/usr/src/pwntools"]
 	path = pwnie/usr/src/pwntools
 	url = https://github.com/Gallopsled/pwntools.git
+	autoupdate = true
 [submodule "pwnie/usr/src/HashPump"]
 	path = pwnie/usr/src/HashPump
 	url = https://github.com/bwall/HashPump.git
+	autoupdate = true
 [submodule "pwnie/usr/src/xortool"]
 	path = pwnie/usr/src/xortool
 	url = https://github.com/hellman/xortool.git
+	autoupdate = true
 [submodule "pwnie/opt/peda"]
 	path = pwnie/opt/peda
 	url = https://github.com/zachriggle/peda.git
+	autoupdate = true
 [submodule "pwnie/opt/preeny"]
 	path = pwnie/opt/preeny
 	url = https://github.com/zardus/preeny.git
+	autoupdate = true
 [submodule "pwnie/opt/radare2"]
 	path = pwnie/opt/radare2
 	url = https://github.com/radare/radare2.git
+	autoupdate = true
 [submodule "pwnie/opt/sqlmap"]
 	path = pwnie/opt/sqlmap
 	url = https://github.com/sqlmapproject/sqlmap.git
+	autoupdate = true
 [submodule "pwnie/opt/commix"]
 	path = pwnie/opt/commix
 	url = https://github.com/stasinopoulos/commix.git
+	autoupdate = true
 [submodule "pwnie/opt/weevely3"]
 	path = pwnie/opt/weevely3
 	url = https://github.com/epinna/weevely3.git
+	autoupdate = true
 
 [submodule "limnoria/usr/src/limnoria"]
 	path = limnoria/usr/src/limnoria
 	url = https://github.com/ProgVal/Limnoria.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-progval"]
 	path = limnoria/usr/src/plugins-progval
 	url = https://github.com/ProgVal/Supybot-plugins.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-glolol"]
 	path = limnoria/usr/src/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-imdb"]
 	path = limnoria/usr/src/plugins-imdb
 	url = https://github.com/ddan39/Supybot-IMDb.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-various/TVMaze"]
 	path = limnoria/usr/src/plugins-various/TVMaze
 	url = https://github.com/Znuff/limnoria-tvmaze.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-various/UrbanDictionary"]
 	path = limnoria/usr/src/plugins-various/UrbanDictionary
 	url = https://github.com/reticulatingspline/UrbanDictionary.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-various/DuckHunt"]
 	path = limnoria/usr/src/plugins-various/DuckHunt
 	url = https://github.com/veggiematts/supybot-duckhunt.git
+	autoupdate = true
 
