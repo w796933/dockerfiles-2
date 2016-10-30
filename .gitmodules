@@ -39,7 +39,7 @@
 [submodule "pwnie/opt/radare2"]
 	path = pwnie/opt/radare2
 	url = https://github.com/radare/radare2.git
-	autoupdate = true
+	autoupdate = false
 [submodule "pwnie/opt/sqlmap"]
 	path = pwnie/opt/sqlmap
 	url = https://github.com/sqlmapproject/sqlmap.git
