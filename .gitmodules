@@ -19,6 +19,7 @@
 [submodule "pwnie/usr/src/pwntools"]
 	path = pwnie/usr/src/pwntools
 	url = https://github.com/Gallopsled/pwntools.git
+	branch = stable
 	autoupdate = true
 [submodule "pwnie/usr/src/HashPump"]
 	path = pwnie/usr/src/HashPump

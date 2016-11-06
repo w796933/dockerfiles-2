@@ -22,15 +22,17 @@ RUN ${YUM} -y install \
 	pyserial \
 	python-afl \
 	python-afl-bin \
-	python-argh \
-	python-dateutil \
-	python-docopt \
 	python-mako \
-	python-paramiko \
 	python-prettytable \
 	python-pyelftools \
-	python2-requests \
+	python-pygments \
 	python-z3 \
+	python2-argh \
+	python2-dateutil \
+	python2-docopt \
+	python2-paramiko \
+	python2-pysocks \
+	python2-requests \
 	PyYAML \
 	scapy \
 	&& ${YUM} clean all
@@ -38,6 +40,8 @@ RUN ${YUM} -y install \
 COPY . /
 
 RUN set -e; \
+	python -m pip install --upgrade pip; \
+	\
 	mv -f /usr/bin/checksec /tmp/; \
 	for APP in ROPgadget pwntools HashPump xortool; do \
 		cd /usr/src/${APP}; \

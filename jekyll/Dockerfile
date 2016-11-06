@@ -14,7 +14,6 @@ RUN ${YUM} -y install \
 	rubygem-rdoc \
 	rubygem-redcarpet \
 	rubygem-RedCloth \
-	rubygem-therubyracer \
 	rubygem-thread_safe \
 	rubygem-tzinfo \
 	python-pygments \
@@ -29,7 +28,8 @@ RUN gem install \
 	jekyll-redirect-from \
 	jekyll-sass-converter \
 	jekyll-sitemap \
-	pygments.rb
+	pygments.rb \
+	therubyracer
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	RUN="/usr/bin/docker run --rm -itu \${SUDO_UID:-\$UID}:\${SUDO_GID:-\$GID} \
