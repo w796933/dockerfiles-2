@@ -1,7 +1,6 @@
 [Unit]
 Description=OpenVPN
-After=docker.service network-online.target
-Requires=docker.service
+After=docker.service docker-latest.service network-online.target
 Wants=network-online.target
 
 [Service]

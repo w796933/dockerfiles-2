@@ -1,7 +1,6 @@
 [Unit]
 Description=Unbound DNS Resolver
-After=docker.service
-Requires=docker.service
+After=docker.service docker-latest.service
 
 [Service]
 EnvironmentFile=-/etc/sysconfig/containers/environment

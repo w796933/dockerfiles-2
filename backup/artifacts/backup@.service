@@ -1,6 +1,5 @@
 [Unit]
 Description=Backup Service
-Requires=docker.service
 
 [Service]
 EnvironmentFile=-/etc/sysconfig/containers/environment

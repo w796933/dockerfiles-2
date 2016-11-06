@@ -1,7 +1,6 @@
 [Unit]
 Description=Limnoria/Supybot
-After=docker.service miniircd@.service znc@.service network-online.target
-Requires=docker.service
+After=docker.service docker-latest.service miniircd@.service znc@.service network-online.target
 Wants=network-online.target
 
 [Service]
