@@ -1,8 +1,8 @@
 FROM scratch
 
-ARG ATOMIC="/usr/bin/docker run -t -i \
-	--rm --privileged --user=root --net=host \
-	--read-only --tmpfs=/tmp --tmpfs=/var/tmp --tmpfs=/run \
+ARG ATOMIC="/usr/bin/docker run -t -i --rm \
+	--user=root --net=host --security-opt=label=disable \
+	--read-only --tmpfs=/tmp --tmpfs=/var/tmp \
 	-v /etc/systemd/system:/host/etc/systemd/system:rw \
 	-v /etc/firewalld/services:/host/etc/firewalld/services:rw \
 	-v /etc/profile.d:/host/etc/profile.d:rw \
