@@ -37,13 +37,13 @@ Here be dragons!
 ## Install
 
 ```
-atomic install oszi/pwnie
+atomic install oszi/pwnie:$TAG
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/pwnie NAME=pwnie
+export IMAGE=oszi/pwnie:$TAG NAME=pwnie
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

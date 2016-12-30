@@ -1,6 +1,5 @@
 #!/bin/bash -eu
-IMAGE=$(egrep -rh '^IMAGE=' /etc/sysconfig/containers/backup | head -n1 | cut -d= -f2)
-NAME=backup-${RANDOM}
+. /etc/sysconfig/containers/backup
 DOCKER_OPTS=''
 while [ $# -ge 1 ]; do
   case "$1" in

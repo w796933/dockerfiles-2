@@ -1,8 +1,8 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start haproxy@\${NAME}" \
-	STOP="/usr/bin/systemctl stop haproxy@\${NAME}"
+	RUN="/usr/bin/systemctl start \${NAME}" \
+	STOP="/usr/bin/systemctl stop \${NAME}"
 
 RUN ${YUM} -y install haproxy \
 	&& ${YUM} clean all \

@@ -17,5 +17,6 @@ Fedora base image created with DNF.
 ### Containerized systemd
 
 ```
-docker run -t -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /run --tmpfs=/tmp ${IMAGE} init
+docker run -t -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+--tmpfs=/run --tmpfs=/tmp ${IMAGE} init
 ```

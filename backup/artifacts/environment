@@ -1,9 +1,8 @@
 IMAGE=${IMAGE}
-NAME=backup-${NAME}
-DOCKER_OPTS='-v /:/host:ro -v /media:/media:rw -v /mnt:/mnt:rw -v /root:/root:rw'
+NAME=${NAME}
 
-## Required for timers:
-CMD='...'
+#DOCKER_OPTS='-v /:/host:ro -v /media:/media:rw -v /root:/root:rw'
+#CMD='...'
 
 ## Disable volumes
 CONFDIR=

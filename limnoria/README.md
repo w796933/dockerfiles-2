@@ -10,19 +10,19 @@ and [GLolol](https://github.com/GLolol/SupyPlugins).
 List all available plugins:
 
 ```
-docker run -t --rm --entrypoint ls oszi/limnoria /usr/src/limnoria/plugins/
+docker run -t --rm --entrypoint ls oszi/limnoria:$TAG /usr/src/limnoria/plugins/
 ```
 
 ## Install
 
 ```
-atomic install --name=mybot oszi/limnoria
+atomic install --name=mybot oszi/limnoria:$TAG
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/limnoria NAME=mybot
+export IMAGE=oszi/limnoria:$TAG NAME=mybot
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

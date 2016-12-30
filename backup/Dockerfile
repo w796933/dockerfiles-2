@@ -44,15 +44,20 @@ LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	-v /etc/shadow:/etc/shadow:ro \
 	-v /home:/home:ro \
 	-v /media:/media:rw \
-	-v /run/media:/run/media:rw \
 	-v /mnt:/mnt:rw \
-	-v /root:/root:rw \
-	-i -t -e TERM=\$(tset -q) \
+	-v /run:/run:rw \
+	-v /root/.cache:/root/.cache:rw \
+	-v /root/.config:/root/.config:rw \
+	-v /root/.gnupg:/root/.gnupg:rw \
+	-v /root/.ssh:/root/.ssh:rw \
+	-v /var/tmp:/var/tmp:rw \
+	-v /tmp:/tmp:rw \
+	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
 	\${DOCKER_OPTS-} \${IMAGE}"
 
-VOLUME ["/root", "/var/tmp", "/tmp"]
+VOLUME ["/var/tmp", "/tmp"]
 
-WORKDIR /root
+WORKDIR /host
 
-CMD ["bash", "--norc"]
+CMD ["bash"]

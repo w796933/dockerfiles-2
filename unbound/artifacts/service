@@ -3,13 +3,13 @@ Description=Unbound DNS Resolver
 After=docker.service docker-latest.service
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/containers/environment
-EnvironmentFile=/etc/sysconfig/containers/unbound/unbound
+EnvironmentFile=-/etc/environment
+EnvironmentFile=/etc/sysconfig/containers/%p
 Restart=on-failure
 RestartSec=1
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
-ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/unbound/unbound \
+ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --read-only -p ${FORWARD}/udp -p ${FORWARD}/tcp \
 -v ${CONFDIR}:/etc/unbound:ro,Z -v ${DATADIR}:/var/lib/unbound:Z \
 --dns=127.0.0.1 $DOCKER_OPTS ${IMAGE}

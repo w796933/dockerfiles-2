@@ -3,16 +3,16 @@
 Initialize an empty repository:
 
 ```
-backup-container borg init /mnt/Borg
+backup-shell borg init /mnt/Borg
 ```
 
-**/etc/sysconfig/containers/backup/borgmatic**
+**/etc/sysconfig/containers/borgmatic**
 
 ```
-IMAGE=oszi/backup
-NAME=backup-borgmatic
+IMAGE=oszi/backup:$TAG
+NAME=borgmatic
 DOCKER_OPTS='-v /:/host:ro -v /root:/root:rw -v /mnt/Borg:/mnt/Borg:rw'
-CMD='borgmatic -v 1 -c /host/etc/borgmatic/config --excludes /host/etc/borgmatic/excludes'
+CMD='borgmatic -c /host/etc/borgmatic/config --excludes /host/etc/borgmatic/excludes'
 ```
 
 **/etc/borgmatic/config**
@@ -71,4 +71,4 @@ checks: repository archives
 */Downloads/*
 ```
 
-Use `backup-container borg` to manage or restore your backups.
+Use `backup-shell borg` to manage or restore your backups.

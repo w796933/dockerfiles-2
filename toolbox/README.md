@@ -7,7 +7,7 @@ Swiss army knife for debugging and managing container hosts.
 Start Toolbox with NET_ADMIN and SYS_ADMIN capabilities:
 
 ```
-docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} oszi/toolbox
+docker run -it --rm --cap-add={NET_ADMIN,SYS_ADMIN} oszi/toolbox:$TAG
 ```
 
 Share a running container's volumes, network and IPC namespaces:
@@ -53,13 +53,13 @@ Aliases in [docker_aliases.sh](etc/profile.d/docker_aliases.sh) will also be ins
 ## Install
 
 ```
-atomic install oszi/toolbox
+atomic install oszi/toolbox:$TAG
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/toolbox NAME=toolbox
+export IMAGE=oszi/toolbox:$TAG NAME=toolbox
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```

@@ -1,8 +1,8 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start unbound" \
-	STOP="/usr/bin/systemctl stop unbound"
+	RUN="/usr/bin/systemctl start \${NAME}" \
+	STOP="/usr/bin/systemctl stop \${NAME}"
 
 RUN ${YUM} -y install unbound python*-unbound \
 	&& ${YUM} clean all \

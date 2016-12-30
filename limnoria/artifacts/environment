@@ -1,5 +1,5 @@
 IMAGE=${IMAGE}
-NAME=limnoria-${NAME}
+NAME=${NAME}
 DATADIR=${DATADIR}
 NET=default
 MEM=64m

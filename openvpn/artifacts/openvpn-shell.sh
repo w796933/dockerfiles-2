@@ -4,7 +4,7 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-ENVFILE=/etc/sysconfig/containers/openvpn/$1
+ENVFILE=/etc/sysconfig/containers/$1
 . ${ENVFILE}
 
 exec docker run -t -i --rm --env-file=${ENVFILE} --name=${NAME}-shell \

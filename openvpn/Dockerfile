@@ -1,8 +1,8 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start openvpn@\${NAME}" \
-	STOP="/usr/bin/systemctl stop openvpn@\${NAME}"
+	RUN="/usr/bin/systemctl start \${NAME}" \
+	STOP="/usr/bin/systemctl stop \${NAME}"
 
 RUN ${YUM} -y install openvpn \
 	bridge-utils \

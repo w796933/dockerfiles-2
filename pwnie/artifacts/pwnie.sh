@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-. /etc/sysconfig/containers/pwnie/pwnie
+. /etc/sysconfig/containers/pwnie
 NAME=${NAME}-${RANDOM}
 DOCKER_OPTS=''
 while [ $# -ge 1 ]; do

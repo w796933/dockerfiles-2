@@ -4,11 +4,11 @@
 
 ## Notes
 
-Environment file: `/etc/sysconfig/containers/nginx/NAME`
+Environment file: `/etc/sysconfig/containers/NAME`
 
-Configuration directory: `/etc/nginx/NAME` mounted as `/etc/nginx`
+Configuration directory: `/etc/containers/NAME` mounted as `/etc/nginx`.
 
-Data directory: `/var/www/NAME` mounted as `/var/www/NAME`
+Data directory: `DATADIR` mounted at the same location.
 
 The default configuration files are adapted to containerized environments.
 
@@ -20,13 +20,17 @@ but not all storage layers support setcap. Thus the default internal ports are
 ## Install
 
 ```
-atomic install -n default oszi/nginx
+atomic install --name=nginx oszi/nginx:$TAG
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/nginx NAME=default
+export IMAGE=oszi/nginx:$TAG NAME=nginx
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
+```
+
+```
+systemctl enable --now ${NAME}
 ```

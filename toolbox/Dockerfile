@@ -87,7 +87,7 @@ LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	-v /run:/run:rw \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v /tmp:/tmp:rw \
-	-i -t -e TERM=\$(tset -q) \
+	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
 	\${DOCKER_OPTS-} \${IMAGE}"
 

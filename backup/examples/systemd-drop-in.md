@@ -1,6 +1,6 @@
 ##example-drop-in
 
-**/etc/systemd/system/backup@NAME.service.d/prereq.conf**
+**/etc/systemd/system/NAME.service.d/prereq.conf**
 
 ```
 [Service]

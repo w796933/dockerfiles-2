@@ -10,20 +10,24 @@ Docker image for [Samba](https://www.samba.org) servers and clients.
 
  * ...and whitespace characters must be escaped.
 
- * You can set the environment variables in `/etc/sysconfig/containers/samba/samba`.
+ * You can set the environment variables in `/etc/sysconfig/containers/samba`.
 
  * Logs are redirected to stdout.
 
 ## Install
 
 ```
-atomic install oszi/samba
+atomic install oszi/samba:$TAG
 ```
 
 Manually on any distribution:
 
 ```
-export IMAGE=oszi/samba NAME=samba
+export IMAGE=oszi/samba:$TAG NAME=samba
 docker pull ${IMAGE}
 eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
+```
+
+```
+systemctl enable --now smb nmb
 ```

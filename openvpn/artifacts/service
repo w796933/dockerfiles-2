@@ -4,15 +4,15 @@ After=docker.service docker-latest.service network-online.target
 Wants=network-online.target
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/containers/environment
-EnvironmentFile=/etc/sysconfig/containers/%p/%i
+EnvironmentFile=-/etc/environment
+EnvironmentFile=/etc/sysconfig/containers/%p
 Restart=on-failure
 RestartSec=1
 
 ExecStartPre=-/usr/bin/docker rm -fv ${NAME}
-ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p/%i \
+ExecStart=/usr/bin/docker run --name=${NAME} --env-file=/etc/sysconfig/containers/%p \
 --net=${NET} -m ${MEM} --memory-swap=${SWAP} --cap-add=NET_ADMIN --security-opt=label=disable \
--v ${CONFDIR}:/etc/openvpn:ro,Z -v ${DATADIR}:/var/lib/openvpn:Z $DOCKER_OPTS ${IMAGE} --config %i.conf
+-v ${CONFDIR}:/etc/openvpn:ro,Z -v ${DATADIR}:/var/lib/openvpn:Z $DOCKER_OPTS ${IMAGE} --config %p.conf
 ExecStop=/usr/bin/docker stop ${NAME}
 
 [Install]

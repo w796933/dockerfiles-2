@@ -73,6 +73,6 @@ LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	-v /etc/group:/etc/group:ro \
 	-v /etc/passwd:/etc/passwd:ro \
 	-v \"\$(pwd):\$(pwd)\" -w \"\$(pwd)\" \
-	-i -t -e TERM=\$(tset -q) \
+	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
 	\${DOCKER_OPTS-} \${IMAGE}"

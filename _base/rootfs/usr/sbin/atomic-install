@@ -10,19 +10,17 @@ if [ -f environment ] && [ ! -e ${ENVFILE} ]; then
 fi
 . ${ENVFILE}
 
-# Global environment file:
-if [ ! -e ${ENVROOT}/environment ]; then
-  ln -s /etc/environment ${ENVROOT}/environment
-fi
-
 # Copy systemd unit files...
-find . -maxdepth 1 -regex '.+\.\(service\|socket\|timer\)\(\.d\)?$' \
-  -exec cp -avL "{}" "${HOST_SYSTEMD}"/ \; \
-  -exec chcon -R --reference="${HOST_SYSTEMD}" "${HOST_SYSTEMD}/{}" \;
+for unit in service socket timer; do
+  if [ -f ${unit} ]; then
+    cp -auv ${unit} ${SYSTEMD}/${NAME}.${unit}
+    chcon -R --reference=${SYSTEMD} ${SYSTEMD}/${NAME}.${unit} || :
+  fi
+done
 
 # Update instead of install?
-if [ $# -ge 1 ] && [[ "$1" =~ ^(update|upgrade)$ ]]; then
-  sed -i -E "s|^(IMAGE=).*|\1${IMAGE}|" ${ENVFILE}
+if [ $# -ge 1 ] && [[ "$1" =~ ^-*(update|upgrade)$ ]]; then
+  sed -i -r "s|^(IMAGE=).*|\1${IMAGE}|" ${ENVFILE}
   # Execute extension...
   if [ -f atomic-update.sh ]; then
     . atomic-update.sh

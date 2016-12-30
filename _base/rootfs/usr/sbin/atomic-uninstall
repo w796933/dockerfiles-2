@@ -12,10 +12,8 @@ elif [ -f ${ENVFILE}~ ]; then
 fi
 
 # Delete obsolete unit files...
-if [ $(find_instances | wc -l) -eq 0 ]; then
-  find . -maxdepth 1 -regex '.+\.\(service\|socket\|timer\)\(\.d\)?$' \
-    -exec rm -rfv "${HOST_SYSTEMD}/{}" \;
-fi
+find ${SYSTEMD} -maxdepth 1 -regex ".+/${NAME}\.\(service\|socket\|timer\)$" \
+  -exec rm -fv "{}" \;
 
 # Execute extension...
 if [ -f atomic-uninstall.sh ]; then
@@ -23,12 +21,11 @@ if [ -f atomic-uninstall.sh ]; then
 fi
 
 # Delete everything if requested...
-if [ $# -ge 1 ] && [[ "$1" =~ ^(erase|purge)$ ]]; then
-  rm -f ${ENVFILE}{,~} 2> /dev/null || :
-  rmdir $(dirname ${ENVFILE}) 2> /dev/null || :
-  [ -n "${CONFDIR}" ] && rm -rfv "${HOST}/${CONFDIR}" || :
-  [ -n "${DATADIR}" ] && rm -rfv "${HOST}/${DATADIR}" || :
-  [ -n "${LOGDIR}"  ] && rm -rfv "${HOST}/${LOGDIR}"  || :
+if [ $# -ge 1 ] && [[ "$1" =~ ^-*(erase|purge)$ ]]; then
+  [ -n "${CONFDIR}" ] && rm -rfv "${HOST}/${CONFDIR}"
+  [ -n "${DATADIR}" ] && rm -rfv "${HOST}/${DATADIR}"
+  [ -n "${LOGDIR}"  ] && rm -rfv "${HOST}/${LOGDIR}"
+  rm -f ${ENVFILE}{,~}
 fi
 
 popd > /dev/null
