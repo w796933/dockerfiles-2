@@ -66,6 +66,10 @@
 	path = limnoria/usr/src/plugins-glolol
 	url = https://github.com/GLolol/SupyPlugins.git
 	autoupdate = true
+[submodule "limnoria/usr/src/plugins-supyiel"]
+	path = limnoria/usr/src/plugins-supyiel
+	url = https://github.com/ormanya/Supyiel.git
+	autoupdate = true
 [submodule "limnoria/usr/src/plugins-imdb"]
 	path = limnoria/usr/src/plugins-imdb
 	url = https://github.com/ddan39/Supybot-IMDb.git

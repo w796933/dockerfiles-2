@@ -28,5 +28,5 @@ eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
 ```
 
 ```
-systemctl enable --now limnoria@mybot
+systemctl enable --now mybot
 ```
