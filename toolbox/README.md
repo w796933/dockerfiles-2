@@ -82,6 +82,8 @@ Web:
 
  * [weevely3](https://github.com/epinna/weevely3)
 
+ * [wuzz](https://github.com/asciimoo/wuzz)
+
 Here be dragons!
 
 ## Install

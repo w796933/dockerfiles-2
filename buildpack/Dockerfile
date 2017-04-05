@@ -1,6 +1,11 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-# SCM, build essentials and common development packages
+LABEL Name=${INAME} Version=${DIST} Release=${RELEASE}
+
+ENV PATH=${PATH}:/usr/share/gocode/bin \
+	GOPATH=/usr/share/gocode
+
+# SCM, build essentials and common devel packages
 RUN ${YUM} -y install \
 	autoconf \
 	automake \
@@ -38,6 +43,7 @@ RUN ${YUM} -y install \
 	sqlite-devel \
 	zlib-devel \
 	\
+	golang \
 	lua-devel \
 	perl-devel \
 	perl-CPAN \
@@ -46,5 +52,3 @@ RUN ${YUM} -y install \
 	ruby-devel \
 	rubygems \
 	&& ${YUM} clean all
-
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE}

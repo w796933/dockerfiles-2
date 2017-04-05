@@ -125,6 +125,8 @@ RUN set -e; \
 	make && mv *-*-* lib64; \
 	make clean; \
 	\
+	go get github.com/asciimoo/wuzz; \
+	\
 	rm -rf ~/.cache;
 
 LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
