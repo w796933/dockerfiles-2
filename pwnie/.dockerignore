@@ -1,7 +1,0 @@
-*
-!artifacts
-!opt
-!root
-!usr
-*/*/.git*
-*/*/*/.git*

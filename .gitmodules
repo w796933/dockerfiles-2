@@ -12,45 +12,41 @@
 	url = https://github.com/OpenVPN/easy-rsa.git
 	autoupdate = true
 
-[submodule "pwnie/usr/src/ROPgadget"]
-	path = pwnie/usr/src/ROPgadget
+[submodule "toolbox/usr/src/ROPgadget"]
+	path = toolbox/usr/src/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
 	autoupdate = true
-[submodule "pwnie/usr/src/pwntools"]
-	path = pwnie/usr/src/pwntools
+[submodule "toolbox/usr/src/pwntools"]
+	path = toolbox/usr/src/pwntools
 	url = https://github.com/Gallopsled/pwntools.git
 	branch = stable
 	autoupdate = true
-[submodule "pwnie/usr/src/HashPump"]
-	path = pwnie/usr/src/HashPump
+[submodule "toolbox/usr/src/HashPump"]
+	path = toolbox/usr/src/HashPump
 	url = https://github.com/bwall/HashPump.git
 	autoupdate = true
-[submodule "pwnie/usr/src/xortool"]
-	path = pwnie/usr/src/xortool
+[submodule "toolbox/usr/src/xortool"]
+	path = toolbox/usr/src/xortool
 	url = https://github.com/hellman/xortool.git
 	autoupdate = true
-[submodule "pwnie/opt/peda"]
-	path = pwnie/opt/peda
+[submodule "toolbox/opt/peda"]
+	path = toolbox/opt/peda
 	url = https://github.com/zachriggle/peda.git
 	autoupdate = true
-[submodule "pwnie/opt/preeny"]
-	path = pwnie/opt/preeny
+[submodule "toolbox/opt/preeny"]
+	path = toolbox/opt/preeny
 	url = https://github.com/zardus/preeny.git
 	autoupdate = true
-[submodule "pwnie/opt/radare2"]
-	path = pwnie/opt/radare2
-	url = https://github.com/radare/radare2.git
-	autoupdate = false
-[submodule "pwnie/opt/sqlmap"]
-	path = pwnie/opt/sqlmap
+[submodule "toolbox/opt/sqlmap"]
+	path = toolbox/opt/sqlmap
 	url = https://github.com/sqlmapproject/sqlmap.git
 	autoupdate = true
-[submodule "pwnie/opt/commix"]
-	path = pwnie/opt/commix
+[submodule "toolbox/opt/commix"]
+	path = toolbox/opt/commix
 	url = https://github.com/stasinopoulos/commix.git
 	autoupdate = true
-[submodule "pwnie/opt/weevely3"]
-	path = pwnie/opt/weevely3
+[submodule "toolbox/opt/weevely3"]
+	path = toolbox/opt/weevely3
 	url = https://github.com/epinna/weevely3.git
 	autoupdate = true
 
