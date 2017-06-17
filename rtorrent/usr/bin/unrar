@@ -1,0 +1,35 @@
+#!/bin/bash -e
+
+[ "$1" != 'e' ] && [ "$1" != 'x' ] && {
+  echo "Usage: $0 e|x [-pPASS] archive [out-dir]" >&2
+  exit 1
+}
+shift
+
+OPTS=()
+while [ $# -ge 1 ]; do
+  case "$1" in
+    -p-) ;;
+    -p*) OPTS+=(-p "${1:2}");;
+    -o+) OPTS+=(-f);;
+    -o-) OPTS+=(-s);;
+  -inul) OPTS+=(-q);;
+     -*) ;;
+      *) break;;
+  esac
+  shift
+done
+
+AR="$1"
+OUT="${2:-.}"
+
+[ -z "$AR" ] && {
+  echo 'Archive not specified.' >&2
+  exit 1
+}
+
+[ -d "$AR" ] && {
+  AR=$(find "$AR" -maxdepth 1 -type f -iregex '.*\.\(r0+\|rar\)$' | head -n1)
+}
+
+exec unar "${OPTS[@]}" -o "$OUT" "$AR"

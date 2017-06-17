@@ -12,6 +12,11 @@
 	url = https://github.com/OpenVPN/easy-rsa.git
 	autoupdate = true
 
+[submodule "rtorrent/usr/share/rutorrent"]
+	path = rtorrent/usr/share/rutorrent
+	url = https://github.com/Novik/ruTorrent.git
+	autoupdate = true
+
 [submodule "toolbox/usr/src/ROPgadget"]
 	path = toolbox/usr/src/ROPgadget
 	url = https://github.com/JonathanSalwan/ROPgadget.git
@@ -50,6 +55,34 @@
 	url = https://github.com/epinna/weevely3.git
 	autoupdate = true
 
+[submodule "miniircd/usr/share/miniircd"]
+	path = miniircd/usr/share/miniircd
+	url = https://github.com/jrosdahl/miniircd.git
+	autoupdate = false
+
+[submodule "tircd/usr/share/tircd"]
+	path = tircd/usr/share/tircd
+	url = https://github.com/DexterTheDragon/tircd.git
+	branch = my_version
+	autoupdate = true
+
+[submodule "znc/usr/src/znc-push"]
+	path = znc/usr/src/znc-push
+	url = https://github.com/jreese/znc-push.git
+	autoupdate = true
+[submodule "znc/usr/src/znc-clientbuffer"]
+	path = znc/usr/src/znc-clientbuffer
+	url = https://github.com/jpnurmi/znc-clientbuffer.git
+	autoupdate = true
+[submodule "znc/usr/src/znc-chanfilter"]
+	path = znc/usr/src/znc-chanfilter
+	url = https://github.com/jpnurmi/znc-chanfilter.git
+	autoupdate = true
+[submodule "znc/usr/src/znc-modules"]
+	path = znc/usr/src/znc-modules
+	url = https://github.com/oszi/znc-modules.git
+	autoupdate = true
+
 [submodule "limnoria/usr/src/limnoria"]
 	path = limnoria/usr/src/limnoria
 	url = https://github.com/ProgVal/Limnoria.git
@@ -70,16 +103,11 @@
 	path = limnoria/usr/src/plugins-imdb
 	url = https://github.com/ddan39/Supybot-IMDb.git
 	autoupdate = true
-[submodule "limnoria/usr/src/plugins-various/TVMaze"]
-	path = limnoria/usr/src/plugins-various/TVMaze
+[submodule "limnoria/usr/src/plugins-tvmaze/TVMaze"]
+	path = limnoria/usr/src/plugins-tvmaze/TVMaze
 	url = https://github.com/Znuff/limnoria-tvmaze.git
 	autoupdate = true
-[submodule "limnoria/usr/src/plugins-various/UrbanDictionary"]
-	path = limnoria/usr/src/plugins-various/UrbanDictionary
+[submodule "limnoria/usr/src/plugins-urbandict/UrbanDictionary"]
+	path = limnoria/usr/src/plugins-urbandict/UrbanDictionary
 	url = https://github.com/reticulatingspline/UrbanDictionary.git
 	autoupdate = true
-[submodule "limnoria/usr/src/plugins-various/DuckHunt"]
-	path = limnoria/usr/src/plugins-various/DuckHunt
-	url = https://github.com/veggiematts/supybot-duckhunt.git
-	autoupdate = true
-

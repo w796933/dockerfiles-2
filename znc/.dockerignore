@@ -1,0 +1,5 @@
+*
+!artifacts
+!usr
+usr/src/*/.git*
+usr/src/*/.travis.yml

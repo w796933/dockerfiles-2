@@ -1,0 +1,4 @@
+#!/bin/bash -u
+rm -f "${PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR}/Plex Media Server"/*.pid
+export LD_LIBRARY_PATH="${PLEX_MEDIA_SERVER_HOME}"
+exec "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
