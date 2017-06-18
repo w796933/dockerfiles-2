@@ -11,7 +11,6 @@ ifeq ($(HEAD) $(origin OSREL) $(origin DIST),$(MASTER) file file)
 endif
 
 build:
-	-@$(GIT) submodule update --init --recursive --checkout .
 	@$(SEDVARS) Dockerfile > .Dockerfile~
 	$(DOCKER) build $(BFLAGS) -t $(IMAGE) -f .Dockerfile~ .
 

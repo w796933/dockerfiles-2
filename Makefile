@@ -20,8 +20,11 @@ endif
 
 -include .deps.mk~
 
+submodule-update-init:
+	@$(GIT) submodule update --force --checkout --init --recursive
+
 submodule-update-remote:
-	@$(GIT) submodule update --remote --force --checkout \
+	@$(GIT) submodule update --force --checkout --remote \
 	$(patsubst submodule.%.autoupdate,%,\
 	$(shell $(GIT) config -f .gitmodules --name-only --get-regexp '\.autoupdate$$' true))
 
@@ -29,4 +32,4 @@ clean:
 	$(RM) .*~
 	$(GIT) clean -fdx */
 
-.PHONY: $(BASE) $(TARGETS) submodule-update-remote clean
+.PHONY: $(BASE) $(TARGETS) submodule-update-init submodule-update-remote clean

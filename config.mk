@@ -8,7 +8,7 @@ DOCKER  := docker
 GIT     := git
 YUM     := dnf
 
-MASTER  ?= fedora
+MASTER  ?= master
 RELEASE ?= $(shell date '+%Y%m%d')
 VARS    += REGISTRY BASE OSREL DIST ARCH RELEASE YUM
 
