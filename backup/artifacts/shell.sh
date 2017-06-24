@@ -1,5 +1,6 @@
 #!/bin/bash -eu
-. /etc/sysconfig/containers/backup
+IMAGE=...
+NAME=...
 DOCKER_OPTS=''
 while [ $# -ge 1 ]; do
   case "$1" in

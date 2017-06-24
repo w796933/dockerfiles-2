@@ -5,5 +5,5 @@ if [ $# -eq 0 ]; then
 fi
 
 exec "$(dirname "$0")"/toolbox.sh --privileged \
---pid=host --{net,ipc}="container:$1" \
+--pid=host --{network,ipc}="container:$1" \
 --volumes-from="$1" "${@:2:$#}"

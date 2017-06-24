@@ -9,29 +9,11 @@ Installation is simple; no configuration is required.
 Start miniircd with the default options:
 
 ```
-docker run --rm --name=miniircd -p 6667:6667 oszi/miniircd:$TAG
+docker run -d --name=miniircd -p 6667:6667 oszi/miniircd
 ```
 
 List all available options:
 
 ```
-docker run --rm oszi/miniircd:$TAG --help
-```
-
-## Install
-
-```
-atomic install --name=miniircd oszi/miniircd:$TAG
-```
-
-Manually on any distribution:
-
-```
-export IMAGE=oszi/miniircd:$TAG NAME=miniircd
-docker pull ${IMAGE}
-eval $(docker inspect -f {{.Config.Labels.INSTALL}} ${IMAGE})
-```
-
-```
-systemctl enable --now ${NAME}
+docker run --rm oszi/miniircd --help
 ```

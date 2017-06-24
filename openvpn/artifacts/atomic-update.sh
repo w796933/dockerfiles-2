@@ -1,5 +1,3 @@
-cp -av openvpn-shell.sh ${HOST}/etc/containers/
-
-cat <<EOF > ${HOST}/etc/profile.d/openvpn_container.sh
-alias openvpn-shell='/etc/containers/openvpn-shell.sh'
-EOF
+#!/bin/bash -eu
+sed -E "s|^(IMAGE=).*|\1${IMAGE}|" /artifacts/shell.sh > ${HOST}/${CONFDIR}/shell.sh
+chmod +x ${HOST}/${CONFDIR}/shell.sh

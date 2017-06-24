@@ -1,32 +1,10 @@
 #!/bin/bash -eu
-. /etc/atomic-install
-pushd /artifacts > /dev/null
-
-# Source and move the env file!
-if [ -f ${ENVFILE} ]; then
-  . ${ENVFILE}
-  mv -v ${ENVFILE}{,~}
-# Source the old env file?
-elif [ -f ${ENVFILE}~ ]; then
-  . ${ENVFILE}~
+if [ -f /artifacts/atomic-uninstall.sh ]; then
+  . /artifacts/atomic-uninstall.sh
 fi
 
-# Delete obsolete unit files...
-find ${SYSTEMD} -maxdepth 1 -regex ".+/${NAME}\.\(service\|socket\|timer\)$" \
-  -exec rm -fv "{}" \;
-
-# Execute extension...
-if [ -f atomic-uninstall.sh ]; then
-  . atomic-uninstall.sh
+if [ $# -ne 0 ] && [[ "$1" =~ ^(erase|force|purge|remove)$ ]]; then
+  [ -n "${CONFDIR-}" ] && rm -rfv "${HOST}/${CONFDIR}"
+  [ -n "${DATADIR-}" ] && rm -rfv "${HOST}/${DATADIR}"
+  [ -n "${LOGDIR-}"  ] && rm -rfv "${HOST}/${LOGDIR}"
 fi
-
-# Delete everything if requested...
-if [ $# -ge 1 ] && [[ "$1" =~ ^-*(erase|purge)$ ]]; then
-  [ -n "${CONFDIR}" ] && rm -rfv "${HOST}/${CONFDIR}"
-  [ -n "${DATADIR}" ] && rm -rfv "${HOST}/${DATADIR}"
-  [ -n "${LOGDIR}"  ] && rm -rfv "${HOST}/${LOGDIR}"
-  rm -f ${ENVFILE}{,~}
-fi
-
-popd > /dev/null
-exit 0

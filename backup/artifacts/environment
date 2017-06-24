@@ -1,9 +1,0 @@
-IMAGE=${IMAGE}
-NAME=${NAME}
-
-#DOCKER_OPTS='-v /:/host:ro -v /media:/media:rw -v /root:/root:rw'
-#CMD='...'
-
-## Disable volumes
-CONFDIR=
-DATADIR=

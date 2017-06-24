@@ -1,9 +1,0 @@
-IMAGE=${IMAGE}
-NAME=${NAME}
-DATADIR=${DATADIR}
-NET=default
-MEM=64m
-SWAP=128m
-#DOCKER_OPTS=
-## No conf vol!
-CONFDIR=

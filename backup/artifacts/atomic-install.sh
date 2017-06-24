@@ -1,9 +1,5 @@
-# backup-shell sources the default instance...
-if [ ! -f ${ENVROOT}/${INAME} ]; then
-  ln -s ${NAME} ${ENVROOT}/${INAME}
-fi
-
-cp -av backup-shell.sh ${HOST}/etc/containers/
-cat <<EOF > ${HOST}/etc/profile.d/backup_container.sh
-alias backup-shell="/etc/containers/backup-shell.sh"
-EOF
+#!/bin/bash -eu
+mkdir -p ${HOST}/${CONFDIR}
+sed -E "s|^(IMAGE=).*|\1${IMAGE}|;s|^(NAME=).*|\1${NAME}|" /artifacts/shell.sh \
+> ${HOST}/${CONFDIR}/shell.sh
+chmod +x ${HOST}/${CONFDIR}/shell.sh

@@ -1,43 +1,17 @@
 #!/bin/bash -eu
-. /etc/atomic-install
-pushd /artifacts > /dev/null
+# Defaults for volumes
+: ${CONFDIR:=/etc/${NAME}}
+: ${DATADIR:=/var/lib/${NAME}}
+: ${LOGDIR:=/var/log/${NAME}}
 
-# Install the environment file!
-if [ -f environment ] && [ ! -e ${ENVFILE} ]; then
-  mkdir -p $(dirname ${ENVFILE})
-  parse_file environment > ${ENVFILE}
-  echo "ENV FILE: ${ENVFILE}"
-fi
-. ${ENVFILE}
-
-# Copy systemd unit files...
-for unit in service socket timer; do
-  if [ -f ${unit} ]; then
-    cp -auv ${unit} ${SYSTEMD}/${NAME}.${unit}
-    chcon -R --reference=${SYSTEMD} ${SYSTEMD}/${NAME}.${unit} || :
+# Initial setup (preferably non-destructive)
+if [ $# -eq 0 ]; then
+  if [ -f /artifacts/atomic-install.sh ]; then
+    . /artifacts/atomic-install.sh
   fi
-done
-
-# Update instead of install?
-if [ $# -ge 1 ] && [[ "$1" =~ ^-*(update|upgrade)$ ]]; then
-  sed -i -r "s|^(IMAGE=).*|\1${IMAGE}|" ${ENVFILE}
-  # Execute extension...
-  if [ -f atomic-update.sh ]; then
-    . atomic-update.sh
-  fi
-  popd > /dev/null
-  exit 0
+# Run a specific script (e.g. atomic-*update*.sh)?
+elif [ -f /artifacts/atomic-"$1".sh ]; then
+  . /artifacts/atomic-"$1".sh
+else
+  echo "WARNING: /artifacts/atomic-$1.sh not found!" >&2
 fi
-
-# Initialize the volumes...
-[ -n "${CONFDIR}" ] && mkvol "${HOST}/${CONFDIR}"
-[ -n "${DATADIR}" ] && mkvol "${HOST}/${DATADIR}"
-[ -n "${LOGDIR}"  ] && mkvol "${HOST}/${LOGDIR}"
-
-# Execute extension...
-if [ -f atomic-install.sh ]; then
-  . atomic-install.sh
-fi
-
-popd > /dev/null
-exit 0

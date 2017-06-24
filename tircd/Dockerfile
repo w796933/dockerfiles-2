@@ -1,11 +1,5 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start \${NAME}" \
-	STOP="/usr/bin/systemctl stop \${NAME}"
-
-ENV PERL_LWP_SSL_VERIFY_HOSTNAME 1
-
 RUN ${YUM} -y install \
 	perl-Digest-SHA1 \
 	perl-HTML-Parser \
@@ -19,6 +13,8 @@ RUN ${YUM} -y install \
 	perl-URI \
 	perl-URI-Find \
 	&& ${YUM} clean all
+
+ENV PERL_LWP_SSL_VERIFY_HOSTNAME=1
 
 COPY . /
 

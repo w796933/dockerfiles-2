@@ -1,11 +1,9 @@
-if [ "$NAME" != "$INAME" ]; then
-  echo "There can be only one! NAME=${INAME}" >&2
-  atomic-uninstall erase &> /dev/null
-  exit 1
-fi
+#!/bin/bash -eu
+mkdir -p ${HOST}/${CONFDIR} ${HOST}/${DATADIR}
+chown -R container: ${HOST}/${CONFDIR} ${HOST}/${DATADIR}
+chmod -R o=--- ${HOST}/${CONFDIR} ${HOST}/${DATADIR}
 
 unbound-control-setup -d ${HOST}/${CONFDIR}/
 rsync -av --ignore-existing /etc/unbound/ ${HOST}/${CONFDIR}/
 rsync -av --ignore-existing /var/lib/unbound/ ${HOST}/${DATADIR}/
-
-. atomic-update.sh
+/artifacts/atomic-update.sh

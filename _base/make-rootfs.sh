@@ -38,8 +38,8 @@ echo '%_install_langs en_US' > /rootfs/etc/rpm/macros.mkimage
 for i in /rootfs/etc/yum.conf /rootfs/etc/dnf/dnf.conf; do
   if [[ -f "$i" ]]; then
     awk '(NF==0 && !done) { print "tsflags=nodocs"; done=1 } { print }
-    END { if (!done) print "tsflags=nodocs" }' "$i" > "$i".new
-    mv "$i"{.new,}
+    END { if (!done) print "tsflags=nodocs" }' "$i" > "$i"~
+    mv "$i"{~,}
   fi
 done
 
@@ -57,7 +57,7 @@ cp -av --no-preserve=ownership /rootfs/etc/skel /rootfs/root
 # Post-install customizations!
 cp -av --no-preserve=ownership ./rootfs/* /rootfs/
 chroot /rootfs /bin/update-ca-trust
-chroot /rootfs /sbin/groupadd -og $(/bin/id -g nobody) nogroup
+chroot /rootfs /sbin/groupadd -og $(chroot /rootfs /bin/id -g nobody) nogroup
 chroot /rootfs /sbin/groupadd -g "$XGID" "$XUSER"
 chroot /rootfs /sbin/useradd -lg "$XGID" -u "$XUID" -md "$XHOME" "$XUSER"
 

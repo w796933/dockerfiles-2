@@ -1,9 +1,5 @@
 FROM ${REGISTRY}/nginx:${DIST}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start \${NAME}" \
-	STOP="/usr/bin/systemctl stop \${NAME}"
-
 ENV RUTORRENT_DATA=/data/.rutorrent \
 	RTSESSION=/data/.rtsession \
 	PORT_RANGE=55665-55665 \
@@ -31,8 +27,6 @@ COPY . /
 RUN ln -sf /etc/rutorrent/config.php /usr/share/rutorrent/conf/config.php \
 	&& sed -i -E 's/^(worker_processes)\s.*/\1 1;/' /etc/nginx/nginx.conf \
 	&& chown -R container: /data/
-
-EXPOSE 8080
 
 USER container
 

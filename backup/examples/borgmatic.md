@@ -1,15 +1,15 @@
-##example-borgmatic
+## Examples: Borgmatic
 
 Initialize an empty repository:
 
 ```
-backup-shell borg init /mnt/Borg
+shell.sh borg init /mnt/Borg
 ```
 
-**/etc/sysconfig/containers/borgmatic**
+**Environment**
 
 ```
-IMAGE=oszi/backup:$TAG
+IMAGE=oszi/backup
 NAME=borgmatic
 DOCKER_OPTS='-v /:/host:ro -v /root:/root:rw -v /mnt/Borg:/mnt/Borg:rw'
 CMD='borgmatic -c /host/etc/borgmatic/config --excludes /host/etc/borgmatic/excludes'
@@ -71,4 +71,4 @@ checks: repository archives
 */Downloads/*
 ```
 
-Use `backup-shell borg` to manage or restore your backups.
+Use `shell.sh borg` to manage or restore your backups.

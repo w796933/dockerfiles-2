@@ -1,4 +1,6 @@
 #!/bin/bash -eu
-sudo -u container znc --foreground --datadir=/data --makeconf
-PORT=$(egrep -m1 '\bPort\s*=' /data/configs/znc.conf | egrep -o '[0-9]+')
-sed -i -E "s/^FORWARD=\S*/FORWARD=${PORT}:${PORT}/g" ${ENVFILE}
+mkdir -p ${HOST}/${DATADIR}
+cd ${HOST}/${DATADIR}
+chown -R container: .
+chmod -R o=--- .
+sudo -u container znc --foreground --datadir=./ --makeconf

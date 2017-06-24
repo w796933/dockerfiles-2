@@ -1,6 +1,6 @@
 #!/bin/bash -eu
-. /etc/sysconfig/containers/toolbox
-NAME=${NAME}-${RANDOM}
+IMAGE=...
+NAME=toolbox-${RANDOM}
 OPTS=(-ite TERM --rm --name=${NAME})
 while [ $# -ge 1 ]; do
   case "$1" in

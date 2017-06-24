@@ -1,18 +1,15 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start \${NAME}" \
-	STOP="/usr/bin/systemctl stop \${NAME}"
-
 RUN ${YUM} -y install nginx \
 	httpd-tools \
 	&& ${YUM} clean all \
+	&& setcap cap_net_bind_service+ep /usr/sbin/nginx \
 	&& chown -R container: /var/*/nginx \
 	&& rm -f /etc/nginx/*.default
 
 COPY . /
 
-EXPOSE 8080 8443
+EXPOSE 80 443
 
 USER container
 

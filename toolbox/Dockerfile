@@ -1,8 +1,5 @@
 FROM ${REGISTRY}/buildpack:${DIST}
 
-# Expect all packages from the base images...
-# The first block of packages should match the centos branch.
-
 RUN ${YUM} -y install \
 	ansible \
 	ansible-lint \
@@ -129,9 +126,8 @@ RUN set -e; \
 	\
 	rm -rf ~/.cache;
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/docker run --rm --name=\${NAME} \
-	--net=host --ipc=host --pid=host --privileged \
+LABEL RUN="/usr/bin/docker run --rm --name=\${NAME} \
+	--network=host --ipc=host --pid=host --privileged \
 	-v /:/host:rw -e HOST=/host -w /host \
 	-v /boot:/boot:ro \
 	-v /dev:/dev:rw \
@@ -144,13 +140,14 @@ LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
 	-v /media:/media:rw \
 	-v /mnt:/mnt:rw \
 	-v /run:/run:rw \
-	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+	-v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+	-v /sys/fs/selinux:/sys/fs/selinux:ro \
 	-v /tmp:/tmp:rw \
 	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
-	\${DOCKER_OPTS-} \${IMAGE}"
+	\${DOCKER_OPTS} \${IMAGE}"
 
-ENV DOCKER_DRIVER overlay
+ENV SYSTEMD_IGNORE_CHROOT=1
 
 VOLUME ["/root", "/var/lib/docker", "/var/tmp", "/tmp"]
 

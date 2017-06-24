@@ -1,14 +1,13 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start \${NAME}" \
-	STOP="/usr/bin/systemctl stop \${NAME}"
-
 RUN ${YUM} -y install haproxy \
 	&& ${YUM} clean all \
+	&& ls /usr/sbin/haproxy* | xargs -n1 setcap cap_net_bind_service+ep \
 	&& chown -R container: /var/*/haproxy
 
 COPY . /
+
+EXPOSE 80 443
 
 USER container
 

@@ -1,9 +1,5 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE} \
-	RUN="/usr/bin/systemctl start smb nmb" \
-	STOP="/usr/bin/systemctl stop smb nmb"
-
 RUN ${YUM} -y install \
 	samba \
 	samba-client \

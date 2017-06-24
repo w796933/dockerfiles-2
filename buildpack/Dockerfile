@@ -1,7 +1,5 @@
 FROM ${REGISTRY}/${BASE}:${OSREL}
 
-LABEL Name=${INAME} Version=${DIST} Release=${RELEASE}
-
 ENV PATH=${PATH}:/usr/share/gocode/bin \
 	GOPATH=/usr/share/gocode
 

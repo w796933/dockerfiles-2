@@ -1,5 +1,12 @@
 #!/bin/bash -eu
-pushd /data > /dev/null
+mkdir -p ${HOST}/${DATADIR}
+cd ${HOST}/${DATADIR}
+
+chown -R container: .
+chmod -R o=--- .
+
 sudo -u container supybot-wizard --allow-home
-test ! -f ${NAME}.conf && mv *.conf ${NAME}.conf
-popd > /dev/null
+
+if [ ! -f ${NAME}.conf ]; then
+  mv *.conf ${NAME}.conf
+fi

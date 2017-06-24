@@ -1,0 +1,9 @@
+alias chr="chroot ${HOST:-/host}"
+alias ll='ls -alFh --group-directories-first'
+alias la='ls -A'
+alias l='ls -CF'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -I'
+alias e='etcdctl'
+alias k='kubectl'

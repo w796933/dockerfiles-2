@@ -1,3 +1,3 @@
 #!/bin/sh -u
-. /etc/sysconfig/containers/samba
+NAME=...
 exec docker exec -t -i ${NAME} "$@"
