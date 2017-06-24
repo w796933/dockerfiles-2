@@ -1,6 +1,6 @@
 REGISTRY:= docker.io/oszi
 BASE    := fedora
-OSREL   := 25
+OSREL   := 26
 DIST    := fc$(OSREL)
 ARCH    := x86_64
 
