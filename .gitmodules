@@ -1,7 +1,7 @@
 [submodule "backup/usr/src/borgmatic"]
 	path = backup/usr/src/borgmatic
 	url = https://github.com/witten/borgmatic.git
-	autoupdate = true
+	autoupdate = false
 [submodule "backup/usr/src/tarsnap"]
 	path = backup/usr/src/tarsnap
 	url = https://github.com/Tarsnap/tarsnap.git
