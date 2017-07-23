@@ -28,15 +28,11 @@ Default mount points:
 
 | Host          | Container     | Mode |
 |---------------|---------------|------|
-| /             | /host         | ro   |
-| /home         | /home         | rw   |
+| /             | /host         | rw   |
 | /media        | /media        | rw   |
 | /mnt          | /mnt          | rw   |
 | /run          | /run          | rw   |
 | /root/.cache  | /root/.cache  | rw   |
 | /root/.config | /root/.config | rw   |
-| /root/.local  | /root/.local  | rw   |
 | /root/.gnupg  | /root/.gnupg  | rw   |
 | /root/.ssh    | /root/.ssh    | rw   |
-| /var/tmp      | /var/tmp      | rw   |
-| /tmp          | /tmp          | rw   |
