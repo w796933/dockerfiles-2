@@ -1,8 +1,7 @@
 ## rtorrent.rc ##
 # Ports are set from environment variables by rtorrent-entrypoint!
-
-directory = /data
 # Hint: /mnt is also bind mounted.
+directory = /data
 
 schedule = watch_directory,5,5,load_start=/data/watch/*.torrent
 schedule = untied_directory,5,5,stop_untied=

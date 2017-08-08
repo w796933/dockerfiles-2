@@ -6,7 +6,7 @@ export NAME  := $(INAME)
 
 all: build
 	$(MAKE) push
-ifeq ($(HEAD) $(origin OSREL) $(origin DIST),$(MASTER) file file)
+ifeq ($(HEAD) $(origin OSREL) $(origin DIST),master file file)
 	$(MAKE) latest
 endif
 

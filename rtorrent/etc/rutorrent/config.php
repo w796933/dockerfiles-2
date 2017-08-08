@@ -10,13 +10,13 @@
 	@define('LOG_RPC_FAULTS', true, true);
 
 	$topDirectory = '/';
-	$tempDirectory = '/var/tmp';
 	$log_file = '/dev/stderr';
-	$do_diagnostic = true;
+	$do_diagnostic = false;
 	$saveUploadedTorrents = true;
 	$overwriteUploadedTorrents = false;
 	$forbidUserSettings = false;
 	$canUseXSendFile = true;
+	$tempDirectory = null;
 	$schedule_rand = 10;
 
 	$profilePath = getenv('RUTORRENT_DATA');

@@ -48,7 +48,7 @@ LABEL RUN="/usr/bin/docker run --rm --name=\${NAME} \
 	-v /root/.ssh:/root/.ssh:rw \
 	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
-	\${DOCKER_OPTS} \${IMAGE}"
+	\${DOCKER_OPTS-} \${IMAGE}"
 
 VOLUME ["/var/tmp", "/tmp"]
 

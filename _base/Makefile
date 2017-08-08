@@ -2,7 +2,7 @@ include ../config.mk ./config.mk
 
 all: build
 	$(MAKE) push
-ifeq ($(HEAD) $(origin OSREL) $(origin DIST),$(BASE) file file)
+ifeq ($(HEAD) $(origin OSREL) $(origin DIST),master file file)
 	$(MAKE) latest
 endif
 

@@ -140,12 +140,10 @@ LABEL RUN="/usr/bin/docker run --rm --name=\${NAME} \
 	-v /media:/media:rw \
 	-v /mnt:/mnt:rw \
 	-v /run:/run:rw \
-	-v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-	-v /sys/fs/selinux:/sys/fs/selinux:ro \
-	-v /tmp:/tmp:rw \
+	-v /sys/fs:/sys/fs:ro \
 	-i -t -e TERM=xterm-256color \
 	-e NAME=\${NAME} -e IMAGE=\${IMAGE} \
-	\${DOCKER_OPTS} \${IMAGE}"
+	\${DOCKER_OPTS-} \${IMAGE}"
 
 ENV SYSTEMD_IGNORE_CHROOT=1
 
