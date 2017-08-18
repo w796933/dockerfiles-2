@@ -122,7 +122,9 @@ RUN set -e; \
 	make && mv *-*-* lib64; \
 	make clean; \
 	\
-	go get github.com/asciimoo/wuzz; \
+	curl -sL ${WUZZ_BIN} > /usr/bin/wuzz; \
+	echo ${WUZZ_SHA256} /usr/bin/wuzz | sha256sum -c -; \
+	chmod +x /usr/bin/wuzz; \
 	\
 	rm -rf ~/.cache;
 
