@@ -25,6 +25,7 @@ PACKAGES := \
 	iputils \
 	less \
 	make \
+	net-tools \
 	nmap-ncat \
 	openssh-clients \
 	openssl \
@@ -33,7 +34,7 @@ PACKAGES := \
 	perl \
 	procps-ng \
 	psmisc \
-	python \
+	python2 \
 	python3 \
 	rpm \
 	rsync \
@@ -42,8 +43,12 @@ PACKAGES := \
 	sudo \
 	systemd \
 	tar \
+	telnet \
+	unar \
+	unzip \
 	util-linux \
 	vim-minimal \
+	wget \
 	which \
 	xz \
 	zip \

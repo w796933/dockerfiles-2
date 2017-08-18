@@ -17,6 +17,7 @@ RUN ${YUM} -y install \
 	fpaste \
 	gdb \
 	goaccess \
+	hddtemp \
 	hexedit \
 	htop \
 	httpd-tools \
@@ -27,6 +28,7 @@ RUN ${YUM} -y install \
 	irssi \
 	kubernetes \
 	lftp \
+	lm_sensors \
 	lshw \
 	lsof \
 	ltrace \
@@ -34,7 +36,6 @@ RUN ${YUM} -y install \
 	mailx \
 	mc \
 	nano \
-	net-tools \
 	netsniff-ng \
 	nmap \
 	numactl \
@@ -52,12 +53,10 @@ RUN ${YUM} -y install \
 	sysstat \
 	tcpdump \
 	tcpreplay \
-	telnet \
 	testdisk \
 	tmux \
 	traceroute \
 	tree \
-	unar \
 	vim-enhanced \
 	w3m \
 	whois \
@@ -82,19 +81,20 @@ RUN ${YUM} -y install \
 	capstone-devel \
 	libini_config-devel.* \
 	pyserial \
-	python-afl \
+	python{2,3}-afl \
 	python-afl-bin \
 	python-mako \
 	python-prettytable \
 	python-pyelftools \
-	python-pygments \
 	python-z3 \
 	python2-argh \
 	python2-dateutil \
 	python2-docopt \
 	python2-paramiko \
+	python2-pygments \
 	python2-pysocks \
 	python2-requests \
+	python3-PyYAML \
 	PyYAML \
 	scapy \
 	&& ${YUM} clean all

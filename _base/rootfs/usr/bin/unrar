@@ -20,8 +20,11 @@ while [ $# -ge 1 ]; do
   shift
 done
 
+[ -n "$2" ] && {
+  OPTS+=(-o "$2")
+}
+
 AR="$1"
-OUT="${2:-.}"
 
 [ -z "$AR" ] && {
   echo 'Archive not specified.' >&2
@@ -32,4 +35,4 @@ OUT="${2:-.}"
   AR=$(find "$AR" -maxdepth 1 -type f -iregex '.*\.\(r0+\|rar\)$' | head -n1)
 }
 
-exec unar "${OPTS[@]}" -o "$OUT" "$AR"
+exec unar "${OPTS[@]}" "$AR"

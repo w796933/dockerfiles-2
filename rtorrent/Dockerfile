@@ -17,8 +17,6 @@ RUN ${YUM} -y install \
 	php-pecl-geoip \
 	supervisor \
 	mediainfo \
-	unar \
-	unzip \
 	&& ${YUM} clean all \
 	&& rm -rf /etc/nginx/*.d /artifacts/*
 
