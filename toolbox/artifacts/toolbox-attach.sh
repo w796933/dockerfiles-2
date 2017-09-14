@@ -4,6 +4,6 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-exec "$(dirname "$0")"/toolbox.sh --privileged \
+exec "$(dirname "$(realpath "$0")")"/toolbox.sh --privileged \
 --pid=host --{network,ipc}="container:$1" \
 --volumes-from="$1" "${@:2:$#}"
